@@ -7,7 +7,8 @@ SW 역량테스트 대비
 
 ## Folder
 - C++를 이용한 창의적 문제 해결(인프런 강의)
-- BOJ(Baekjoon Online Judge) CAU Algoritm Study
+- BOJ(Baekjoon Online Judge) 
+- Study(CAU Algoritm Study)
 
 ## C/C++  
 <h3 id="-">STL</h3>
@@ -19,6 +20,8 @@ SW 역량테스트 대비
 <h3 id="-">수학</h3>
 
 - [x] 나머지 
+- [x] 자연수의 합
+- [x] 1부터 N까지 M의 배수합
 
 <h3 id="-">브루트 포스</h3>
 
