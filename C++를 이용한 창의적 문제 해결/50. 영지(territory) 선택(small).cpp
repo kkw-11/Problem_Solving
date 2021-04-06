@@ -2,7 +2,7 @@
 #include <stdio.h>
 int main() {
 	//freopen("input.txt", "rt", stdin);
-	int map[50][50];
+	int map[51][51];
 	int H, W, HH, HW, area=0, maxArea = 0;
 
     //입력
@@ -27,6 +27,11 @@ int main() {
 					area += map[i + k][j + l];
 				}
 			}
+           //for (int k = i; k <i + HH; ++k) {
+			// 	for (int l = j; l <j + HW; ++l) {
+			// 		area += map[k][l];
+			// 	}
+			// }
 			if (maxArea < area) {
 				maxArea = area;
 			}
