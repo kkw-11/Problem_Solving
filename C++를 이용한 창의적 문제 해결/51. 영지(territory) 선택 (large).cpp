@@ -1,30 +1,75 @@
-//51. 영지(territory) 선택 : (large)
+// //51. 영지(territory) 선택 : (large)
+// #include<stdio.h>
+// #include<vector>
+// #include<algorithm>
+// using namespace std;
+// int a[701][701], dy[701][701];
+// int main(){
+// 	freopen("input.txt", "rt", stdin);
+// 	int h, w, n, m, i, j, tmp, max=-2147000000;
+// 	scanf("%d %d", &h, &w);
+// 	for(i=1; i<=h; i++){
+// 		for(j=1; j<=w; j++){
+// 			scanf("%d", &a[i][j]);
+// 			dy[i][j]=dy[i-1][j]+dy[i][j-1]-dy[i-1][j-1]+a[i][j];
+// 		}
+// 	}
+// 	scanf("%d %d", &n, &m);
+// 	for(i=n; i<=h; i++){
+// 		for(j=m; j<=w; j++){
+// 			tmp=dy[i][j]-dy[i-n][j]-dy[i][j-m]+dy[i-n][j-m];
+// 			if(tmp>max) max=tmp;		
+// 		}
+// 	}
+// 	printf("%d\n", max);
+// 	return 0;
+// }
+// //51. 영지(territory) 선택 : (large)
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main() {
+// 	//freopen("input.txt", "rt", stdin);
+// 	int H, W, HH, HW, maxArea=0, area;
+// 	int** map;
+// 	int** totalAreaMap;
 
-#include<stdio.h>
-#include<vector>
-#include<algorithm>
-using namespace std;
-int a[701][701], dy[701][701];
-int main(){
-	freopen("input.txt", "rt", stdin);
-	int h, w, n, m, i, j, tmp, max=-2147000000;
-	scanf("%d %d", &h, &w);
-	for(i=1; i<=h; i++){
-		for(j=1; j<=w; j++){
-			scanf("%d", &a[i][j]);
-			dy[i][j]=dy[i-1][j]+dy[i][j-1]-dy[i-1][j-1]+a[i][j];
-		}
-	}
-	scanf("%d %d", &n, &m);
-	for(i=n; i<=h; i++){
-		for(j=m; j<=w; j++){
-			tmp=dy[i][j]-dy[i-n][j]-dy[i][j-m]+dy[i-n][j-m];
-			if(tmp>max) max=tmp;		
-		}
-	}
-	printf("%d\n", max);
-	return 0;
-}
+// 	scanf("%d %d", &H, &W);
+// 	map = (int**)malloc(sizeof(int*) * (H + 1));
+// 	totalAreaMap = (int**)malloc(sizeof(int*) * (H + 1));
+
+// 	for (int i = 0; i < (H + 1); ++i) {
+// 		map[i] = (int*)calloc(W + 1, sizeof(int));
+// 		totalAreaMap[i] = (int*)calloc(W + 1, sizeof(int));
+
+// 	}
+
+
+// 	//입력받으면서 현재위치의 Square형태의 까지의 누적 넓이 구하기
+// 	//(i,j)는 좌측 위 대각선 꼭지점
+// 	for (int i = 1; i <= H; ++i) {
+// 		for (int j = 1; j <= W; ++j) {
+// 			scanf("%d", &map[i][j]);
+// 			totalAreaMap[i][j] = totalAreaMap[i - 1][j] + totalAreaMap[i][j - 1] - totalAreaMap[i - 1][j - 1]+ map[i][j];
+// 		}
+// 	}
+// 	scanf("%d %d", &HH, &HW);
+
+// 	//(k,l)은 우측 아래 대각선 꼭지점
+// 	for (int k = HH; k <= H; ++k) {
+// 		for (int l = HW; l <= W; ++l) {
+// 			area = totalAreaMap[k][l] - totalAreaMap[k][l-HW] - totalAreaMap[k-HH][l] + totalAreaMap[k-HH][l-HW];
+// 			if (area > maxArea)
+// 				maxArea = area;
+// 		}
+
+// 	}
+// 	printf("%d\n", maxArea);
+
+// 	return 0;
+// }
+
+
+
 
 // //51. 영지(territory) 선택 : (large)
 // #include <stdio.h>
@@ -74,7 +119,7 @@ int main(){
 
 
 // 			//새롭게 더해질 곳은 기준으로 부터 현수가 갖게될 가로길이 만큼 옆으로 간곳
-// 			//빠져야 할 곳은 가장 좌측(기준 열)모두
+// 			//빠져야 할 곳은 가장 좌측(기준점에서 주어진 세로높이까지의 열)모두
 // 			//"행의 기준점+HW"인 더하고 기준값 빼고 기준 값 다음 열에서 같은 행위 반복
 // 			//printf("(%d,%d),cur:%d\n", i, j, curArea);
 
