@@ -44,6 +44,7 @@ SW 역량테스트 대비
 
 - [x] <a href="https://www.acmicpc.net/problem/11047">동전 0</a> 
 - [x] 영지(territory) 선택 : (small)
+- [ gi] 영지(territory) 선택 : (large)
 
 
 <h3 id="-">다이나믹 프로그래밍</h3>
