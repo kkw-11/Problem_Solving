@@ -22,6 +22,8 @@ SW 역량테스트 대비
 - [x] 나머지 
 - [x] 자연수의 합
 - [x] 1부터 N까지 M의 배수합
+- [x] <a href ="https://www.acmicpc.net/problem/1339">단어수학</a>
+
 
 <h3 id="-">브루트 포스</h3>
 
