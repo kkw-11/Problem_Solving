@@ -1,6 +1,4 @@
 //https://www.acmicpc.net/problem/1339
-
-
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -39,7 +37,6 @@ int main() {
 	//A-1000 , B-100 C-1100, D-11. E-1, F 0, G-1000
 	//0,         000         0 1 11 100 1000 1100[]
 	sort(arr, arr+30);
-	
 	
 	int result=0;
 
