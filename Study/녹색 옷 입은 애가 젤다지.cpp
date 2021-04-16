@@ -1,4 +1,66 @@
+
 //https://www.acmicpc.net/problem/4485
+
+//시간초과 풀이
+#include <iostream>
+#include <cstring>
+
+#define endl "\n"
+#define MAX 126
+#define INF 987654321
+using namespace std;
+
+int N;
+int arr[MAX][MAX];
+int dy[4] = { 0,1,0,-1 };
+int dx[4] = { 1,0,-1,0 };
+int hrr[MAX][MAX];
+
+void jelda(int a, int b) {
+	int cost = hrr[a][b];
+
+	if (a == N - 1 && b == N - 1)
+		return;
+
+	for (int i = 0; i < 4; i++) {
+		int A = a + dy[i];
+		int B = b + dx[i];
+
+		if (A >= 0 && A < N && B >= 0 && B < N) {
+			if (cost + arr[A][B] < hrr[A][B]) {
+				hrr[A][B] = cost + arr[A][B];
+				jelda(A, B);
+			}
+		}
+	}
+}
+
+int main() {
+	freopen("input.txt", "rt", stdin);
+
+	int t = 1;
+	while (1) {
+		cin >> N;
+
+		if (N == 0)
+			break;
+		memset(arr, 0, sizeof(arr));
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				cin >> arr[i][j];
+				hrr[i][j] = INF;
+			}
+		}
+		hrr[0][0] = arr[0][0];
+		jelda(0, 0);
+
+		int result = hrr[N - 1][N - 1];
+
+		cout << "Problem " << t << ": " << result << endl;
+		t++;
+	}
+}
+
 // # 
 
 // # 첫번째 풀이 : 정통 ? 다익스트라 알고리즘 >> 시간초과
