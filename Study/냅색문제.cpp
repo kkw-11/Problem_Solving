@@ -1,7 +1,16 @@
 // https://www.acmicpc.net/problem/1450
+
+//pseudo code
+//냅색 알고리즘 인프런 강좌 학습하고 보기
 #include <stdio.h>
 int sum, i, j, c, n, cnt;
 int num[30];
+
+//10 3
+//2 1 1 3 1 1 1 4 5 
+//i값이 N이 되었을 때 
+//3 -> --2
+
 void go(int c, int i, int j, int sum) {
     if (i == n) return;
 
@@ -28,7 +37,7 @@ void go(int c, int i, int j, int sum) {
         }
     }
 
-    go(c, i, j, sum + num[j]);
+    go(--c, i, j, sum + num[j]);
 
 }
 

@@ -14,21 +14,22 @@ int N;
 int arr[MAX][MAX];
 int dy[4] = { 0,1,0,-1 };
 int dx[4] = { 1,0,-1,0 };
-int hrr[MAX][MAX];
+int sum[MAX][MAX];
 
 void jelda(int a, int b) {
-	int cost = hrr[a][b];
+	int cost = sum[a][b];
 
 	if (a == N - 1 && b == N - 1)
 		return;
 
+	//i값은 dy,dx의 상하좌우 방향설정을 위한 변수
 	for (int i = 0; i < 4; i++) {
 		int A = a + dy[i];
 		int B = b + dx[i];
 
 		if (A >= 0 && A < N && B >= 0 && B < N) {
-			if (cost + arr[A][B] < hrr[A][B]) {
-				hrr[A][B] = cost + arr[A][B];
+			if (cost + arr[A][B] < sum[A][B]) {
+				sum[A][B] = cost + arr[A][B];
 				jelda(A, B);
 			}
 		}
@@ -48,13 +49,13 @@ int main() {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				cin >> arr[i][j];
-				hrr[i][j] = INF;
+				sum[i][j] = INF;
 			}
 		}
-		hrr[0][0] = arr[0][0];
+		sum[0][0] = arr[0][0];
 		jelda(0, 0);
 
-		int result = hrr[N - 1][N - 1];
+		int result = sum[N - 1][N - 1];
 
 		cout << "Problem " << t << ": " << result << endl;
 		t++;
