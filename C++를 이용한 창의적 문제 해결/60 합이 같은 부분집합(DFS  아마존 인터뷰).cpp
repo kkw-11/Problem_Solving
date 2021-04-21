@@ -62,6 +62,7 @@ int main() {
 //int num[10];
 //
 //void dfs(int depth, int sum) {
+//  if(sum>(total/2)) return;
 //	if (flag == 1) return;
 //	//모든 원소에 대해서 부분집합에 포함시킬지 말지 결정했을때(depth == n)
 //	//부분집합의 합에 대해서 나머지 부분집합과 비교할 차례
