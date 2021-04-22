@@ -70,8 +70,6 @@ int main() {
 //	if (depth == n) {
 //		if (sum == total - sum)
 //			flag = 1;
-//
-//
 //		return;
 //
 //	}
@@ -80,7 +78,6 @@ int main() {
 //		dfs(depth + 1, sum + num[depth]);
 //
 //		dfs(depth + 1, sum );
-//
 //	}
 //
 //}
