@@ -27,6 +27,9 @@ void jelda(int a, int b) {
 		int A = a + dy[i];
 		int B = b + dx[i];
 
+//방문처리를 해주지 않아서 시간초과가 난것 같고요
+//방문처리를 하지 않아도
+
 		if (A >= 0 && A < N && B >= 0 && B < N) {
 			if (cost + arr[A][B] < sum[A][B]) {
 				sum[A][B] = cost + arr[A][B];

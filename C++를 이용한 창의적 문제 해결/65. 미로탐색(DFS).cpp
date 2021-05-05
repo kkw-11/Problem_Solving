@@ -1,5 +1,6 @@
-#include <stdio.h>
+//65. 미로탐색(DFS)
 
+#include <stdio.h>
 int map[7][7], visited[7][7];
 int dx[] = { 1,0,-1,0 };
 int dy[] = { 0,1,0,-1 };
