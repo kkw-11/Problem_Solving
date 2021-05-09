@@ -1,5 +1,4 @@
 //https://www.acmicpc.net/problem/1065
-
 #include <stdio.h>
 
 int main() {
@@ -20,7 +19,6 @@ int main() {
 		}
 		printf("%d", 99+cnt);
 	}
-
 
 	return 0;
 }
