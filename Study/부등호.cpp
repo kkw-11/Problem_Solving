@@ -12,6 +12,7 @@ int main() {
 	//freopen("input.txt", "rt", stdin);
 	int k, i;
 	scanf("%d", &k);
+	//부등호의 개수가 k면 숫자는 k+1
 	for (i = 0; i <= k; i++) {
 		if (i != k) {
 			getchar();
@@ -69,6 +70,9 @@ void dfs(int flag, int start, int end) {
 		}
 	}
 
+//copy = [a,b,c]
+//start = 0, end = k;
+//
 	//모든 경우의 수 배열하기
 	//순열 짜기 기본 코드
 	for (int i = start; i <= end; i++) {
