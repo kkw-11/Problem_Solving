@@ -7,13 +7,12 @@ int dcol[] = {0,0,-1,1};
 int map[51][51], allycheck[51][51];
 int cnt, sum, allycount, N,L,R, r,c, sub,flag;
 
-void check(){
+void allycheckfunc(){
 
     //i,j는 map의 현재 위치를 나타내는 변수
     //k는 현재위치로부터 상하좌우 이동을 어디로 할지 정하는 변수
     for(int i = 0;i<N;++i){
         for(int j = 0; j<N;++j){
-
 
             //i,j는 현재위치,r,c는 이웃 위치
             for(int k = 0;k<4;++k){
@@ -39,7 +38,7 @@ void check(){
         }
     }
 }
-void renewal(){
+int renewal(){
     for(int i = 0;i<N;++i){
         for(int j = 0;j<N;++j){
             if(allycheck[i][j] == 1){
@@ -49,9 +48,7 @@ void renewal(){
 
         }
     }
-    if(flag){
-        ++cnt;
-    }
+    return flag; 
 }
 void reset(){
     flag = 0;
@@ -62,7 +59,7 @@ void reset(){
     }
 }
 int main(){
-    freopen("input.txt","rt",stdin);
+    //freopen("input.txt","rt",stdin);
     //입력값 받기
     scanf("%d%d%d",&N,&L,&R);
 
@@ -73,15 +70,17 @@ int main(){
     }
     while(1){
         //연합국 인지 확인(연합국 allycheck 배열 0->1, 연합국 아니면(상하좌우 차가 모두 문제의 주어진 범위에 속하지 않으면) -1)
-        check();
+        allycheckfunc();
         //연합국의 각 인구 계산
 
         //연합국 인구 갱신
-        renewal();
-        
-        if(flag !=1)
-            break;
-        //위 과정 반복
+        flag = renewal();
+
+        if(flag)
+           ++cnt;
+        else 
+           break;
+        //리셋 후 위 과정 반복
         reset();
     }
     
