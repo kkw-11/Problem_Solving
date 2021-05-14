@@ -13,7 +13,6 @@ void allycheckfunc(){
     //k는 현재위치로부터 상하좌우 이동을 어디로 할지 정하는 변수
     for(int i = 0;i<N;++i){
         for(int j = 0; j<N;++j){
-
             //i,j는 현재위치,r,c는 이웃 위치
             for(int k = 0;k<4;++k){
                 r = i + drow[k];
@@ -33,7 +32,6 @@ void allycheckfunc(){
 
                      }
                 }
-
             }
         }
     }
@@ -68,10 +66,11 @@ int main(){
             scanf("%d",&map[i][j]);
         }
     }
+   
     while(1){
         //연합국 인지 확인(연합국 allycheck 배열 0->1, 연합국 아니면(상하좌우 차가 모두 문제의 주어진 범위에 속하지 않으면) -1)
-        allycheckfunc();
         //연합국의 각 인구 계산
+        allycheckfunc();
 
         //연합국 인구 갱신
         flag = renewal();
@@ -80,6 +79,7 @@ int main(){
            ++cnt;
         else 
            break;
+
         //리셋 후 위 과정 반복
         reset();
     }
