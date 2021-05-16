@@ -10,6 +10,10 @@ int main() {
 		scanf(" %c", &str[i]);
 	}
 
+	//부등호의 개수는 k개 
+	//마지막 부등호배열의 인덱스 번호는 k-1
+	//마지막 숫자의 인덱스 번호는 k
+	//마지막 숫자 까지 입력하고 인덱스 i가 k+1이 되면 while문 종료
 	while (i != k+1) {
 		if (str[i] == '>') {
 			max[i++] = curMax--;
@@ -25,7 +29,7 @@ int main() {
 			cnt = 0;
 			curMax -= ++temp;
 		}
-		else
+		else //'>' 다음 str[i]가 널이라면 max[i]에 현재 최대값 넣고 종료
 			max[i++] = curMax;
 
 	}
@@ -47,9 +51,8 @@ int main() {
 			cnt = 0;
 			curMin += ++temp;
 		}
-		else
+		else //'>' 다음 str[i]가 널이라면 min[i]에 현재 최소값넣고 종료
 			min[i++] = curMin;
-	
 	}
 
 	min[i] = NULL;
