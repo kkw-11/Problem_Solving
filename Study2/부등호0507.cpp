@@ -1,6 +1,4 @@
-
 // //https://www.acmicpc.net/problem/2529
-
 #include<stdio.h>
 #include<string.h>
 
@@ -15,6 +13,8 @@ int main() {
 	int k, i;
 	scanf("%d", &k);
 	//부등호의 개수가 k면 숫자는 k+1
+	//부등호 저장 배열의 마지막 인덱스는 k-1
+	//부등호 사이에 들어갈 수의 개수는 k
 	for (i = 0; i <= k; i++) {
 		if (i != k) {
 			getchar();
@@ -22,18 +22,23 @@ int main() {
 		}
 		else str[i] = NULL;
 		//부등호의 수 + 1만큼의 수를 
-		//최대 값에서는 9부터 아래로 하나씩 입력
-		//최소 값에서는 0부터 위로 하나씩 입력
+		//최대 값에서는 9-k부터 9까지 하나씩 입력
+		//최소 값에서는 0+k부터 하나씩 입력
 		max[i] = '9' - k + i;
 		min[i] = '0' + k - i;
 	}
 
 	max[i] = NULL;
 	min[i] = NULL;
+
 	strcpy(copy, max);
+	//flag=1, 최대값 구하기
 	permu(1, 0, k);
+
 	strcpy(copy, min);
+	//flag=0, 최소값 구하기
 	permu(0, 0, k);
+
 	printf("%s\n%s", max, min);
 	return 0;
 }
@@ -49,10 +54,9 @@ void swap(int a, int b) {
 //flag 0이면 최소값 구하기
 void permu(int flag, int start, int end) {
 	//start가 숫자 배열의 범위를 벗어났을 경우 이제 모두 정렬한 상태
-	//정렬된 상태에서 부등호와 맞는지 체크하고 맞다면 현재값이 최대값과 비교하여 최대값 구하기
+	//정렬한 상태에서 부등호와 맞는지 체크하고 맞다면 현재값이 최대값과 비교하여 최대값 구하기
 	if (start == end + 1) {
 		checkfindMaxMin(flag);
-
 	}
 
 	//모든 경우의 수 배열하기
@@ -112,7 +116,7 @@ int check() {
 	return 1;
 }
 
-
+// //파이썬 풀이
 // import sys
 // import heapq
 // import math
@@ -122,13 +126,14 @@ int check() {
 // n = int(input())
 // arr = list(input().split())
 // res = []
-// ch  = [0]*(11)
+// ch  = [0]*(11) //숫자 사용여부 체크 배열
 
+// #go(숫자사용 체크배열,부등호배열 인덱스,내부 부등호 왼쪾에 들어갈 숫자,답 기록 배열)
 // def go(ch,idx,cNum,ans):
 //     if idx == n: # 지금까지 3개 넣었다는 의미이다 
 //         res.append(''.join(map(str,ans)))
 //     else:
-//         for i in range(0,10):
+//         for i in range(0,10): #부등호 오른쪽에 들어갈 숫자 i, 현재 부등호에서 0,9까지 숫자 대입해보기 부등호 만족하면 다음 재귀함수 호출
 //             if ch[i] == 0 :
 //                 if arr[idx] == '<' and cNum < i:
 //                     ch[i] = 1
