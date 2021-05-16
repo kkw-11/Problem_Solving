@@ -3,7 +3,7 @@
 #include<string.h>
 
 void swap(int a, int b);
-void permu(int flag, int start, int end);
+void permu(int flag, int start, int end); // 9 8 7 => 6가지 978 897 879 798 789
 int check();
 void checkfindMaxMin(int flag);
 
@@ -24,13 +24,15 @@ int main() {
 		//부등호의 수 + 1만큼의 수를 
 		//최대 값에서는 9-k부터 9까지 하나씩 입력
 		//최소 값에서는 0+k부터 하나씩 입력
-		max[i] = '9' - k + i;
-		min[i] = '0' + k - i;
+		//max에는 입력가능한 수들 중에 가장 작은값을 초기값으로 넣어주고
+		max[i] = '9' - k + i; 
+		//min에는 입력가능한 수들 중에 가장 큰값을 초기 값으로 넣어주고
+		min[i] = '0' + k - i; 
 	}
-
 	max[i] = NULL;
 	min[i] = NULL;
 
+	//알고리즘은 max와 min이 아닌 copy값으로 수행 하기위해 복사본 저장
 	strcpy(copy, max);
 	//flag=1, 최대값 구하기
 	permu(1, 0, k);
@@ -52,6 +54,7 @@ void swap(int a, int b) {
 
 //flag 1이면 최대값 구하기
 //flag 0이면 최소값 구하기
+//7,8,9
 void permu(int flag, int start, int end) {
 	//start가 숫자 배열의 범위를 벗어났을 경우 이제 모두 정렬한 상태
 	//정렬한 상태에서 부등호와 맞는지 체크하고 맞다면 현재값이 최대값과 비교하여 최대값 구하기
@@ -70,12 +73,12 @@ void permu(int flag, int start, int end) {
 	수형도를 그려 직접 손으로 순열을 직접 다 구할때 각 문자에 대해 첫 번째 오는 경우를 적어두고 다음 경우들을 적어두면서 하는 것처럼 
 	생각하면 됨
 	*/
+	//7,8,9  8,7,9   9,8,7 
 	for (int i = start; i <= end; i++) {
 		swap(start, i);
 		permu(flag, start + 1, end);
 		swap(start, i); //각 스택마다 배열의 위치를 함수호출 직전으로 되돌리기
 	}
-
 }
 
 void checkfindMaxMin(int flag) {
@@ -126,7 +129,7 @@ int check() {
 // n = int(input())
 // arr = list(input().split())
 // res = []
-// ch  = [0]*(11) //숫자 사용여부 체크 배열
+// ch  = [0]*(11) #숫자 사용여부 체크 배열
 
 // #go(숫자사용 체크배열,부등호배열 인덱스,내부 부등호 왼쪾에 들어갈 숫자,답 기록 배열)
 // def go(ch,idx,cNum,ans):
@@ -137,7 +140,7 @@ int check() {
 //             if ch[i] == 0 :
 //                 if arr[idx] == '<' and cNum < i:
 //                     ch[i] = 1
-//                     go(ch,idx+1,i,ans + [i])
+//                     go(ch,idx+1,i,ans + [i]) ans = [1]
 //                     ch[i] = 0
 //                 if arr[idx] == '>' and cNum > i:
 //                     ch[i] = 1
@@ -151,7 +154,6 @@ int check() {
 
 // print(res[-1])
 // print(res[0])
-
 
 // // //https://www.acmicpc.net/problem/2529
 

@@ -8,7 +8,6 @@ int map[51][51], allycheck[51][51];
 int cnt, sum, allycount, N,L,R, r,c, sub,flag;
 
 void allycheckfunc(){
-
     //i,j는 map의 현재 위치를 나타내는 변수
     //k는 현재위치로부터 상하좌우 이동을 어디로 할지 정하는 변수
     for(int i = 0;i<N;++i){
@@ -43,7 +42,6 @@ int renewal(){
                 map[i][j] = sum/allycount;
                 flag = 1;
             }
-
         }
     }
     return flag; 
