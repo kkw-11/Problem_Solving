@@ -4,6 +4,7 @@
 using namespace std;
 int Q[100], front=-1, rear=-1, visited[10];
 vector<int> map[10];
+
 int main(){
 	//freopen("input.txt", "rt", stdin);
 	int i, a, b, x, firstX= 1;
@@ -20,14 +21,15 @@ int main(){
 	while(front<rear){
 		x=Q[++front];
 		printf("%d ", x);
-        //x에 연결 된 부분은 2차원 배열 map에 저장해주었는데 이 2차원 배열에서 각 노드에 연결된 사이즈 만큼
-		for(i=0; i<map[x].size(); i++){
+        //x에 연결된 부분을 저장해두었던 인접리스트로 표현해 2차원 vector에 각 노드에 연결된 사이즈 만큼 for문으로 확인
+		for(i=0; i<map[x].size(); ++i){
             printf("%d ",map[x][i]);
+
             //queue에서 빼준(queue에는 가장 먼저들어 간 순서대로 빠진다.) 노드에 연결된 부분을 순차적으로 방문확인하고
             //방문 하지 않았으면 방문처리하고 Queue에 넣어준다.
-			if(visited[map[x][i]]==0){
-				visited[map[x][i]]=1;
-				Q[++rear]=map[x][i];
+			if(visited[map[x][i]] == 0){
+				visited[map[x][i]] = 1;
+				Q[++rear] = map[x][i];
 			}
 		}
         printf("\n");
