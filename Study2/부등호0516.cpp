@@ -1,5 +1,6 @@
 #include <stdio.h>
 int main() {
+	
 	//freopen("input.txt", "rt", stdin);
 	int k, i =0,cnt = 0;
 	char curMax = '9', curMin = '0';
@@ -22,6 +23,7 @@ int main() {
 			for (int j = i; str[j] == '<'; ++j) {
 				++cnt;
 			}
+			//cnt를 가지고 그 다음 최대숫자를 구할 수 있는데 cnt가 변경되기 때문에 temp에 저장해둠
 			int temp = cnt;
 			for (; cnt >= 0; --cnt) {
 				max[i++] = curMax - cnt;

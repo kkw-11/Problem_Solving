@@ -1,0 +1,17 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "atomic": "cpp",
+        "deque": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "queue": "cpp",
+        "streambuf": "cpp",
+        "vector": "cpp",
+        "xlocale": "cpp",
+        "xlocnum": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
+}
