@@ -82,8 +82,8 @@ int main(){
 
 		for (int r = 0; r < n; ++r) {
 			for (int c = 0; c < n; ++c) {
-				int area_num = what_area[r][c];
-				int avg = sum[area_num] / count[area_num];
+				int index = what_area[r][c];
+				int avg = sum[index] / count[index];
 				if (map[r][c] != avg) {
 					map[r][c] = avg;
 					is_update = true;
@@ -99,7 +99,6 @@ int main(){
 	return 0;
 }
 
-//출처: https://na982.tistory.com/99 [na982]
 
 // import sys
 // import heapq
