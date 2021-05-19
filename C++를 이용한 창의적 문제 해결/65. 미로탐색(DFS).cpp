@@ -13,14 +13,14 @@ void go(int y, int x) {
 	else {
 		for (int i = 0; i < 4; ++i) {
 			// xx, yy는 다음에 갈 곳, x,y는 현재 위치
-			int xx = x + dx[i];
-			int yy = y + dy[i];
+			int nx = x + dx[i];
+			int ny = y + dy[i];
 
-			if (xx >= 0 && xx < 7 && yy >= 0 && yy < 7 && map[yy][xx] == 0 && visited[yy][xx] == 0) { 
-				visited[yy][xx] = 1;
-				go(yy, xx);
+			if (nx >= 0 && nx < 7 && ny >= 0 && ny < 7 && map[ny][nx] == 0 && visited[ny][nx] == 0) { 
+				visited[ny][nx] = 1;
+				go(ny, nx);
 				//직전에 방문 한곳 다시 미방문 처리
-				visited[yy][xx] = 0;
+				visited[ny][nx] = 0;
 			}
 		}
 	}

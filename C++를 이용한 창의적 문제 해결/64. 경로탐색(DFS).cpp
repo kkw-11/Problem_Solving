@@ -27,7 +27,7 @@ int main() {
 	int m, x, y;
 	scanf("%d%d", &n, &m);
 
-	//방향 그래프
+	//행렬 방식으로 방향 그래프 저장
 	for (int i = 0; i < m; ++i) {
 		scanf("%d%d", &y, &x);
 		map[y-1][x-1] = 1;
@@ -40,3 +40,38 @@ int main() {
 
 	return 0;
 }
+
+
+//64. 경로 탐색(DFS)
+//#include<stdio.h>
+//int N, M, cnt;
+//int map[21][21], visited[21];
+//void dfs(int v) {
+//	if (v == N)
+//		++cnt;
+//	else {
+//		for (int i = 1; i <= N; ++i) {
+//			if (map[v][i] == 1 && visited[i] == 0) {
+//				visited[i] = 1;
+//				dfs(i);
+//				visited[i] = 0;
+//			}
+//		}
+//	}
+//
+//}
+//int main() {
+//	//freopen("input.txt", "rt", stdin);
+//	int a, b, start = 1;
+//	scanf("%d %d", &N, &M);
+//	for (int i = 0; i < M; ++i) {
+//		scanf("%d %d", &a, &b);
+//		map[a][b] = 1;
+//	}
+//
+//	visited[start] = 1;
+//	dfs(start);
+//	printf("%d", cnt);
+//
+//	return 0;
+//}
