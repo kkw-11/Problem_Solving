@@ -1,11 +1,10 @@
 //https://www.acmicpc.net/problem/16234
-
 #include <stdio.h>
 
 int drow[] = {-1,1,0,0};
 int dcol[] = {0,0,-1,1};
 int map[51][51], allycheck[51][51];
-int cnt, sum, allycount, N,L,R, r,c, sub,flag;
+int cnt, sum, allycount, N,L,R, r,c, sub, flag;
 
 void allycheckfunc(){
     //i,j는 map의 현재 위치를 나타내는 변수
