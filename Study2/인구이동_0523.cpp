@@ -20,15 +20,15 @@ main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 �
 	const int dr[] = { -1, 1, 0, 0 };
 	const int dc[] = { 0, 0, -1, 1 };
 
-	queue<POSI> q;
-	POSI head;
+	queue<POSI> q;//POSI 라는 구조체를 통해 생성한 사용자 정의형 타입을 담을 수 있는 큐
+	POSI head; // head에는 int r,int c가 쌍으로 있는 타입 POSI타입의 head라는 변수명을 가진 변수 선언 
 	head.r = sr;
 	head.c = sc;
 	visited[sr][sc] = 1;
 	q.push(head);
 
 	while (!q.empty()) {
-		POSI cur = q.front();
+		POSI cur = q.front(); //큐에 제일 앞에 있는 POSI 타입 변수 반환
 		q.pop();
 
 		area[cur.r][cur.c] = index;
@@ -82,8 +82,8 @@ int main(){
 
 		for (int r = 0; r < n; ++r) {
 			for (int c = 0; c < n; ++c) {
-				int index = what_area[r][c];
-				int avg = sum[index] / count[index];
+				int area_num = what_area[r][c];
+				int avg = sum[area_num] / count[area_num];
 				if (map[r][c] != avg) {
 					map[r][c] = avg;
 					is_update = true;
