@@ -12,7 +12,7 @@ int map[50][50];
 
 void create_area(int sr, int sc, int area[][50],int index, int& count, int& sum) {
 /*
-다른 시작점에서는 동맹국이 아닐지 모르지만 지금 시작점에서 다시 동맥국으로 생길지 모르기 때문에 
+다른 시작점에서는 동맹국이 아닐지 모르지만 지금 시작점에서 다시 동맹국으로 생길지 모르기 때문에 
 main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 좌표 방문은 초기화 해주어 현재 시작 위치로부터 방문 했었은지 확인해야 한다.
 */
 	int visited[50][50] = { 0, }; 
@@ -62,7 +62,7 @@ int main(){
 		}
 	}
 
-	int cnt = 0;
+	int result = 0;
 	bool is_update = true;
 	while (is_update) {
 		is_update = false;
@@ -91,11 +91,11 @@ int main(){
 			}
 		}
 		if (is_update) {
-			++cnt;
+			++result;
 		}
 	}
 
-	printf("%d\n", cnt);
+	printf("%d\n", result);
 	return 0;
 }
 
