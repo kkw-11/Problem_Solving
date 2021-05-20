@@ -10,7 +10,7 @@ typedef struct position{
 int n, l, r;
 int map[50][50];
 
-void create_area(int sr, int sc, int area[][50],int index, int& count, int& sum) {
+void check_area(int sr, int sc, int area[][50],int index, int& count, int& sum) {
 /*
 다른 시작점에서는 동맹국이 아닐지 모르지만 지금 시작점에서 다시 동맹국으로 생길지 모르기 때문에 
 main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 좌표 방문은 초기화 해주어 현재 시작 위치로부터 방문 했었은지 확인해야 한다.
@@ -20,8 +20,9 @@ main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 �
 	const int dr[] = { -1, 1, 0, 0 };
 	const int dc[] = { 0, 0, -1, 1 };
 
-	queue<POSI> q;//POSI 라는 구조체를 통해 생성한 사용자 정의형 타입을 담을 수 있는 큐
-	POSI head; // head에는 int r,int c가 쌍으로 있는 타입 POSI타입의 head라는 변수명을 가진 변수 선언 
+	//탐색진행 전 start row, start coloum을 큐에 넣기 작업
+	queue<POSI> q; //구조체를 통해 생성한 사용자 정의형 타입, POSI라는 타입을 담을 수 있는 큐
+	POSI head; //head에는 int r,int c가 쌍으로 있는 타입 POSI타입의 head라는 변수명을 가진 변수 선언 
 	head.r = sr;
 	head.c = sc;
 	visited[sr][sc] = 1;
@@ -69,13 +70,13 @@ int main(){
 
 		int what_area[50][50] = { 0, };
 		int area_index = 0;
-		int count[2501] = { 0, };//50*50 = 2500개의 개별 국가 존재 가능
-		int sum[2501] = { 0, };
+		int area_count[2501] = { 0, };//50*50 = 2500개의 개별 국가 존재 가능
+		int people_sum[2501] = { 0, };
 		for (int r = 0; r < n; ++r) {
 			for (int c = 0; c < n; ++c) {
 				if (what_area[r][c] == 0) {
 					++area_index;
-					create_area(r, c, what_area, area_index, count[area_index], sum[area_index]);
+					check_area(r, c, what_area, area_index, area_count[area_index], people_sum[area_index]);
 				}
 			}
 		}
@@ -83,7 +84,7 @@ int main(){
 		for (int r = 0; r < n; ++r) {
 			for (int c = 0; c < n; ++c) {
 				int area_num = what_area[r][c];
-				int avg = sum[area_num] / count[area_num];
+				int avg = people_sum[area_num] / area_count[area_num];
 				if (map[r][c] != avg) {
 					map[r][c] = avg;
 					is_update = true;
