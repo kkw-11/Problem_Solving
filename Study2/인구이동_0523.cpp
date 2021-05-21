@@ -1,104 +1,293 @@
+//https://www.acmicpc.net/problem/16234
 #include <stdio.h>
 #include <algorithm>
-#include <queue>
-using namespace std;
-
-typedef struct position{
-	int r, c;
-}POSI;
-
-int n, l, r;
+int n,l,r,cnt;
 int map[50][50];
+int visited[50][50];
+int dirR[] = {-1,1,0,0};
+int dirC[] = {0,0,-1,1};
 
-void check_area(int sr, int sc, int area[][50],int index, int& count, int& sum) {
-/*
-다른 시작점에서는 동맹국이 아닐지 모르지만 지금 시작점에서 다시 동맹국으로 생길지 모르기 때문에 
-main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 좌표 방문은 초기화 해주어 현재 시작 위치로부터 방문 했었은지 확인해야 한다.
-*/
-	int visited[50][50] = { 0, }; 
+int totalAllyPeople(int r,int c,int preValue){
+    if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return 0;
+    if(visited[r][c]) return 0;
 
-	const int dr[] = { -1, 1, 0, 0 };
-	const int dc[] = { 0, 0, -1, 1 };
+    //main에서 preValue = -1로 처리한 시작 위치가 넘어오면 이전 값이 없기 때문에 차이를 구할 게 없음  
+    if(preValue != -1){
+        int delta = abs(preValue - map[r][c]);
+        if(delta<l||delta>r) return 0;
+    }
+    visited[r][c] = 1;
+    ++cnt;
+    int sum = map[r][c];
+    for(int dir=0;dir<4;++dir){
+        int nr = r + dirR[dir];
+        int nc = c + dirC[dir];
 
-	//탐색진행 전 start row, start coloum을 큐에 넣기 작업
-	queue<POSI> q; //구조체를 통해 생성한 사용자 정의형 타입, POSI라는 타입을 담을 수 있는 큐
-	POSI head; //head에는 int r,int c가 쌍으로 있는 타입 POSI타입의 head라는 변수명을 가진 변수 선언 
-	head.r = sr;
-	head.c = sc;
-	visited[sr][sc] = 1;
-	q.push(head);
+        sum+=totalAllyPeople(nr,nc,map[r][c]);
+    }
+    // sum +=find(r-1,c,map[r][c]);
+    // sum +=find(r+1,c,map[r][c]);
+    // sum +=find(r,c-1,map[r][c]);
+    // sum +=find(r,c+1,map[r][c]);
 
-	while (!q.empty()) {
-		POSI cur = q.front(); //큐에 제일 앞에 있는 POSI 타입 변수 반환
-		q.pop();
+    return sum;
+}
+void renewal(int r, int c, int avg){
+    if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return;
+    if(visited[r][c] != 1) return;
+    visited[r][c] = 2;
 
-		area[cur.r][cur.c] = index;
-		++count;
-		sum += map[cur.r][cur.c];
-		//현재 위치(r,c)에서 문제의 조건에 부합하는 상하좌우에 위치한 곳은 전부 큐에 넣기
-		for (int dir = 0; dir < 4; ++dir) {
-			POSI next;
-			next.r = cur.r + dr[dir];
-			next.c = cur.c + dc[dir];
+    map[r][c] = avg;
 
-			if (next.r < 0 || next.r >= n || next.c < 0 || next.c >= n) continue; //주어진 map에서 벗어난 위치이면 다음 방향 찾기
+     for(int dir=0;dir<4;++dir){
+        int nr = r + dirR[dir];
+        int nc = c + dirC[dir];
+        renewal(nr,nc,avg);
+    }
 
-			int delta = abs(map[cur.r][cur.c] - map[next.r][next.c]); //절대값 차 구하기
-			if (visited[next.r][next.c] == 0 && l <= delta && delta <= r) {
-				visited[next.r][next.c] = 1;
-				q.push(next);
-			}
-		}
-	}
+    // change(r-1,c,avg);
+    // change(r+1,c,avg);
+    // change(r,c-1,avg);
+    // change(r,c+1,avg);
+
 }
 
+int go(){
+    int cnt = 0;
+    bool flag;
+
+    do{
+        flag = false;
+        for(int i = 0; i<n;++i){
+            for(int j = 0; j<n;++j){
+                visited[i][j] = 0;
+            }
+        }
+
+        for(int i =0;i<n;++i){
+            for(int j = 0;j<n;++j){
+                if(visited[i][j]==0){ //방문만 했으면 1, 인구수 갱신국이면 2
+                    cnt = 0;
+                    int total = totalAllyPeople(i,j,-1);
+                    if(cnt>1){ //cnt가 1이면 자기 혼자만 동맹국
+                        flag = true;
+                        renewal(i,j,total/cnt);
+                    }
+                    else{
+                        visited[i][j] = 2;
+                    }
+                }
+            }
+        }
+
+        if(flag) ++cnt;
+    }while(flag);
+
+    return cnt;
+}
 
 int main(){
-	freopen("input.txt", "rt", stdin);
+    scanf("%d %d %d",&n,&l,&r);
 
-	scanf("%d %d %d", &n, &l, &r);
-	for (int y = 0; y < n; ++y) {
-		for (int x = 0; x < n; ++x) {
-			scanf("%d", &map[y][x]);
-		}
-	}
+    for(int i =0;i<n;++i){
+        for(int j = 0;j<n;++j){
+            scanf("%d",&map[i][j]);
+        }
+    }
+    printf("%d",go());
 
-	int result = 0;
-	bool is_update = true;
-	while (is_update) {
-		is_update = false;
-
-		int what_area[50][50] = { 0, };
-		int area_index = 0;
-		int area_count[2501] = { 0, };//50*50 = 2500개의 개별 국가 존재 가능
-		int people_sum[2501] = { 0, };
-		for (int r = 0; r < n; ++r) {
-			for (int c = 0; c < n; ++c) {
-				if (what_area[r][c] == 0) {
-					++area_index;
-					check_area(r, c, what_area, area_index, area_count[area_index], people_sum[area_index]);
-				}
-			}
-		}
-
-		for (int r = 0; r < n; ++r) {
-			for (int c = 0; c < n; ++c) {
-				int area_num = what_area[r][c];
-				int avg = people_sum[area_num] / area_count[area_num];
-				if (map[r][c] != avg) {
-					map[r][c] = avg;
-					is_update = true;
-				}
-			}
-		}
-		if (is_update) {
-			++result;
-		}
-	}
-
-	printf("%d\n", result);
 	return 0;
 }
+
+
+// //https://www.acmicpc.net/problem/16234
+// #include <stdio.h>
+// #include <algorithm>
+// int n,l,r,cnt;
+// int map[50][50];
+// int visited[50][50];
+
+// int find(int r,int c,int preValue){
+//     if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return 0;
+//     if(visited[r][c] == 0) return 0;
+
+//     if(preValue != -1){
+//         int delta = abs(preValue - map[r][c]);
+//         if(delta<l||delta>r) return 0;
+//     }
+//     visited[r][c] = 1;
+//     ++cnt;
+//     int sum = map[r][c];
+//     sum +=find(r-1,c,map[r][c]);
+//     sum +=find(r+1,c,map[r][c]);
+//     sum +=find(r,c-1,map[r][c]);
+//     sum +=find(r,c+1,map[r][c]);
+
+//     return sum;
+// }
+// void change(int r, int c, int avg){
+//     if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return;
+//     if(visited[r][c] != 1) return;
+//     visited[r][c] = 2;
+
+//     map[r][c] = avg;
+//     change(r-1,c,avg);
+//     change(r+1,c,avg);
+//     change(r,c-1,avg);
+//     change(r,c+1,avg);
+
+// }
+
+// int go(){
+//     int cnt = 0;
+//     bool flag;
+
+//     do{
+//         flag = false;
+//         for(int i = 0; i<n;++i){
+//             for(int j = 0; j<n;++j){
+//                 visited[i][j] = 0;
+//             }
+//         }
+
+//         for(int i =0;i<n;++i){
+//             for(int j = 0;j<n;++j){
+//                 if(visited[i][j]==0){
+//                     cnt = 0;
+//                     int sum = find(i,j,-1);
+//                     if(cnt>1){
+//                         flag = true;
+//                         change(i,j,sum/cnt);
+//                     }
+//                     else{
+//                         visited[i][j] = 2;
+//                     }
+//                 }
+//             }
+//         }
+
+//         if(flag) ++cnt;
+//     }while(flag);
+
+//     return cnt;
+// }
+
+// int main(){
+//     scanf("%d %d %d",&n,&l,&r);
+
+//     for(int i =0;i<n;++i){
+//         for(int j = 0;j<n;++j){
+//             scanf("%d",&map[i][j]);
+//         }
+//     }
+//     printf("%d",go());
+
+// 	return 0;
+// }
+
+
+
+// #include <stdio.h>
+// #include <algorithm>
+// #include <queue>
+// using namespace std;
+
+// typedef struct position{
+// 	int r, c;
+// }POSI;
+
+// int n, l, r;
+// int map[50][50];
+
+// void check_area(int sr, int sc, int area[][50],int index, int& count, int& sum) {
+// /*
+// 다른 시작점에서는 동맹국이 아닐지 모르지만 지금 시작점에서 다시 동맹국으로 생길지 모르기 때문에 
+// main for문에서 매번 시작좌표로 함수를 호출할때 마다 모든 좌표 방문은 초기화 해주어 현재 시작 위치로부터 방문 했었은지 확인해야 한다.
+// */
+// 	int visited[50][50] = { 0, }; 
+
+// 	const int dr[] = { -1, 1, 0, 0 };
+// 	const int dc[] = { 0, 0, -1, 1 };
+
+// 	//탐색진행 전 start row, start coloum을 큐에 넣기 작업
+// 	queue<POSI> q; //구조체를 통해 생성한 사용자 정의형 타입, POSI라는 타입을 담을 수 있는 큐
+// 	POSI head; //head에는 int r,int c가 쌍으로 있는 타입 POSI타입의 head라는 변수명을 가진 변수 선언 
+// 	head.r = sr;
+// 	head.c = sc;
+// 	visited[sr][sc] = 1;
+// 	q.push(head);
+
+// 	while (!q.empty()) {
+// 		POSI cur = q.front(); //큐에 제일 앞에 있는 POSI 타입 변수 반환
+// 		q.pop();
+
+// 		area[cur.r][cur.c] = index;
+// 		++count;
+// 		sum += map[cur.r][cur.c];
+// 		//현재 위치(r,c)에서 문제의 조건에 부합하는 상하좌우에 위치한 곳은 전부 큐에 넣기
+// 		for (int dir = 0; dir < 4; ++dir) {
+// 			POSI next;
+// 			next.r = cur.r + dr[dir];
+// 			next.c = cur.c + dc[dir];
+
+// 			if (next.r < 0 || next.r >= n || next.c < 0 || next.c >= n) continue; //주어진 map에서 벗어난 위치이면 다음 방향 찾기
+
+// 			int delta = abs(map[cur.r][cur.c] - map[next.r][next.c]); //절대값 차 구하기
+// 			if (visited[next.r][next.c] == 0 && l <= delta && delta <= r) {
+// 				visited[next.r][next.c] = 1;
+// 				q.push(next);
+// 			}
+// 		}
+// 	}
+// }
+
+
+// int main(){
+// 	freopen("input.txt", "rt", stdin);
+
+// 	scanf("%d %d %d", &n, &l, &r);
+// 	for (int y = 0; y < n; ++y) {
+// 		for (int x = 0; x < n; ++x) {
+// 			scanf("%d", &map[y][x]);
+// 		}
+// 	}
+
+// 	int result = 0;
+// 	bool is_update = true;
+// 	while (is_update) {
+// 		is_update = false;
+
+// 		int what_area[50][50] = { 0, };
+// 		int area_index = 0;
+// 		int area_count[2501] = { 0, };//50*50 = 2500개의 개별 국가 존재 가능
+// 		int people_sum[2501] = { 0, };
+// 		for (int r = 0; r < n; ++r) {
+// 			for (int c = 0; c < n; ++c) {
+// 				if (what_area[r][c] == 0) {
+// 					++area_index;
+// 					check_area(r, c, what_area, area_index, area_count[area_index], people_sum[area_index]);
+// 				}
+// 			}
+// 		}
+
+// 		for (int r = 0; r < n; ++r) {
+// 			for (int c = 0; c < n; ++c) {
+// 				int area_num = what_area[r][c];
+// 				int avg = people_sum[area_num] / area_count[area_num];
+// 				if (map[r][c] != avg) {
+// 					map[r][c] = avg;
+// 					is_update = true;
+// 				}
+// 			}
+// 		}
+// 		if (is_update) {
+// 			++result;
+// 		}
+// 	}
+
+// 	printf("%d\n", result);
+// 	return 0;
+// }
 
 
 // import sys

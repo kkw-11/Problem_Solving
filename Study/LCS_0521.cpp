@@ -14,6 +14,7 @@ void PrintArray(int** arr, int row, int col) {
 		printf("\n");
 	}
 }
+
 int Max(int a, int b) {
 
 	return a > b ? a : b;
@@ -37,11 +38,16 @@ int Subsequence(const char* str1, const char* str2) {
 	//arr[6] = new int[col];
 
 	/////////////////////////////////
+
+	//arr[1][1] == str1[0] == str2[0]
 	for (int i = 0; i < row; ++i) {
 		for (int j = 0; j < col; ++j) {
 			arr[i][j] = 0;
 		}
 	}
+	
+	//FISH  2  arr[i][j - 1]
+	//FINISH 3 arr[i - 1][j] =3 
 
 	for (int i = 1; i < row; ++i) {
 		for (int j = 1; j < col; ++j) {
@@ -51,9 +57,6 @@ int Subsequence(const char* str1, const char* str2) {
 				arr[i][j] = Max(arr[i - 1][j], arr[i][j - 1]);
 		}
 	}
-
-
-
 
 	//PrintArray(arr, row, col);
 	int retValue = arr[row - 1][col - 1];

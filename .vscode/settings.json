@@ -13,6 +13,16 @@
         "xmemory": "cpp",
         "xstring": "cpp",
         "xutility": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ios": "cpp",
+        "memory": "cpp",
+        "ostream": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "xtree": "cpp",
+        "cmath": "cpp",
+        "system_error": "cpp"
     }
 }
