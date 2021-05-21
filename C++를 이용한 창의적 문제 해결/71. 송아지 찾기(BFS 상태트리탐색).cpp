@@ -6,11 +6,12 @@ using namespace std;
 int main() {
 	freopen("input.txt", "rt", stdin);
 	int s, e, x, nx;
+	scanf("%d %d", &s, &e);
+	
+	
 	int checkCnt[10001] = {0,};
 	int dirx[] = { -1,1,5 };
 	queue<int> Q;
-
-	scanf("%d %d", &s, &e);
 
 	Q.push(s);
 	checkCnt[s] = 1;
@@ -20,8 +21,9 @@ int main() {
 		Q.pop();
 		for (int dir = 0; dir < 3; ++dir) {
 			nx = x + dirx[dir];
-		
-			if(nx<=0||nx>10000) continue;
+
+			if (nx <= 0 || nx > 10000)
+				continue;
 			if (nx == e) {
 				printf("%d", checkCnt[x]);
 				exit(0);

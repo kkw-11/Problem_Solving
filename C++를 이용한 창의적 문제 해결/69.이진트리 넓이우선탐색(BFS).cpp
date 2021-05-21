@@ -1,4 +1,4 @@
-//70. 그래프 최단거리(BFS)
+//69. 이진트리 넓이우선 탐색(BFS)
 
 #include<stdio.h>
 #include<vector>

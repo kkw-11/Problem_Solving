@@ -29,7 +29,7 @@ int main() {
 
 	for (int i = 0; i < M; ++i) {
 		scanf("%d %d %d", &r, &c, &dist);
-		map[r].push_back(make_pair(c,dist));///push_back함수를 통해 make_pair함수를 통해 pair형으로 만들어진 자료를 넣는다.
+		map[r].push_back(make_pair(c,dist));//push_back함수를 통해 make_pair함수를 통해 pair형으로 만들어진 자료를 넣는다.
 	}
 
 	dfs(1, 0);

@@ -22,7 +22,7 @@ void DFS(int vertex) {
 }
 
 int main() {
-	freopen("input.txt", "rt", stdin);
+	//freopen("input.txt", "rt", stdin);
 
 	int m, x, y;
 	scanf("%d%d", &n, &m);
