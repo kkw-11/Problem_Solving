@@ -1,192 +1,222 @@
 //https://www.acmicpc.net/problem/16234
+//DFS 풀이, 인구 총합을 return 값으로 반환하도록 풀이
 #include <stdio.h>
 #include <algorithm>
-int n,l,r,cnt;
+int n, l, r, cnt;
 int map[50][50];
 int visited[50][50];
-int dirR[] = {-1,1,0,0};
-int dirC[] = {0,0,-1,1};
+int dirR[] = { -1,1,0,0 };
+int dirC[] = { 0,0,-1,1 };
 
-int totalAllyPeople(int r,int c,int preValue){
-    if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return 0;
-    if(visited[r][c]) return 0;
-
+int allyPeople(int row, int column, int preValue) {
+    if (row < 0 || row > n - 1 || column < 0 || column > n - 1) return 0;
+    if (visited[row][column]) return 0;
     //main에서 preValue = -1로 처리한 시작 위치가 넘어오면 이전 값이 없기 때문에 차이를 구할 게 없음  
-    if(preValue != -1){
-        int delta = abs(preValue - map[r][c]);
-        if(delta<l||delta>r) return 0;
+    if (preValue != -1) {
+        int delta = abs(preValue - map[row][column]);
+        if (delta<l || delta>r) return 0;
     }
-    visited[r][c] = 1;
+    visited[row][column] = 1;
     ++cnt;
-    int sum = map[r][c];
-    for(int dir=0;dir<4;++dir){
+
+    int sum = map[row][column];
+   /* for (int dir = 0; dir < 4; ++dir) {
         int nr = r + dirR[dir];
         int nc = c + dirC[dir];
+        sum += totalAllyPeople(nr, nc, map[r][c]);
+    }*/
 
-        sum+=totalAllyPeople(nr,nc,map[r][c]);
-    }
-    // sum +=find(r-1,c,map[r][c]);
-    // sum +=find(r+1,c,map[r][c]);
-    // sum +=find(r,c-1,map[r][c]);
-    // sum +=find(r,c+1,map[r][c]);
+     sum += allyPeople(row-1,column,map[row][column]); //각 위치에서 상하좌우 끝내고 리턴
+     sum += allyPeople(row+1,column,map[row][column]);
+     sum += allyPeople(row,column-1,map[row][column]);
+     sum += allyPeople(row,column+1,map[row][column]);
 
     return sum;
 }
-void renewal(int r, int c, int avg){
-    if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return;
-    if(visited[r][c] != 1) return;
-    visited[r][c] = 2;
+void renewal(int row, int column, int avg) {
+    if (row < 0 || row > n - 1 || column < 0 || column > n - 1) return;
+    if (visited[row][column] != 1) return;
+    visited[row][column] = 2;
 
-    map[r][c] = avg;
+    map[row][column] = avg;
 
-     for(int dir=0;dir<4;++dir){
+    /*for (int dir = 0; dir < 4; ++dir) {
         int nr = r + dirR[dir];
         int nc = c + dirC[dir];
-        renewal(nr,nc,avg);
-    }
+        renewal(nr, nc, avg);
+    }*/
 
-    // change(r-1,c,avg);
-    // change(r+1,c,avg);
-    // change(r,c-1,avg);
-    // change(r,c+1,avg);
+    renewal(row-1,column,avg);
+    renewal(row+1,column,avg);
+    renewal(row,column-1,avg);
+    renewal(row,column+1,avg);
 
 }
 
-int go(){
-    int cnt = 0;
+int go() {
+    int answer = 0;
     bool flag;
 
-    do{
+    do {
         flag = false;
-        for(int i = 0; i<n;++i){
-            for(int j = 0; j<n;++j){
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
                 visited[i][j] = 0;
             }
         }
 
-        for(int i =0;i<n;++i){
-            for(int j = 0;j<n;++j){
-                if(visited[i][j]==0){ //방문만 했으면 1, 인구수 갱신국이면 2
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (visited[i][j] == 0) { //방문만 했으면 1, 인구수 갱신국이면 2
                     cnt = 0;
-                    int total = totalAllyPeople(i,j,-1);
-                    if(cnt>1){ //cnt가 1이면 자기 혼자만 동맹국
+                    int total = allyPeople(i, j, -1);
+                    if (cnt > 1) { //cnt가 1이면 자기 혼자만 동맹국
                         flag = true;
-                        renewal(i,j,total/cnt);
+                        renewal(i, j, total / cnt);
                     }
-                    else{
+                    else {
                         visited[i][j] = 2;
                     }
                 }
             }
         }
 
-        if(flag) ++cnt;
-    }while(flag);
+        if (flag) ++answer;
+    } while (flag);
 
-    return cnt;
+    return answer;
 }
 
-int main(){
-    scanf("%d %d %d",&n,&l,&r);
+int main() {
+    freopen("input.txt", "rt", stdin);
+    scanf("%d %d %d", &n, &l, &r);
 
-    for(int i =0;i<n;++i){
-        for(int j = 0;j<n;++j){
-            scanf("%d",&map[i][j]);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            scanf("%d", &map[i][j]);
         }
     }
-    printf("%d",go());
+    printf("%d", go());
 
-	return 0;
+    return 0;
 }
 
 
-// //https://www.acmicpc.net/problem/16234
-// #include <stdio.h>
-// #include <algorithm>
-// int n,l,r,cnt;
-// int map[50][50];
-// int visited[50][50];
+//DFS 풀이, 인구 총합을 return 값으로 반환하도록 다시 풀이
+// #include<stdio.h>
+//#include<algorithm>
+//int n, r, l;
+//int map[50][50];
+//int check[50][50];//0방문 안함, 1 동맹국, 2 인구갱신완료
+////int dirR[] = { -1,1,0,0 };
+////int dirC[] = { 0,0,-1,1 };
+//int total, cnt;
+//
+//int go(int row, int column, int prevalue) {
+//	if (row < 0 || row >= n || column < 0 || column >= n) return 0;
+//	if (check[row][column]) return 0;//현재 (row,column)이 방문했으면 리턴
+//	//이전값이 없을 경우 prevalue = -1 로 체크 차를 비교할 수 없기 때문에 바로 다음으로
+//	if (prevalue != -1) {
+//		int delta = abs(prevalue - map[row][column]);
+//		if (delta<l || delta>r) return 0;
+//	}
+//
+//	check[row][column] = 1;
+//	++cnt;
+//	int population = map[row][column];
+//
+//	population += go(row - 1, column, map[row][column]);
+//	population += go(row + 1, column, map[row][column]);
+//	population += go(row, column - 1, map[row][column]);
+//	population += go(row, column + 1, map[row][column]);
+//
+//	/* for (int dir = 0; dir < 4; ++dir) {
+//		int nr = r + dirR[dir];
+//		int nc = c + dirC[dir];
+//		population += go(nr, nc, map[r][c]);
+//	}*/
+//
+//
+//	return population;
+//}
+//void renewal(int row, int column, int avg) {
+//	if (row < 0 || row >= n || column < 0 || column >= n) return;
+//
+//	if (check[row][column] == 1) {
+//		check[row][column] = 2;
+//		map[row][column] = avg;
+//		renewal(row - 1, column, avg);
+//		renewal(row + 1, column, avg);
+//		renewal(row, column - 1, avg);
+//		renewal(row, column + 1, avg);
+//
+//
+//
+//		/*for (int dir = 0; dir < 4; ++dir) {
+//			int nr = r + dirR[dir];
+//			int nc = c + dirC[dir];
+//			renewal(nr, nc, avg);
+//		}*/
+//	}
+//
+//}
+//
+//int main() {
+//
+////	freopen("input.txt", "rt", stdin);
+//	int answer = 0;
+//	scanf("%d %d %d", &n, &l, &r);
+//	//입력
+//	for (int i = 0; i < n; ++i) {
+//		for (int j = 0; j < n; ++j) {
+//			scanf("%d", &map[i][j]);
+//		}
+//	}
+//
+//
+//	int flag = true;
+//
+//	do {
+//		flag = false;
+//
+//		for (int i = 0; i < n; ++i) {
+//			for (int j = 0; j < n; ++j) {
+//				if (check[i][j] == 0) {
+//					cnt = 0;
+//					int total = go(i, j, -1);
+//
+//					if (cnt > 1) {
+//						flag = true;
+//						renewal(i, j, total / cnt);
+//					}
+//					else
+//						check[i][j] = 2;
+//				}
+//			}
+//		}
+//
+//		if (flag) {
+//
+//			++answer;
+//			for (int i = 0; i < n; ++i) {
+//				for (int j = 0; j < n; ++j) {
+//					check[i][j] = 0;
+//				}
+//			}
+//		}
+//
+//	} while (flag);
+//
+//
+//	printf("%d", answer);
+//
+//
+//	return 0;
+//}
 
-// int find(int r,int c,int preValue){
-//     if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return 0;
-//     if(visited[r][c] == 0) return 0;
-
-//     if(preValue != -1){
-//         int delta = abs(preValue - map[r][c]);
-//         if(delta<l||delta>r) return 0;
-//     }
-//     visited[r][c] = 1;
-//     ++cnt;
-//     int sum = map[r][c];
-//     sum +=find(r-1,c,map[r][c]);
-//     sum +=find(r+1,c,map[r][c]);
-//     sum +=find(r,c-1,map[r][c]);
-//     sum +=find(r,c+1,map[r][c]);
-
-//     return sum;
-// }
-// void change(int r, int c, int avg){
-//     if (r < 0 || r > n - 1 || c < 0 || c > n - 1) return;
-//     if(visited[r][c] != 1) return;
-//     visited[r][c] = 2;
-
-//     map[r][c] = avg;
-//     change(r-1,c,avg);
-//     change(r+1,c,avg);
-//     change(r,c-1,avg);
-//     change(r,c+1,avg);
-
-// }
-
-// int go(){
-//     int cnt = 0;
-//     bool flag;
-
-//     do{
-//         flag = false;
-//         for(int i = 0; i<n;++i){
-//             for(int j = 0; j<n;++j){
-//                 visited[i][j] = 0;
-//             }
-//         }
-
-//         for(int i =0;i<n;++i){
-//             for(int j = 0;j<n;++j){
-//                 if(visited[i][j]==0){
-//                     cnt = 0;
-//                     int sum = find(i,j,-1);
-//                     if(cnt>1){
-//                         flag = true;
-//                         change(i,j,sum/cnt);
-//                     }
-//                     else{
-//                         visited[i][j] = 2;
-//                     }
-//                 }
-//             }
-//         }
-
-//         if(flag) ++cnt;
-//     }while(flag);
-
-//     return cnt;
-// }
-
-// int main(){
-//     scanf("%d %d %d",&n,&l,&r);
-
-//     for(int i =0;i<n;++i){
-//         for(int j = 0;j<n;++j){
-//             scanf("%d",&map[i][j]);
-//         }
-//     }
-//     printf("%d",go());
-
-// 	return 0;
-// }
 
 
-
+//BFS로 구현 풀이, 구조체로 position 잡아서
 // #include <stdio.h>
 // #include <algorithm>
 // #include <queue>
@@ -289,7 +319,7 @@ int main(){
 // 	return 0;
 // }
 
-
+//인구이동 파이썬 풀이
 // import sys
 // import heapq
 // import math
