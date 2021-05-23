@@ -1,3 +1,4 @@
+//https://www.acmicpc.net/problem/16236
 #include<iostream>
 #include<queue>
 #include<vector>
@@ -6,7 +7,6 @@
 #include<string.h>
 #include<math.h>
 #include<algorithm>
-
 using namespace std;
 
 #define MAX 21
@@ -20,7 +20,7 @@ int eat_distance;
 int arr[MAX][MAX];
 int visit[MAX][MAX];
 int Baby_x, Baby_y;
-vector <pair <pair<int, int>, int>> Eat;
+vector <pair <pair<int, int>, int>> Eat; //<<거리,x>y>
 
 int dx[4] = { 0, 0, -1, 1 };
 int dy[4] = { -1, 1, 0, 0 };
@@ -29,7 +29,8 @@ void BFS(int init_x, int init_y) {
 	eat_distance = MIN;
 	Eat.clear();
 	memset(visit, 0, sizeof(visit));
-	queue<pair<int, int>> que;
+
+	queue<pair<int, int>> que; 
 	que.push(make_pair(init_x, init_y));
 
 	while (!que.empty()) {
@@ -38,9 +39,11 @@ void BFS(int init_x, int init_y) {
 		que.pop();
 
 		for (int i = 0; i < 4; i++) {
-			int nx = x + dx[i]; int ny = y + dy[i];
+			int nx = x + dx[i]; 
+			int ny = y + dy[i];
 			
 			if (0 > nx || N <= nx || 0 > ny || N <= ny) continue;
+
 			if (visit[nx][ny] == 0 && baby_size >= arr[nx][ny]) { // 자기보다 큰 물고기 자리 못감
 				visit[nx][ny] = visit[x][y] + 1;
 				if (arr[nx][ny] > 0 && arr[nx][ny] < baby_size) {// 자기보다 작은 물고기 꿀꺽
@@ -53,6 +56,7 @@ void BFS(int init_x, int init_y) {
 			}
 		}
 	}
+
 }
 
 void init() {
@@ -68,7 +72,7 @@ int main() {
 		for (int j = 0; j < N; j++) {
 			cin >> arr[i][j];
 
-			if (arr[i][j] == 9) {// 아기상어
+			if (arr[i][j] == 9) { //아기 상어
 				arr[i][j] = 0;
 				Baby_x = i; 
 				Baby_y = j;
@@ -81,7 +85,7 @@ int main() {
 
 		if (Eat.empty()) break;
 		else {
-			sort(Eat.begin(), Eat.end());
+			sort(Eat.begin(), Eat.end());//
 			eat_count++;
 			result += Eat[0].first.first;//(distance,x,y)
 			arr[Eat[0].first.second][Eat[0].second] = 0;
@@ -94,6 +98,7 @@ int main() {
 			}
 		}
 	}
+
 	cout << result;
 	return 0;
 }

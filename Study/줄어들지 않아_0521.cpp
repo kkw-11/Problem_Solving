@@ -24,6 +24,7 @@ ll neverdown(int maxDigit) {
         }
     }
     
+    
     ll res = 0;
     for (int num = 0; num <=9; num++)
         res += dp[maxDigit][num];
