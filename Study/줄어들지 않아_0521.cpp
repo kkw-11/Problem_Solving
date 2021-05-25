@@ -12,22 +12,22 @@ int T, n;
 ll neverdown(int maxDigit) {
 
     //점화식 구현을 위해 초기항 셋팅
-    for (int digit = 1; digit <= maxDigit; digit++)
+    for (int digit = 1; digit <= maxDigit; ++digit)
         dp[digit][0] = 1;
+    
     for (int num = 0; num < 10; num++)
         dp[1][num] = 1;
 
-
-    for (int digit = 1; digit <= maxDigit; digit++) {
+    for (int digit = 1; digit <= maxDigit; ++digit) {
         for (int num = 1; num <= 9; num++) {
             dp[digit][num] = dp[digit - 1][num] + dp[digit][num - 1];
         }
     }
     
-    
     ll res = 0;
     for (int num = 0; num <=9; num++)
         res += dp[maxDigit][num];
+   
     return res;
 }
  

@@ -12,6 +12,7 @@ int dc[] = { 0,0,-1,1 };
 int n;
 int Sharksize = 2;
 int ateCnt;
+
 struct Shark {
 	int row, column;
 };
@@ -19,23 +20,17 @@ vector<pair<int, pair<int, int>>> eatFish;
 
 void BFS(Shark sharkStart) {
 	
-
-	Shark posi;
-	posi.row = sharkStart.row;
-	posi.column = sharkStart.column;
-
 	queue<Shark> q;
-	q.push(posi);
+	q.push(sharkStart);
 
 	while (!q.empty()) {
 		Shark cur;
-		Shark next;
-
 		cur.row = q.front().row;
 		cur.column = q.front().column;
 		q.pop();
 
 		for (int i = 0; i < 4; ++i) {
+			Shark next;
 			next.row = cur.row + dr[i];
 			next.column = cur.column + dc[i];
 
