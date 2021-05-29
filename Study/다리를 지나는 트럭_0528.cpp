@@ -8,17 +8,17 @@
 using namespace std;
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
-	int remainingWeight = weight;
     int answer = 0;
     int crossingTruckWeight =0;
     int curTruckIdx = 0;
-    queue<int> q;
+    
+    <int> q;
         
     while(curTruckIdx != truck_weights.size()){
         
         ++answer;
-        
-        
+      //[7,4,5,6] 
+      //q = 7
         if(truck_weights[curTruckIdx]+ crossingTruckWeight <= weight){
             q.push(truck_weights[curTruckIdx]);
             crossingTruckWeight += truck_weights[curTruckIdx];
@@ -31,7 +31,6 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
         
         if(q.size()==bridge_length){
             crossingTruckWeight-=q.front();
-
             q.pop();
         }
         

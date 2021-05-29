@@ -22,6 +22,7 @@ vector<int> solution(vector<int> prices) {
         }
         answer.push_back(time);
     }
+    
     answer.push_back(0);
  
     return answer;

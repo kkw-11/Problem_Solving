@@ -7,6 +7,7 @@ using namespace std;
  
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
+   
     //각 장르별로 총 재생횟수 저장 해쉬
     map<string, int> genreTotalPlays;
     //각 장르별로 무슨 노래가 몇 번씩 재생됐는지
@@ -22,9 +23,10 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         // musiclist <장르:<노래번호,플레이횟수>> 
         //<"classic", 0, 500> <"classic",2, 150>  <"classic",3, 800>
         //<"pop", 1, 600> <"pop", 4, 2500>
-        musicLists[genres[i]][i] = plays[i]; 
+        musicLists[genres[i]][i] = plays[i]; //musiclic<장르:<노래번호,플레이횟수>>
     }
     
+
     //장르가 다 없어질 때까지 반복
     while (genreTotalPlays.size() > 0) {
         string genre;
@@ -42,6 +44,8 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         for (int i = 0; i < 2; i++){
             int val = 0, idx = -1;
 
+              //<"classic", 0, 500> <"classic",2, 150>  <"classic",3, 800>
+           //<"pop", 1, 600> <"pop", 4, 2500>
             //노래중에서 제일 높은것 찾기
             for (auto musicList : musicLists[genre]) {
                 if (val < musicList.second) {
@@ -62,5 +66,6 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         //map 에서 사용한 장르삭제
         genreTotalPlays.erase(genre);
     }
+    
     return answer;
 }
