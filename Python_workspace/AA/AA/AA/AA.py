@@ -1,32 +1,29 @@
-#import sys
-##sys.stdin = open("input.txt","rt")
-#n, k = map(int, input().split())
-#a = list(map(int, input().split()))
-#res = set() #중복제거하는 set 자료구조
-
-#for i in range(n):
-#    for j in range(i+1,n):
-#        for m in range(j+1,n):
-#            res.add(a[i]+a[j]+a[m])
-
-
-#res = list(res)
-#res.sort(reverse = True)
-#print(res[k-1])
-
-
 import sys
-sys.stdin = open("input.txt","rt")
-n,k = map(int,input().split())
-card = list(map(int, input().split()))
-res = set()
+#sys.stdin = open("input.txt","rt")
+
+n = int(input())
+num = list(map(int,input().split()))
+
+#def digit_sum(x):
+#    digitSum = 0
+#    while x:
+#        digitSum += x %10
+#        x //= 10
+#    return digitSum
+
+def digit_sum(x):
+    digitSum = 0
+    for i in str(x):
+        digitSum += int(i)
+
+    return digitSum
+
+max = -1
 
 for i in range(n):
-    for j in range(i+1,n):
-        for m in range(j+1,n):
-            res.add(card[i]+card[j]+card[m])
+    total = digit_sum(num[i])
+    if total > max:
+        max = total
+        answer = num[i]
 
-
-res = list(res)
-res.sort(reverse = True)
-print(res[k-1])
+print(answer)
