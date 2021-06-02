@@ -11,7 +11,6 @@ SW 역량테스트 대비
 - Study(CAU Algoritm Study)
 
 ## C/C++  
-<h3 id="-">STL</h3>
 <ul>
  <a href="https://baactree.tistory.com/29">STL 사용법</a><br> 
  <a href="https://en.cppreference.com/w/">C++ 레퍼런스</a> 
