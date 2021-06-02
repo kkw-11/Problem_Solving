@@ -15,9 +15,7 @@ SW 역량테스트 대비
 <ul>
  <a href="https://baactree.tistory.com/29">STL 사용법</a> 
 </ul>
-<ul>
  <a href="https://en.cppreference.com/w/">C++ 레퍼런스</a> 
-</ul>
 
 
 
