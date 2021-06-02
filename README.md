@@ -7,8 +7,9 @@ SW 역량테스트 대비
 
 ## Folder
 - C++를 이용한 창의적 문제 해결(인프런 강의)
-- BOJ(Baekjoon Online Judge) 
-- Study(CAU Algoritm Study)
+- BOJ(Baekjoon Online Judge)
+- Study1(CAU Algorithm Study)
+- Study2(RAPA Algorithm Study)
 
 ## C/C++  
 - [STL 사용법](https://baactree.tistory.com/29)
