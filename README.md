@@ -13,10 +13,6 @@ SW 역량테스트 대비
 ## C/C++  
 - [STL 사용법](https://baactree.tistory.com/29)
 - [C++ 레퍼런스](https://en.cppreference.com/w/)
-<ul>
- <a href="https://baactree.tistory.com/29">STL 사용법</a><br> 
- <a href="https://en.cppreference.com/w/">C++ 레퍼런스</a> 
-</ul>
 
 <h3 id="-">수학</h3>
 
