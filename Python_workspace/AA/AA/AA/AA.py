@@ -1,55 +1,52 @@
+
 import sys 
+from collections import deque
 #sys.stdin = open("input.txt","rt")
+
+cnt = 0
+def DFS(graph, ch, vertex,flag):
+    if ch[vertex] == 1:
+        return
+
+    ch[vertex] = 1
+    global cnt
+    if flag == 1:
+        for i in range(1,n+1):
+            if graph[vertex][i] == 1 and ch[i] != 1:
+                cnt += 1
+                DFS(graph,ch,i,flag)
+    elif flag == -1:
+        for i in range(1,n+1):
+            if graph[vertex][i] == -1 and ch[i] != 1:
+                cnt += 1
+                DFS(graph,ch,i,flag)
+
+    return 
 
 def solution(n, results):
     answer = 0
-    playerInfos = [[0,0,0,0] for _ in range(n+1)] # (승,패,경기수,순위)
-    win = [[] for _ in range(n+1)]
-    lose = [[] for _ in range(n+1)]
+    graph = [[0]*(n+1) for _ in range(n+1)]
+    ch = [0]*(n+1)
+    global cnt
 
+    # 입력 값으로 그래프 만들기
     for result in results:
-        for i in range(2):
-            if i == 0:  # 승 result[i]는 승리한 player 번호
-                playerInfos[result[i]][0] += 1 # 승 수
-                playerInfos[result[i]][2] += 1 # 경기수
-            else: # 패 result[i]는 패배한 player 번호
-                playerInfos[result[i]][1] += 1 # 패 수
-                playerInfos[result[i]][2] += 1 # 경기수
-                
+        graph[result[0]][result[1]] = 1
+        graph[result[1]][result[0]] = -1
 
     for i in range(1,n+1):
-        if playerInfos[i][2] == n-1:
-                answer += 1
+        for j in range(1,n+1):
+            ch[j]= 0
+        cnt = 0
+        DFS(graph,ch,i,1)
+        
+        for j in range(1,n+1):
+            ch[j]= 0
+        DFS(graph,ch,i,-1)
 
+        if cnt == n-1:
+            answer += 1
 
-             
-    for playerInfo in playerInfos:
-           if playerInfo[2] == n-1: # 나머지 선수와 모두 경기 했다면
-                answer += 1
-                playerInfo[3] = n - playerInfo[0] # 1승이라면 4위 (5-1) 꼴지에게만 이김
-                for result in results:
-                    for j in range(2):
-                        if result[j] == player and j == 0:
-                            answer += 1
-           elif playerInfos[player][3] == 2:
-               for result in results:
-                   for j in range(2):
-                       if result[j] == player and j == 1:
-                           answer += 1
-
-
-    for player in range(1,n+1):
-        if playerInfos[player][3] == n-1:
-            for result in results:
-                for j in range(2):
-                    if result[j] == player and j == 0:
-                        answer += 1
-        elif playerInfos[player][3] == 2:
-            for result in results:
-                for j in range(2):
-                    if result[j] == player and j == 1:
-                        answer += 1
-                        
     return answer
 
 n = 5
