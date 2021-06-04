@@ -1,10 +1,9 @@
-
 import sys 
 from collections import deque
 #sys.stdin = open("input.txt","rt")
 
 cnt = 0
-def DFS(graph, ch, vertex,flag):
+def DFS(graph, ch, vertex,flag,n):
     if ch[vertex] == 1:
         return
 
@@ -14,12 +13,12 @@ def DFS(graph, ch, vertex,flag):
         for i in range(1,n+1):
             if graph[vertex][i] == 1 and ch[i] != 1:
                 cnt += 1
-                DFS(graph,ch,i,flag)
+                DFS(graph,ch,i,flag,n)
     elif flag == -1:
         for i in range(1,n+1):
             if graph[vertex][i] == -1 and ch[i] != 1:
                 cnt += 1
-                DFS(graph,ch,i,flag)
+                DFS(graph,ch,i,flag,n)
 
     return 
 
@@ -38,17 +37,18 @@ def solution(n, results):
         for j in range(1,n+1):
             ch[j]= 0
         cnt = 0
-        DFS(graph,ch,i,1)
+        # 승수 세기
+        DFS(graph,ch,i,1,n)
         
         for j in range(1,n+1):
             ch[j]= 0
-        DFS(graph,ch,i,-1)
+        # 패수 세기
+        DFS(graph,ch,i,-1,n)
 
         if cnt == n-1:
             answer += 1
 
     return answer
-
 n = 5
 results = [[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]
 
