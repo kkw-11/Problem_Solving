@@ -12,7 +12,7 @@ int dx[9] = {-1,-1,-1,0,1,1,1,0,0}; // 왼위 위 오위 오 오아 아 왼아 �
 int dy[9] = {-1,0,1,1,1,0,-1,-1,0};
 int high = 0;
 
-void move_map() { // 위에서부터 아래로 밀리게끔 해주는 함수 
+void move_map() { // 위에서부터 아래로 미로 이동 해주는 함수 
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 7; j++) {
 			tmp[j + 1][i] = map[j][i];
@@ -40,10 +40,10 @@ bool solve() {
 			q.pop();
 			
 			if (map[x][y] == '#') continue;
-			if (x <= high) return true; // 가장 높이 있던 벽 이상으로 이동했을 경우 언젠간 도착할 수 있기 때문
+			if (x <= high) return true; // 가장 높이 있던 벽 이상높이(인덱스번호로는 이하)로 이동했을 경우 언젠간 도착할 수 있기 때문
 			if (x == 0 && y == 7)return true;
 
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < 9; ++i) {
 				int nx = x + dx[i];
 				int ny = y + dy[i];
 
@@ -54,7 +54,7 @@ bool solve() {
 		}
 
 		move_map();
-		high++;
+		++high;
 	}
 
 

@@ -1,58 +1,18 @@
-import sys 
-from collections import deque
+import sys
 #sys.stdin = open("input.txt","rt")
 
+str1 = input()
+num = ""
 cnt = 0
-def DFS(graph, ch, vertex,flag,n):
-    if ch[vertex] == 1:
-        return
+for char in str1:
+    if ord(char)>= 48 and ord(char)<=57:
+        num += char
 
-    ch[vertex] = 1
-    global cnt
-    if flag == 1:
-        for i in range(1,n+1):
-            if graph[vertex][i] == 1 and ch[i] != 1:
-                cnt += 1
-                DFS(graph,ch,i,flag,n)
-    elif flag == -1:
-        for i in range(1,n+1):
-            if graph[vertex][i] == -1 and ch[i] != 1:
-                cnt += 1
-                DFS(graph,ch,i,flag,n)
+num = int(num)
 
-    return 
+for i in range(1,num+1):
+    if num % i == 0:
+        cnt += 1
 
-def solution(n, results):
-    answer = 0
-    graph = [[0]*(n+1) for _ in range(n+1)]
-    ch = [0]*(n+1)
-    global cnt
-
-    # 입력 값으로 그래프 만들기
-    for result in results:
-        graph[result[0]][result[1]] = 1
-        graph[result[1]][result[0]] = -1
-
-    for i in range(1,n+1):
-        for j in range(1,n+1):
-            ch[j]= 0
-        cnt = 0
-        # 승수 세기
-        DFS(graph,ch,i,1,n)
-        
-        for j in range(1,n+1):
-            ch[j]= 0
-        # 패수 세기
-        DFS(graph,ch,i,-1,n)
-
-        if cnt == n-1:
-            answer += 1
-
-    return answer
-n = 5
-results = [[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]
-
-answer = solution(n,results)
-
-print(answer)
-
+print(num)
+print(cnt)

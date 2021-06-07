@@ -8,7 +8,7 @@ maxMoney = -1
 for i in range(n):
     a,b,c = map(int,input().split())
 
-    if a==b and a==c and b==c:
+    if a==b and b==c:
         money = 10000 + a*1000
     elif a==b or a==c: # b,c가 같아서 세개가 같은 경우는 없다. 무조건 두개가 같은데 이유는 첫 if에서 걸려졌기 때문 여기서 첫번째와 두번째 or 첫번째와 세번째이다.
         money = 1000 + a*100
