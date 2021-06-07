@@ -3,16 +3,15 @@ import sys
 
 str1 = input()
 num = ""
+res = 0
 cnt = 0
 for char in str1:
-    if ord(char)>= 48 and ord(char)<=57:
-        num += char
+    if char.isdecimal():
+        res = res*10 + int(char)
 
-num = int(num)
-
-for i in range(1,num+1):
-    if num % i == 0:
+for i in range(1,res+1):
+    if res % i == 0:
         cnt += 1
 
-print(num)
+print(res)
 print(cnt)
