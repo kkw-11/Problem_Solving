@@ -1,17 +1,14 @@
 import sys
 #sys.stdin = open("input.txt","rt")
 
-str1 = input()
-num = ""
-res = 0
-cnt = 0
-for char in str1:
-    if char.isdecimal():
-        res = res*10 + int(char)
+card = list(range(21))
 
-for i in range(1,res+1):
-    if res % i == 0:
-        cnt += 1
+for _ in range(10):
+    a, b = map(int,input().split())
+    for i in range((b-a+1)//2):
+        card[a+i], card[b-i] = card[b-i], card[a+i]
 
-print(res)
-print(cnt)
+card.pop(0)
+
+for x in card:
+    print(x,end=" ")
