@@ -1,7 +1,6 @@
 #https://programmers.co.kr/learn/courses/30/lessons/49191?language=python3
 
 import sys 
-from collections import deque
 #sys.stdin = open("input.txt","rt")
 
 cnt = 0

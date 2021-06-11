@@ -1,17 +1,44 @@
-def solution(citations):
-    answer = 0 
-    n = len(citations)
-    citations.sort()
+#dic1 = dict()
+#dic1['a'].append(1)
 
-    for idx, value in enumerate(citations):
-        if (n-idx) >= value and citations[idx-1]<=value: # n-idx : value 이상 인용된 논문수
-            answer = value
-        else:
-            if idx>0:
-                break
 
-    return answer
+#print(dic1['a'])
+dict1 = {'a':2}
+if 'a' in dict1:
+    print('키존재 리스트')
+    dict1['a'].append(1)
+    print(dict1['a'])
+else:
+    dict1['a'] = [1]
+    print(dict1['a'])
 
-citations = [3, 0, 6, 1, 5]
+#dic1['a'] = ['1']
+#print(dic1['a'])
+#dic1['a'].append('2')
 
-print(solution(citations))
+#print(dic1['a'])
+
+#dic1['a'].append('3')
+#print(dic1['a'])
+
+
+
+
+
+from collections import defaultdict
+#defaultDict1 = defaultdict(list)
+#defaultDict1['a'].append(1)
+#print(defaultDict1['a'])
+
+
+
+#tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]
+
+#routes = {}
+#for key, value in tickets:
+#    if key in routes:
+#        routes[key].append(value)
+#    else:
+#        routes[key] = [value]
+
+#print(tickets)
