@@ -41,4 +41,8 @@ from collections import defaultdict
 #    else:
 #        routes[key] = [value]
 
+#routes = defaultdict(list)
+#for key, value = tickets:
+#    routes[key].append(value)
+
 #print(tickets)

@@ -9,6 +9,8 @@ def solution(tickets):
         for key, value in tickets:
             routes[key].append(value)
         return routes
+'''
+init_graph 예외처리로 생성1
     # # 특정 티켓의 인접 리스트를 구하는 함수, 키값 존재 여부 확인 예외처리
     # def init_graph():
     #     routes = dict()
@@ -18,6 +20,19 @@ def solution(tickets):
     #         else: #route에 key값 ticket[0]이 존재하지 않는 다면 ticket[0] 키값과 ticket[1] 리스트 지정 
     #             routes[ticket[0]] = [ticket[1]]
     #     return routes
+    
+init_graph 예외처리로 생성2
+    # # 특정 티켓의 인접 리스트를 구하는 함수
+    # def init_graph():
+    #     routes = dict()
+    #     for ticket in tickets:
+    #         if ticket[0] not in routes:
+    #             routes[ticket[0]] = [ticket[1]]
+    #         else:
+    #             routes[ticket[0]].append(ticket[1])
+                
+    #     return routes
+'''
 
     # 스택을 사용한 DFS
     def dfs():
