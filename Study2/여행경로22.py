@@ -9,6 +9,7 @@ def dfs(routes, start):
     # ["ICN":["SFO","ATL"]]
     for idx, toValue in enumerate(routes[start]):
         if routes[start][idx] in routes:  #도착점이 routes에 key로 있어야 그 곳에서 다시 출발할 수 있음
+            routes[start].pop(idx)
             dfs(routes,toValue)
 
 def solution(tickets):
@@ -25,6 +26,6 @@ def solution(tickets):
     
     return answer
 
-tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"], ["ICN","AAA"],["AAA","BBB"],["IAD","ICN"]]
+tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"], ["ICN","AAA"],["AAA","BBB"]]
 
 print(solution(tickets))
