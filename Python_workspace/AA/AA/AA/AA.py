@@ -1,46 +1,27 @@
-from collections import defaultdict
-answer  = []
-cnt = 0
-# tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"], ["ICN","AAA"],["AAA","BBB"],["IAD","ICN"]]
+#from collections import deque
 
-'''
-ICN:[(AAA,0),(JFK,0)] 
-JFK:[(HND,0)]
-HND:[(IAD,0)]
-IAD:[(ICN,0)]
-AAA:[(BBB)]
-'''
-# 스택을 사용한 DFS
-def dfs(routes, start, ticketSize,moveCnt):
-    if moveCnt == ticketSize or start not in routes:
+#dir = [-1,1,5]
+#def BFS(s,e,visited):
+#    queue = deque()
+#    queue.append(s)
+#    visited[s] = 1 #visited는 방문체크와 동시에 level 체크 현재는 level을 1부터 시작한다고 가정
 
-        return answer
-    elif moveCnt <ticketSize:
-        for toValueInfo in routes[start]:
-            if toValueInfo[1]: continue # 방문 했으면 다음 티켓 정보 확인
-            if toValueInfo[0] in routes:
-            moveCnt += 1
-            dfs(routes, toValueInfo[0],ticketSize,moveCnt)
+#    while queue:
+#        x = queue.popleft()
+#        for i in dir:
+#            nx = x + i
+#            if nx<0 or nx>10000:continue
+#            if visited[nx]:continue
+             ## nx가 방문도 아직 안했고 문제의 좌표 범위 안에 있다면 아래 문장 수행
+#            visited[nx] = visited[x] + 1
+#            if nx == e:
+#                print(visited[nx]-1) #level을 1부터 시작했기 때문에 1을 빼주고 출력
+#                return
+#            queue.append(nx)
 
 
+#visited = [0] * 10001
 
+#s,e = map(int, input().split())
 
-def solution(tickets):
-    ticketSize = len(tickets)
-    # 해쉬 딕셔너리로 tickets 정보 인접 리스트 그래프로 표현
-    routes = defaultdict(list)
-    for fromKey, toValue in tickets: 
-        routes[fromKey].append((toValue,0))
-        
-    for rKey in routes:
-        routes[rKey].sort()
-    
-    answer.append("ICN")
-    dfs(routes,"ICN",ticketSize,0)
-    answer.extend(routes[answer[-1]])
-    
-    return answer
-
-tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"], ["ICN","AAA"],["AAA","BBB"],["IAD","ICN"]]
-
-print(solution(tickets))
+#BFS(s,e,visited)

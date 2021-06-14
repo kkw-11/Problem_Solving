@@ -22,8 +22,8 @@ def solution(tickets):
         routes[rKey].sort()
 
     dfs(routes,"ICN")
-    answer.extend(routes[answer[-1]])
-    
+    # answer.extend(routes[answer[-1]])
+    answer.append(routes[answer[-1]])
     return answer
 
 tickets = [["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"], ["ICN","AAA"],["AAA","BBB"]]
