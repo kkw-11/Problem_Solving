@@ -20,13 +20,10 @@ def DFS(numbers,depth,targetNum,total):
     
 
 def solution(numbers, target):
-    answer = 0 
     
     DFS(numbers,0,target,0)
     
-    answer = res
-    
-    return answer
+    return res
 
 # from collections import deque
 

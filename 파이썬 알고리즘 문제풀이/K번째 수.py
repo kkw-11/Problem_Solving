@@ -14,8 +14,6 @@ for i in range(T):
 
 
 
-
-
 # import sys
 # #sys.stdin = open("input.txt","rt")
 
