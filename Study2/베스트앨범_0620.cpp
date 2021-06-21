@@ -26,7 +26,6 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         musicLists[genres[i]][i] = plays[i]; //musiclic<장르:<노래번호,플레이횟수>>
     }
     
-
     //장르가 다 없어질 때까지 반복
     while (genreTotalPlays.size() > 0) {
         string genre;
@@ -46,7 +45,7 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
 
               //<"classic", 0, 500> <"classic",2, 150>  <"classic",3, 800>
            //<"pop", 1, 600> <"pop", 4, 2500>
-            //노래중에서 제일 높은것 찾기
+            //해당 장르 노래중에 노래중에서 제일 높은것 찾기
             for (auto musicList : musicLists[genre]) {
                 if (val < musicList.second) {
                     val = musicList.second;
