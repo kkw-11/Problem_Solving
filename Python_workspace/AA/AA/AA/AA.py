@@ -1,48 +1,60 @@
-from collections import defaultdict
-def solution(genres, plays):
-    answer = []
-    total = 0
-    maxTotal = -1
-    musicLists = defaultdict(list)
-    genresTotalPlays = defaultdict(int)
+from collections import deque, defaultdict
+
+def isOneCharDiffer(str1, str2):
+    differCnt = 0
+    for i in range(len(str1)):
+        if str1[i] != str2[i]:
+            differCnt += 1
+
+        if differCnt == 2:
+            return False
+    else:
+        if differCnt == 1:
+            return True
+
+
+def solution(begin, target, words):
+    answer = 0
+    wordLen = len(begin)
+    stage = 0
     
-    # genre: album[genre]
-    # "classic" : [(0,500),(2,150),()]
-    for i in range(len(genres)):
-        musicLists[genres[i]].append((i,plays[i]))
-        genresTotalPlays[genres[i]] += plays[i]
-            
-    while len(genresTotalPlays)>0:
-        maxTotal = 0
-        maxGenre = ""
-        for genreKey, totalPlayVal in genresTotalPlays.items():
-            if totalPlayVal > maxTotal:
-                maxGenre = genreKey
-                maxTotal = totalPlayVal
-        else:
-            del genresTotalPlays[maxGenre]
+    # 한글자 차이나는 글자들로 그래프 만들기
+    wordGraph = defaultdict(list)
+    usedWord = defaultdict(bool)
+    for word1 in words:
+        if isOneCharDiffer(begin,word1):
+            wordGraph[begin].append(word1)
         
+        for word2 in words:
+            if isOneCharDiffer(word1,word2):
+                wordGraph[word1].append(word2)
+                usedWord[word1] = False
+                
+    print(wordGraph)
+    if target not in words:
+        answer = 0
+        return answer
+    else:
 
-        for i in range(2):
-            play = 0 
-            musicNum = -1            
-            for musicList in musicLists[maxGenre]:
-                if musicList[1] > play:
-                    play = musicList[1]
-                    musicNum = musicList[0]
-            else:
-                if musicNum == -1:
-                    break
-                else:
-                    answer.append(musicNum)
-                    musicList.remove((musicNum,play))
+        if isOneCharDiffer(begin, target):
+            answer = 1
+            return answer
+        else:
+            queue = deque()
+            queue.append([begin,0])
+            while queue:
+                curWord, cnt = queue.popleft()
 
+                if curWord == target:
+                    return cnt
 
-    
+                for word in wordGraph[curWord]:
+                    if not usedWord[word]: # 단어 사용하지 않았다면 
+                        queue.append([word,cnt +1])
+                        usedWord[word] = True
+                    
+        
     return answer
 
-genres = ["classic", "pop", "classic", "classic", "pop"]
 
-plays = [500, 600, 150, 800, 2500]
-
-print(solution(genres, plays))
+print(solution("hit","cog",["hot", "dot", "dog", "lot", "log", "cog"]))
