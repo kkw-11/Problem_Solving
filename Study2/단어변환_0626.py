@@ -30,7 +30,6 @@ def BFS(start, end, graph, checked):
             if not checked[nextWord]:
                 checked[nextWord] = True
                 q.append([nextWord,stage + 1])
-
             
 def solution(begin, target, words):
     answer = 0
@@ -56,6 +55,8 @@ def solution(begin, target, words):
                     wordGraph[word1].append(word2)
                     usedWord[word1] = False
         
+        print(wordGraph)
+        print(usedWord)
         # BFS 탐색
         answer = BFS(begin,target,wordGraph,usedWord)
         
