@@ -1,5 +1,3 @@
-#https://programmers.co.kr/learn/courses/30/lessons/43163
-
 from collections import deque, defaultdict
 
 def isOneCharDiffer(str1, str2):
@@ -13,27 +11,10 @@ def isOneCharDiffer(str1, str2):
         if charDifferCnt == 1:
             return True     
             
-def BFS(start, end, graph, checked):
-    
-    q = deque()
-        
-    q.append([start,0]) #[word,stage]
-        
-    while q:
-        curWord, stage = q.popleft()
-
-        if curWord == end:
-            answer = stage
-            return answer
-
-        for nextWord in graph[curWord]: # 현재 단어와 연결된 단어 nextWord에 담기
-            if not checked[nextWord]:
-                checked[nextWord] = True
-                q.append([nextWord,stage + 1])
-
             
 def solution(begin, target, words):
     answer = 0
+    
     
     if target not in words:
         answer = 0
@@ -57,10 +38,22 @@ def solution(begin, target, words):
                     usedWord[word1] = False
         
         # BFS 탐색
-        answer = BFS(begin,target,wordGraph,usedWord)
+        q = deque()
         
-        return answer
-     
-
+        q.append([begin,0]) #[word,stage]
+        
+        while q:
+            curWord, stage = q.popleft()
+            
+            if curWord == target:
+                answer = stage
+                return answer
+            
+            for nextWord in words[curWord]: # 현재 단어와 연결된 단어 nextWord에 담기
+                if not usedWord[nextWord]:
+                    usedWord[nextWord] = True
+                    q.append([nextWord,stage + 1])
 
 print(solution("hit","cog",["hot", "dot", "dog", "lot", "log", "cog"]))
+
+    

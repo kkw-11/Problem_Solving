@@ -1,60 +1,28 @@
-from collections import deque, defaultdict
-
-def isOneCharDiffer(str1, str2):
-    differCnt = 0
-    for i in range(len(str1)):
-        if str1[i] != str2[i]:
-            differCnt += 1
-
-        if differCnt == 2:
-            return False
-    else:
-        if differCnt == 1:
-            return True
-
-
-def solution(begin, target, words):
-    answer = 0
-    wordLen = len(begin)
-    stage = 0
+from collections import deque
     
-    # 한글자 차이나는 글자들로 그래프 만들기
-    wordGraph = defaultdict(list)
-    usedWord = defaultdict(bool)
-    for word1 in words:
-        if isOneCharDiffer(begin,word1):
-            wordGraph[begin].append(word1)
-        
-        for word2 in words:
-            if isOneCharDiffer(word1,word2):
-                wordGraph[word1].append(word2)
-                usedWord[word1] = False
-                
-    print(wordGraph)
-    if target not in words:
-        answer = 0
-        return answer
-    else:
-
-        if isOneCharDiffer(begin, target):
-            answer = 1
-            return answer
-        else:
-            queue = deque()
-            queue.append([begin,0])
-            while queue:
-                curWord, cnt = queue.popleft()
-
-                if curWord == target:
-                    return cnt
-
-                for word in wordGraph[curWord]:
-                    if not usedWord[word]: # 단어 사용하지 않았다면 
-                        queue.append([word,cnt +1])
-                        usedWord[word] = True
-                    
-        
-    return answer
+def bfs(begin,target,words,check):
+    # begin으로 시작
+    q = deque()
+    q.append((begin,0))
+    while q :
+        wd,cnt = q.popleft()
+        if wd == target : return cnt
+        # 그냥 매번 모든 단어에 대해서 조사하자
+        for i in range(len(words)) :
+        # arr = [1,2,3,4]
+        # for i in range(len(arr)) : print(arr[i])
+            if len([j for j in range(len(words[i])) if words[i][j] != wd[j]]) == 1 and check[i] == 0 :
+                check[i] = 1
+                q.append((words[i],cnt+1))
+    
+def solution(begin, target, words):
+    # bfs
+    # 왜냐하면 "최소 몇단계의 과정" 이라고 물어봤기 때문이다
+    # 그렇다면, 정점의 정의는 당연히 각각의 단어가 될 것이다
+    # check 배열도 따로 존재해야 할 것 같다
+    if target not in words : return 0
+    check = [0] * len(words)
+    return bfs(begin,target,words,check)
 
 
 print(solution("hit","cog",["hot", "dot", "dog", "lot", "log", "cog"]))
