@@ -49,6 +49,7 @@ def solution(begin, target, words):
         for word1 in words:
             if isOneCharDiffer(begin,word1):
                 wordGraph[begin].append(word1)
+                usedWord[begin] = False
 
             for word2 in words:
                 if isOneCharDiffer(word1,word2):

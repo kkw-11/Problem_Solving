@@ -1,28 +1,27 @@
 # https://programmers.co.kr/learn/courses/30/lessons/43162
-
 def solution(n, computers):
     visited = [False]*n
 
-    def DFS(i,depth):
+    def DFS(curVertex,depth):
         if depth == n:
             return
         
-        visited[i] = True
+        visited[curVertex] = True
 
-        for j in range(n):
-            if visited[j] == True:
+        for nextVertex in range(n):
+            if visited[nextVertex] == True:
                 continue
-            if i == j:
+            if curVertex == nextVertex:
                 continue
-            if computers[i][j] == 1:
-                DFS(j,depth+1)
+            if computers[curVertex][nextVertex] == 1:
+                DFS(nextVertex,depth+1)
 
             
     answer = 0
     
-    for i in range(n):
-        if visited[i] == False:
+    for vertex in range(n):
+        if visited[vertex] == False:
             answer +=1
-            DFS(i,0)
+            DFS(vertex,0)
     
     return answer
