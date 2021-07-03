@@ -4,13 +4,14 @@ def solution(param0):
     answer = []
 
     fileList = []
-
+#['/a/a/c/x/d.x','/a/b/c/a.x', 'b/c/d/a_v.x']
+# [a,b,c,a.x]
     for paramElem in param0:
         paramList = paramElem.split("/") # 파일명 구하기 위해 /로 문자열 구분 리스트에 저장
         fileList.append(paramList[-1][0]+"."+paramList[-1][-1]) # 구분된 문자열을 저장한 리스트에서 마지막 인덱스가 파일명, 그리고 그 파일명에서 버전 정보 제외한 파일명 추출
 
     # file로만 구성된 리스트에서 같은 파일 값 찾기
-
+    #fileList= [a.x ,a.x, a.x, b.x]
     fileListSize = len(fileList)
     for i in range(fileListSize):
         cnt = 1
@@ -19,7 +20,7 @@ def solution(param0):
                 cnt += 1
             
             if cnt != 1 and fileList[i] not in answer: # 동일한 파일명이 존재여부 및 중복 검사 
-                answer.append(fileList[i])
+                answer.append(fileList[i]) # ['a.x','2','d.x','2',]
                 answer.append(str(cnt))
 
-            
+

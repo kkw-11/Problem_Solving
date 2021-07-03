@@ -23,6 +23,7 @@
         "type_traits": "cpp",
         "xtree": "cpp",
         "cmath": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "utility": "cpp"
     }
 }
