@@ -37,7 +37,7 @@ SW 역량테스트 대비
 <h3 id="-DFS,BFS">그래프와 DFS, BFS</h3>
 
 - [ ] <a href="https://www.acmicpc.net/problem/16929">Two Dots</a> 
-- [ ] <a href="https://www.acmicpc.net/problem/2206">벽 부수고 이동하기</a>
+- [x] <a href="https://www.acmicpc.net/problem/2206">벽 부수고 이동하기</a>
 
 
 <h3 id="-">Greedy</h3>
