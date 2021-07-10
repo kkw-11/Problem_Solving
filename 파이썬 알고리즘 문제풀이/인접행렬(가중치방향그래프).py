@@ -4,7 +4,7 @@ import sys
 
 n, m = map(int, input().split())
 
-matrix = [[0]*n for _ in range(n)]
+matrix = [[0]*n for _ in range(n)] # 2차원 배열 만들기
 
 for _ in range(m):
     row, col, weight = map(int,input().split())
