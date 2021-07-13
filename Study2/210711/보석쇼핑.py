@@ -5,7 +5,7 @@ def solution(gems):
     dic = { gems[0]: 1 }
     answer = [1, len(gems)]
     start , end = 0, 0
-    
+
     while(start < len(gems) and end < len(gems)):
         if len(dic) != gemsCategoryCnt:
             end += 1
@@ -15,6 +15,7 @@ def solution(gems):
         else:
             if end - start < answer[1] - answer[0]:
                 answer = [start + 1, end + 1]
+                
             if dic[gems[start]] == 1:
                 del dic[gems[start]]
             else:
