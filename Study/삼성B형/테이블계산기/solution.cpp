@@ -4,9 +4,11 @@
 void init(int C, int R) {
 	
 }
+
 void set(int col, int row, char input[]) {
 	
 }
+
 void update(int value[MAXR][MAXC]) {
 	
 }
