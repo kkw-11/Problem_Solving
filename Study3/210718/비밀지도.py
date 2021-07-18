@@ -36,5 +36,4 @@ def solution(n, arr1, arr2):
         else:
             answer.append(secretMap)
 
-
     return answer
