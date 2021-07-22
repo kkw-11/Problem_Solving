@@ -1,9 +1,9 @@
 import sys
+
 #sys.stdin = open("input.txt","rt")
 
-
 N = int(sys.stdin.readline())
-stack = [None]*10001
+stack = [None]* 100001
 top = -1
 
 def Push(data):
@@ -45,7 +45,9 @@ def Top():
 
 
 for _ in range(N):
+    # cmd = sys.stdin.readline().rstrip().split(" ")
     cmd = sys.stdin.readline().split()
+
     if cmd[0] == "push":
         Push(cmd[1])
     elif cmd[0] == "pop":
