@@ -3,7 +3,7 @@ import sys
 #sys.stdin = open("input.txt","rt")
 
 N = int(sys.stdin.readline())
-stack = [None]* 100001
+stack = [None] * 100001
 top = -1
 
 def Push(data):

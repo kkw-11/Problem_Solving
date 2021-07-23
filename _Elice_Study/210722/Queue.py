@@ -1,8 +1,6 @@
-# Enqueue, Dequeue, size, empty, front
-
+# Enqueue, Dequeue, //size, empty, front
 
 from typing import Deque
-
 
 class Queue():
     def __init__(self):
@@ -17,7 +15,6 @@ class Queue():
         else:
             return self.myQueue.pop(0)
 
-
 q = Queue()
 
 q.Enqueue(1)
@@ -26,7 +23,4 @@ q.Enqueue(3)
 
 print(q.Dequeue())
 print(q.Dequeue())
-
-
-
 

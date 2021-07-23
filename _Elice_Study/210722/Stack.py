@@ -1,5 +1,4 @@
 # push, pop, size, empty, top
-
 class Stack():
     def __init__(self):
         self.myStack = []
@@ -21,8 +20,6 @@ st.Push(3)
 
 print(st.myStack)
 print(st.Pop())
-
-
 
 # '''
 # Stack 클래스를 완성하세요.

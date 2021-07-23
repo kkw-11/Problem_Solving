@@ -1,8 +1,29 @@
-cmd = input().split(" ")
+# import sys
 
-print(cmd)
+# a,b = map(int,sys.stdin.readline().rstrip().split())
 
-print(cmd[0])
+# print(type(sys.stdin.readline().rstrip().split()))
 
-if cmd[0] == "push":
-    print("push맞음")
+# print(a, b)
+
+# myList = ["3","4"]
+
+# c, d  = map(int,myList)
+
+# print(c,d)
+
+# e, f = ["3","4"]
+
+# print(e,f)
+
+# print(type(map(int,myList)))
+
+import sys
+
+a, b = map(int, sys.stdin.readline().rstrip().split())
+
+print(a/b)
+
+
+
+

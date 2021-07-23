@@ -26,14 +26,12 @@ class PriorityQueue:
         '''
         우선순위가 가장 높은 원소를 반환합니다. 만약 우선순위 큐가 비어있다면 -1을 반환합니다.
         '''
-
         if len(self.heap) == 0:
             return -1
         
         return self.heap[0]
         
 pq = PriorityQueue()
-
 
 pq.push(3)
 pq.push(4)

@@ -1,5 +1,4 @@
-# pushFront, pushRear popFront, popRear
-
+# pushFront, pushRear, popFront, popRear
 class Deque():
     def __init__(self):
         self.data = []
@@ -19,10 +18,11 @@ class Deque():
     def popRear(self):
         if len(self.data) == 0:
             return
+
         return self.data.pop()
 
-
 pq = Deque()    
+
 pq.addFront(1)
 pq.addFront(2)
 pq.addFront(3)
@@ -30,6 +30,3 @@ pq.addFront(3)
 print(pq.data)
 
 print(pq.popFront())
-
-
-
