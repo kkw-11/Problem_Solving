@@ -1,9 +1,19 @@
 import sys
+from collections import deque
 
-sys.stdin = open("input.txt","rt")
+#sys.stdin = open("input.txt","rt")
 
-N, X = map(int, sys.stdin.readline().rstrip().split())
+n = int(sys.stdin.readline().rstrip())
 
-nums = list(map(int, sys.stdin.readline().rstrip().split()))
+q = deque()
 
-print(nums)
+for i in range(1, n+1):
+    q.append(i)
+
+while len(q) != 1:
+    q.popleft()
+    front = q.popleft()
+    q.append(front)
+
+
+print(q[0])
