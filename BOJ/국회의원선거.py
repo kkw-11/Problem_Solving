@@ -1,3 +1,5 @@
+# https://www.acmicpc.net/problem/1417
+
 import sys
 from heapq import heapify, heappush, heappop
 
