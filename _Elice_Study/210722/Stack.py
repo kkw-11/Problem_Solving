@@ -1,16 +1,48 @@
-# push, pop, size, empty, top
-class Stack():
+# ADT: push, pop, size, empty, top
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.prev = next
+
+class Stack:
     def __init__(self):
-        self.myStack = []
+        self.top = None
+  
+    def push(self, data):
+        new_node = Node(data)
+        new_node.prev = self.top
+        self.top = new_node
 
-    def Push(self, data):
-        self.myStack.append(data)
+    def pop(self):
+        if self.is_empty():
+            return -1
+        data = self.top.data
+        self.top = self.top.prev
+        return data
 
-    def Pop(self):
-        if len(self.myStack) == 0:
-            return 
-        else:
-            return self.myStack.pop()
+    def is_empty(self):
+        if self.top:
+            print("Stack is empty")
+            return False
+        return True
+ 
+    def peek(self):
+        if self.is_empty():
+            return -1
+        return self.top.data
+
+# class Stack():
+#     def __init__(self):
+#         self.myStack = []
+
+#     def Push(self, data):
+#         self.myStack.append(data)
+
+#     def Pop(self):
+#         if len(self.myStack) == 0:
+#             return 
+#         else:
+#             return self.myStack.pop()
 
 st = Stack()
 

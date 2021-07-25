@@ -12,7 +12,6 @@ class Deque():
     def popFront(self):
         if len(self.data) == 0:
             return 
-
         return self.data.pop(0)
 
     def popRear(self):
