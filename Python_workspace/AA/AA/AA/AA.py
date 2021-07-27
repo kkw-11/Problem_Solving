@@ -1,22 +1,42 @@
 import sys
 import heapq
+sys.stdin = open("input.txt","rt")
 
-#sys.stdin = open("input.txt","rt")
+n, m = map(int,sys.stdin.readline().rstrip().split())
 
-n, m = map(int, sys.stdin.readline().rstrip().split())
-cards = list(map(int, sys.stdin.readline().rstrip().split()))
-res = 0
+cakes = list(map(int, sys.stdin.readline().rstrip().split()))
 
-heapq.heapify(cards)
+print(n,m)
+print(cakes)
 
-for _ in range(m):
-    card1 = heapq.heappop(cards)
-    card2 = heapq.heappop(cards)
+tenMulti = []
+notTenMulti = []
+answer = 0
+curCutCnt = 0
+totalCutCnt = 0
 
-    heapq.heappush(cards, card1+card2)
-    heapq.heappush(cards, card1+card2)
+for cake in cakes:
+    if cake == 10:
+        answer += 1
+    elif cake % 10 == 0 :
+        heapq.heappush(tenMulti,cake)
+    else:
+        heapq.heappush(notTenMulti,cake)
 
-for i in range(n):
-    res += heapq.heappop(cards)
+print(tenMulti)
+print(notTenMulti)
 
-print(res)
+while tenMulti:
+    cake = heapq.heappop(tenMulti)
+
+    curCutCnt = cake // 10
+
+    if curCutCnt > m - totalCutCnt:
+        anser += m - totalCutCnt
+        break
+    elif curCutCnt == m - totalCutCnt:
+        answer += (curCutCnt + 1)
+        break
+    else:
+        answer += (curCutCnt + 1)
+        totalCutCnt += curCutCnt
