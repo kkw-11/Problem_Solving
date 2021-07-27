@@ -1,17 +1,28 @@
 import sys
 
 input_data = sys.stdin.readline().rstrip()
+cnt = [0] * 26
+maxCnt = 0
+idx = list()
 
-answer = [-1]*26
+for elem in input_data:
+    ascii = ord(elem)
 
-for i in range(len(input_data)):
-    if answer[ord(input_data[i])-97] == -1 :
-        answer[ord(input_data[i])-97] = i
+    if ascii >= 65 and ascii <= 90:
+        cnt[ascii - 65] += 1
+    elif ascii >= 97 and ascii <=122:
+        cnt[ascii - 97] += 1
 
-for elem in answer:
-    print(elem,end=" ")
+maxCnt = max(cnt)
 
+for i in range(len(cnt)):
+    if maxCnt == cnt[i]:
+        idx.append(i)
 
+if len(idx) == 1:
+    print(chr(idx[0]+65))
+elif len(idx) > 1:
+    print("?")
 
 #import sys
 #import heapq
