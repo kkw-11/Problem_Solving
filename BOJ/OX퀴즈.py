@@ -2,6 +2,8 @@ import sys
 #sys.stdin = open('input.txt',"rt")
 
 n = int(sys.stdin.readline().rstrip())
+curScore = 0
+answer = 0
 
 for i in range(n):
     input_data = sys.stdin.readline().rstrip()

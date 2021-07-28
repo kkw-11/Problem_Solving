@@ -18,8 +18,10 @@
 
 # print(type(map(int,myList)))
 
-import sys
+# import sys
 
-a, b = map(int, sys.stdin.readline().rstrip().split())
+# a, b = map(int, sys.stdin.readline().rstrip().split())
 
-print(a/b)
+# print(a/b)
+
+print(__name__)
