@@ -1,7 +1,7 @@
 
 # DataStructure & Algorithm 학습 자료 정리
-* https://github.com/kkw-11/DataStructure
-* https://github.com/kkw-11/C_Algorithm
+* [자료구조](https://github.com/kkw-11/DataStructure)
+* [알고리즘](https://github.com/kkw-11/C_Algorithm)
 
 ## Coding_Test
 SW 역량테스트 대비 
