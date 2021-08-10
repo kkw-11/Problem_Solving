@@ -14,9 +14,9 @@ for cake in cakes:
     if cake == 10:
         answer += 1
     elif cake % 10 == 0 :
-        heapq.heappush(ten_multi_cake,cake)
+        heapq.heappush(ten_multi_cake, cake)
     else:
-        heapq.heappush(not_ten_multi_cake,cake)
+        heapq.heappush(not_ten_multi_cake, cake)
 
 while ten_multi_cake:
     cake = heapq.heappop(ten_multi_cake)
@@ -34,6 +34,7 @@ while ten_multi_cake:
     else:
         answer += (cur_cut_cnt + 1)
         total_cut_cnt += cur_cut_cnt
+
 
 if total_cut_cnt == m:
     print(answer)

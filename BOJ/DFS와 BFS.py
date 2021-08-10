@@ -15,7 +15,6 @@ def dfs(vertex):
             dfs(i)
 
 def bfs(start):
-
     q = deque()
     print(start,end = " ")
     bfsVisited[start] = True
@@ -29,7 +28,6 @@ def bfs(start):
                 print(i,end = " ")
                 q.append(i)
                 bfsVisited[i] = True
-
 
 
 ## 그래프 생성
