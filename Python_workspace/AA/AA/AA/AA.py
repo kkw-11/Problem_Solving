@@ -1,32 +1,36 @@
 import sys
 
-count  = 0
+res = set()
+nums = []
 
-def dfs(depth,sum,n,s,a) :
-    if depth >= n :
-        return
+def subSet(depth, sum, n, nums):
 
-    if sum+a[depth] == s   :
-        global count
-        count+=1
+    if depth == n:
+        res.add(sum)
+        return 
 
-    dfs(depth+1,sum,n,s,a)
-    dfs(depth+1,sum + a[depth],n,s,a) 
+    sum += nums[depth]
+    subSet(depth+1,sum, n, nums)
+    
+    sum -= nums[depth]
+    subSet(depth+1,sum, n, nums)
 
+#sys.stdin = open("input.txt")
+    
+n = int(sys.stdin.readline().rstrip())
 
-def solve() :
-    n,s = map(int,sys.stdin.readline().split())
+nums = list(map(int,sys.stdin.readline().rstrip().split()))
 
-    global count
-    count = 0
+subSet(0,0,n,nums)
 
-    a = list(map(int,sys.stdin.readline().split()))
-    dfs(0,0,n,s,a)
-
-    print(count)
-
-if __name__ == "__main__" :
-    solve()
+res = list(res)
+res.sort()
+for i in range(len(res)):
+    if res[i] != i:
+        print(i)
+        break
+else:
+    print(res[-1]+1)
 
 
 #import sys
