@@ -1,37 +1,32 @@
 import sys
-from collections import deque
 
-sys.stdin = open("input.txt")
+count  = 0
 
-N, K = map(int,sys.stdin.readline().rstrip().split())
+def dfs(depth,sum,n,s,a) :
+    if depth >= n :
+        return
 
-check = [False]*(N+1)
-check[0] = True
+    if sum+a[depth] == s   :
+        global count
+        count+=1
 
-q = deque()
-res = []
-cnt = 0
-for i in range(1,N+1):
-    q.append(i)
-
-while q:
-    for i in range(K):
-        num = q.popleft()
-        if i == K-1:
-            res.append(num)
-        else:
-            q.append(num)
+    dfs(depth+1,sum,n,s,a)
+    dfs(depth+1,sum + a[depth],n,s,a) 
 
 
+def solve() :
+    n,s = map(int,sys.stdin.readline().split())
 
-print("<",end="")
-for i in range(N-1):
-    print(res[i],end="")
-    print(", ",end="")
-else:
-    print(res[N-1],end="")
-    print(">",end="")
+    global count
+    count = 0
 
+    a = list(map(int,sys.stdin.readline().split()))
+    dfs(0,0,n,s,a)
+
+    print(count)
+
+if __name__ == "__main__" :
+    solve()
 
 
 #import sys
