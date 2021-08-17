@@ -1,43 +1,21 @@
 import sys
-from collections import deque
 
 sys.stdin = open("input.txt")
 
-def go(start, graph, visited):
-    global res
-    q = deque()
-    q.append(start)
-
-
-    while q:
-        parent = q.popleft()
-        visited[parent] = True
-
-
-        for child in graph[parent]:
-            if not visited[child]:
-                res[child] = parent
-                q.append(child)
-
-
-
 n = int(sys.stdin.readline().rstrip())
+nums = list(map(int,sys.stdin.readline().rstrip().split()))
+res = [-1]*n
+stack = []
 
-graph = [[] for _ in range(n+1)]
-visited = [False]*(n+1)
-res = [None]*(n+1)
+stack.append(0)
 
+for index in range(1,n):
+    while stack and nums[stack[-1]] < nums[index]:
+        res[stack[-1]] = nums[index]
+        stack.pop()
+    stack.append(index)
 
-for _ in range(n-1):
-    a, b = map(int, sys.stdin.readline().rstrip().split())
-    graph[a].append(b)
-    graph[b].append(a)
-
-go(1,graph,visited)
-
-for i in range(2,n+1):
-    print(res[i])
-
+print(*res)
 
 
 #import sys
