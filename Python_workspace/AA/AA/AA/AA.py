@@ -1,26 +1,35 @@
 import sys
-import heapq
+
+def DFS(cur, answer):
+    visited[cur] = True
+
+    for next in graph[cur]:
+        if visited[next] == False:
+            answer = DFS(next, answer+1)
+
+    return answer
+
 sys.stdin = open("input.txt")
 
 n = int(sys.stdin.readline().rstrip())
 
-slimes = list(map(int, sys.stdin.readline().rstrip().split()))
+for i in range(n):
+    countryOfNum, flightOfNum = map(int, sys.stdin.readline().rstrip().split())
 
-heapq.heapify(slimes)
+    #graph 생성
+    graph = [[] for _ in range(countryOfNum+1)]
+    visited = [False]*(countryOfNum+1)
 
-res = 0
+    for j in range(flightOfNum):
+        a, b = map(int, sys.stdin.readline().rstrip().split())
+        graph[a].append(b)
+        graph[b].append(a)
+    else:
+        answer = 0
+        answer = DFS(1, 0)
+        print(answer)
 
-while len(slimes) != 1:
-    slime1 = heapq.heappop(slimes)
-    slime2 = heapq.heappop(slimes)
-    res += (slime1*slime2)
-    heapq.heappush(slimes, slime1+slime2)
-
-print(res)
-
-
-
-
+    
 
 
 #import sys
