@@ -1,22 +1,54 @@
 import sys
 
-n, k= map(int, sys.stdin.readline().rstrip().split())
+sys.stdin = open("input.txt")
 
-deleteCheck = [False]*(n+1)
+n = int(sys.stdin.readline().rstrip())
 
-cnt = 0
-for i in range(2,n+1):
-    for j in range(i,n+1,i):
-        if deleteCheck[j] == False:
-           
-            deleteCheck[j] = True
-            cnt += 1
-            if cnt == k:
-                print(j)
-                break
-    if cnt == k:
+seq = []
+stack = []
+answer = []
+seqPoint = 0
+curInNum = 1
+flag = True
+
+for i in range(n):
+    a = int(sys.stdin.readline().rstrip())
+    seq.append(a)
+
+
+while seqPoint < n:
+
+    if not stack:
+        stack.append(curInNum)
+        curInNum += 1
+        answer.append("+")
+
+    if stack[-1] < seq[seqPoint]:
+        temp = curInNum
+
+        for i in range(temp ,seq[seqPoint] +1 ):
+            stack.append(i)
+            answer.append("+")
+        else:
+            i += 1
+            curInNum = i
+    elif stack[-1] == seq[seqPoint]:
+        stack.pop()
+        answer.append("-")
+        seqPoint += 1
+    elif  stack[-1] > seq[seqPoint]:
+        flag = False
         break
-  
+
+if flag:
+    for i in range(len(answer)):
+        print(answer[i])
+else:
+    print("NO")
+
+            
+
+
 
 
 #import sys
