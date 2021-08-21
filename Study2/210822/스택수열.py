@@ -1,6 +1,8 @@
 import sys
 
-n = int(sys.stdin.readline().rstrip())
+sys.stdin = open("input.txt")
+
+n = int(sys.stdin.readline())
 
 seq = []
 stack = []
@@ -10,7 +12,7 @@ curInNum = 1
 flag = True
 
 for i in range(n):
-    a = int(sys.stdin.readline().rstrip())
+    a = int(sys.stdin.readline())
     seq.append(a)
 
 
@@ -43,5 +45,3 @@ if flag:
         print(answer[i])
 else:
     print("NO")
-
-            
