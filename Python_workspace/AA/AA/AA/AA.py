@@ -1,18 +1,23 @@
 import sys
 
-start, end = map(int, sys.stdin.readline().rstrip().split())
+n, k= map(int, sys.stdin.readline().rstrip().split())
 
-primeCheck = [True]*(end+1)
-primeCheck[0] = False
-primeCheck[1] = False
+deleteCheck = [False]*(n+1)
 
-for i in range(2,end+1):
-    for j in range(i+i,end+1,i):
-        primeCheck[j] = False
+cnt = 0
+for i in range(2,n+1):
+    for j in range(i,n+1,i):
+        if deleteCheck[j] == False:
+           
+            deleteCheck[j] = True
+            cnt += 1
+            if cnt == k:
+                print(j)
+                break
+    if cnt == k:
+        break
+  
 
-for k in range(start, end+1):
-    if primeCheck[k]:
-        print(k)
 
 #import sys
 
