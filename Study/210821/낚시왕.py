@@ -1,8 +1,7 @@
 from copy import deepcopy
 import sys
-# sys.stdin = open("input.txt",'r')
 
-R, C, M = map(int,input().split())
+R, C, M = map(int, input().split())
 board = [[0]*C for _ in range(R)]
 
 for _ in range(M):

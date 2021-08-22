@@ -1,8 +1,6 @@
 import sys
 
-sys.stdin = open("input.txt")
-
-n = int(sys.stdin.readline())
+n = int(sys.stdin.readline().rstrip())
 
 seq = []
 stack = []
@@ -12,11 +10,10 @@ curInNum = 1
 flag = True
 
 for i in range(n):
-    a = int(sys.stdin.readline())
+    a = int(sys.stdin.readline().rstrip())
     seq.append(a)
 
 while seqPoint < n:
-
     if not stack:
         stack.append(curInNum)
         curInNum += 1
@@ -24,8 +21,7 @@ while seqPoint < n:
 
     if stack[-1] < seq[seqPoint]:
         temp = curInNum
-
-        for i in range(temp ,seq[seqPoint] +1 ):
+        for i in range(temp, seq[seqPoint] +1 ):
             stack.append(i)
             answer.append("+")
         else:
@@ -38,7 +34,7 @@ while seqPoint < n:
     elif  stack[-1] > seq[seqPoint]:
         flag = False
         break
-
+    
 if flag:
     for i in range(len(answer)):
         print(answer[i])
