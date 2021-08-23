@@ -1,36 +1,20 @@
 import sys
-import heapq
 
-sys.stdin = open("input.txt")
+while True:
+    try:
+        input_data = input()
+        while "BUG" in input_data:
+            for i in range(len(input_data)-2):
+                if input_data[i:i+3] == "BUG":
+                    input_data = input_data[:i] + input_data[i+3:]
+                    break
+        if "BUG" not in input_data:
+            print(input_data)
 
-day, sum_priority, kind = map(int,sys.stdin.readline().rstrip().split())
-bear_info = []
-total_priority = 0
-bear_info_heap = []
-find = False
-for _ in range(kind):
-    priority, alcohol = map(int, sys.stdin.readline().rstrip().split())
-    bear_info.append((alcohol,priority))
+    except:
+        break
 
-bear_info.sort()
-
-for bear in bear_info:
-    total_priority += bear[1]
-    heapq.heappush(bear_info_heap, bear[1])
-
-    if len(bear_info_heap) == day:
-        if total_priority >= sum_priority:
-            find = True
-            print(bear[0])
-            break
-        else:
-            total_priority -= heapq.heappop(bear_info_heap)
-
-if not find:
-    print(-1)
-
-
-
+    
 
 
 
