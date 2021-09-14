@@ -13,9 +13,7 @@ def solution(id_list, report, k):
         user_info = value.split()
         
         report_info[user_info[0]].add(user_info[1])
-        
 
-        
     for i in range(number_of_user):
         for user in list(report_info[id_list[i]]):
             cnt_info[user] += 1
@@ -29,5 +27,6 @@ def solution(id_list, report, k):
             if user in who:
                 answer[i] += 1
         
-    
+    # 211020101011
+    # 211020101011
     return answer
