@@ -1,13 +1,25 @@
+import sys
 
-x = 20
-def foo():
-    x = 10
+n = int(sys.stdin.readline().rstrip())
 
-    return x
+for i in range(n):
+    country, flight = map(int, sys.stdin.readline().rstrip().split())
+
+    for j in range(flight):
+        a, b = map(int, sys.stdin.readline().rstrip().split())
+    
+    print(country -1)
 
 
-x = foo()
-print(x)
+#x = 20
+#def foo():
+#    x = 10
+
+#    return x
+
+
+#x = foo()
+#print(x)
 
 
 #def foo():
