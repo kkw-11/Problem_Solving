@@ -1,68 +1,115 @@
-import string
 
-def solution(n, k):
-    answer = 0
+x = 20
+def foo():
+    x = 10
+
+    return x
 
 
-    tmp = string.digits+string.ascii_lowercase
-    def convert(num, base) :
-        q, r = divmod(num, base)
-        if q == 0 :
-            return tmp[r] 
-        else :
-            return convert(q, base) + tmp[r]
-        
-    convert_number = convert(n,k)
-    
+x = foo()
+print(x)
 
-    def is_prime_num(n):
-        if n == 1:
-            return False
-        ch = [0]*(n+1)
 
-        for i in range(2,n+1):
-            if ch[i] == 0:
-                for j in range(i+i,n+1,+i):
-                    ch[j] = 1
-        else:
-            if ch[n]:
-                return False
-            else:
-                return True
-    
-    len_number = len(convert_number)
-    
-    if '0' not in convert_number and is_prime_num(int(convert_number)):
-        answer+=1
-    
-    # 0P0
-    for start, digit in enumerate(convert_number):
-        if digit == '0' :
-            for end in range(start+1,len_number):
-                if convert_number[end] == '0':
-                    # print(int(convert_number[start+1:end]))
-                    if '0' not in convert_number[start+1:end]:
-                        if is_prime_num(int(convert_number[start:end])):
-                            answer += 1
-                            break
-    
-    # P0
-    for index, digit in enumerate(convert_number):
-        if digit == '0':
-            if is_prime_num(int(convert_number[:index])):
-                answer += 1
-                break
-        
-    # 0P
-    for index in range(len(convert_number)-1,-1,-1):
-        if convert_number[index] == '0':
-            if is_prime_num(int(convert_number[index+1:])):
-                answer += 1
-                break
-            
-    return answer
+#def foo():
+#    global x
+#    x = 10
+#    print(x)
 
-print(solution(110011,10))
+
+#foo()
+#print(x)
+#def A():
+#    x = 10
+
+#    def B():
+#        x = 20
+#        return x
+
+#    x = B()
+#    print(x)
+
+#A()
+
+
+#def A():
+#    x = 10
+
+#    def B():
+#        nonlocal x
+#        x = 20
+
+#    B()
+#    print(x)
+
+#A()
+
+
+##def A():
+#    x = 10
+
+#    def B():
+#        x = 20
+
+#    B()
+#    print(x)
+
+#A()
+
+
+#def foo():
+#    global x 
+#    x= 10
+
+#foo()
+#print(x)
+
+#def foo():
+#    global x
+#    x = 3
+#    print(x)
+#    print(graph)
+
+#x = 10
+#print(x)
+#graph = [1,2,3]
+#foo()
+#print(x)
+
+
+#def foo():
+#    x = 3
+#    graph = [22,2332]
+#    print(x)
+#    print(graph)
+
+#x = 10
+#graph = [1,2,3]
+#foo()
+#print(x)
+
+
+
+#def foo():
+#    print(x)
+#    print(graph)
+
+#x = 10
+#graph = [1,2,3]
+#foo()
+
+
+
+#x= 10
+
+#def foo():
+
+#    print(x)
+#foo()
+
+#print(x)
+
+
+
 
 ## 음의 경로가 없는 그래프에서 특정 출발노드에서 다른 모든 노드로 가는 최단경로 알고리즘
 ## 음의 간선이 없는 현실세계에서 최단경로를 구할 때 사용
