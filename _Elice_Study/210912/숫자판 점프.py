@@ -1,36 +1,28 @@
-import sys 
-dir_col = [1,0,-1,0]
-dir_row = [0,1,0,-1]
-res = 0
-answer = set()
-def go(graph, row, col, depth):
-    global res
-    global answer
-    if depth == 6:
-        res = res * 10 + graph[row][col]
-        answer.add(res)
-        return
+import sys
+
+def go(row,col, number, depth):
+    if depth == 5:
+        answer.add(number)
     else:
-        res = res * 10 + graph[row][col]
-        for dir in range(4):
-            nr = row + dir_row[dir]
-            nc = col + dir_col[dir]
+        for i in range(4):
+            new_row = row + dir_row[i]
+            new_col = col + dir_col[i]
+            if new_row >=0 and new_row<5 and new_col >=0 and new_col <5:
+                go(new_row,new_col,number+graph[new_row][new_col],depth+1)
 
-            if nr>=0 and nr < 5 and nc>=0 and nc <5:
-                go(graph,nr,nc,depth+1)
-                res = res//10
+input = sys.stdin.readline
 
-if __name__ == "__main__":
-    
-    graph = []
-    
-    for i in range(5):
-        input_data = list(map(int, sys.stdin.readline().rstrip().split()))
-        graph.append(input_data)
+answer = set()
+dir_col = [-1,1,0,0]
+dir_row = [0,0,-1,1]
+graph = []
 
-    for row in range(5):
-        for col in range(5):
-            res =  0
-            go(graph,row,col,1)
+# Adjacency matrix graph
+for _ in range(5):
+    graph.append(input().split())
 
-    print(len(answer))
+for row in range(5):
+    for col in range(5):
+        go(row,col,graph[row][col],0)
+
+print(len(answer))
