@@ -1,32 +1,39 @@
-import sys
+import sys, math
+from collections import deque
 
-def go(row,col, number, depth):
-    if depth == 5:
-        answer.add(number)
-    else:
-        for i in range(4):
-            new_row = row + dir_row[i]
-            new_col = col + dir_col[i]
-            if new_row >=0 and new_row<5 and new_col >=0 and new_col <5:
-                go(new_row,new_col,number+graph[new_row][new_col],depth+1)
+def bfs():
+    q= deque()
+    visited[1] = True
+    q.append((1,0))
+
+    while q:
+        node, length = q.popleft()
+        print(type(node))
+        print(node,length)
+
+        if answer[node] > length:
+            answer[node] = length
+        for next_node in graph[node]:
+            if not visited[next_node]:
+                visited[next_node] = True
+                q.append((next, length+1))
+
+sys.stdin = open("input.txt")
 
 input = sys.stdin.readline
 
-answer = set()
-dir_col = [-1,1,0,0]
-dir_row = [0,0,-1,1]
-graph = []
+city, street = map(int,input().split())
 
-# Adjacency matrix graph
-for _ in range(5):
-    graph.append(input().split())
+graph = [[] for _ in range(city+1)]
+visited = [False] * (city+1)
+INF = math.inf
+answer = [INF]*(city+1)
 
-for row in range(5):
-    for col in range(5):
-        go(row,col,graph[row][col],0)
-
-print(len(answer))
-
+for _ in range(street):
+    city1, city2 = map(int,input().split())
+    graph[city1].append(city2)
+bfs()
+print(answer)
 
 #x = 20
 #def foo():

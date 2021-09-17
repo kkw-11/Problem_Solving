@@ -1,14 +1,14 @@
 import sys
 
-def go(row,col, number, depth):
-    if depth == 5:
+def go(row,col, number):
+    if len(number) == 6:
         answer.add(number)
     else:
         for i in range(4):
             new_row = row + dir_row[i]
             new_col = col + dir_col[i]
             if new_row >=0 and new_row<5 and new_col >=0 and new_col <5:
-                go(new_row,new_col,number+graph[new_row][new_col],depth+1)
+                go(new_row,new_col,number+graph[new_row][new_col])
 
 input = sys.stdin.readline
 
@@ -23,6 +23,6 @@ for _ in range(5):
 
 for row in range(5):
     for col in range(5):
-        go(row,col,graph[row][col],0)
+        go(row,col,graph[row][col])
 
 print(len(answer))
