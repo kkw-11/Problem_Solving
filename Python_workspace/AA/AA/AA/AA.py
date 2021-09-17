@@ -1,54 +1,48 @@
 import sys
+from collections import deque
 
+def bfs_print():
+    q= deque()
+    visited[1] = True
+    q.append((1,0))
+
+    while q:
+        node, length = q.popleft()
+
+        if answer[node] == -1 or answer[node] > length:
+            answer[node] = length
+
+        for next_node in graph[node]:
+            if not visited[next_node]:
+                visited[next_node] = True
+                q.append((next_node, length+1))
+    for i in range(1,city+1):
+        print(answer[i], end = " ")
+    print()
+                
+#sys.stdin = open("input.txt")
 input = sys.stdin.readline
 
-while True:
-    a, b, c = map(int, input().split())
+city, street = map(int,input().split())
 
-    if a == 0 and b == 0 and c == 0:
-        break
-    else:
-        if a*a + b*b == c*c or a*a + c*c == b*b or b*b + c*c == a*a:
-            print("right")
-        else:
-            print("wrong")
+graph = [[] for _ in range(city+1)]
+visited = [False] * (city+1)
+answer = [-1]*(city+1)
 
-#import sys, math
-#from collections import deque
+for _ in range(street):
+    city1, city2 = map(int,input().split())
+    graph[city1].append(city2)
 
-#def bfs():
-#    q= deque()
-#    visited[1] = True
-#    q.append((1,0))
+qstreet = int(input())
+for _ in range(qstreet):
+    city1, city2 = map(int,input().split())
+    graph[city1].append(city2)
+    visited = [False] * (city+1)
+    bfs_print()
 
-#    while q:
-#        node, length = q.popleft()
-#        print(type(node))
-#        print(node,length)
 
-#        if answer[node] > length:
-#            answer[node] = length
-#        for next_node in graph[node]:
-#            if not visited[next_node]:
-#                visited[next_node] = True
-#                q.append((next, length+1))
 
-#sys.stdin = open("input.txt")
 
-#input = sys.stdin.readline
-
-#city, street = map(int,input().split())
-
-#graph = [[] for _ in range(city+1)]
-#visited = [False] * (city+1)
-#INF = math.inf
-#answer = [INF]*(city+1)
-
-#for _ in range(street):
-#    city1, city2 = map(int,input().split())
-#    graph[city1].append(city2)
-#bfs()
-#print(answer)
 
 #x = 20
 #def foo():
