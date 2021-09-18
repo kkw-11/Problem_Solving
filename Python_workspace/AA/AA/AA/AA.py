@@ -20,7 +20,6 @@ def bfs_print():
         print(answer[i], end = " ")
     print()
                 
-#sys.stdin = open("input.txt")
 input = sys.stdin.readline
 
 city, street = map(int,input().split())
@@ -39,8 +38,6 @@ for _ in range(qstreet):
     graph[city1].append(city2)
     visited = [False] * (city+1)
     bfs_print()
-
-
 
 
 
