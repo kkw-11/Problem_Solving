@@ -1,6 +1,7 @@
 import sys
 from collections import deque
 
+
 def bfs_print():
     q= deque()
     visited[1] = True
@@ -19,7 +20,9 @@ def bfs_print():
     for i in range(1,city+1):
         print(answer[i], end = " ")
     print()
+
                 
+sys.stdin = open("input.txt")
 input = sys.stdin.readline
 
 city, street = map(int,input().split())
