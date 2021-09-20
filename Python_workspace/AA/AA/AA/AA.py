@@ -1,46 +1,150 @@
 import sys
 from collections import deque
 
-
-def bfs_print():
+def DFS(cur_node):
+    global visited
+    print(cur_node, end= " ")
+    visited[cur_node] = True
+    for next_node in graph[cur_node]:
+        if not visited[next_node]:
+            DFS(next_node)
+def BFS(start_node):
+    global visited
     q= deque()
-    visited[1] = True
-    q.append((1,0))
+
+    q.append(start_node)
+    visited[start_node] = True
 
     while q:
-        node, length = q.popleft()
+        pre_node = q.popleft()
+        print(pre_node, end= " ")
 
-        if answer[node] == -1 or answer[node] > length:
-            answer[node] = length
-
-        for next_node in graph[node]:
+        for next_node in graph[pre_node]:
             if not visited[next_node]:
                 visited[next_node] = True
-                q.append((next_node, length+1))
-    for i in range(1,city+1):
-        print(answer[i], end = " ")
-    print()
 
-                
-sys.stdin = open("input.txt")
+                q.append(next_node)
+   
+
 input = sys.stdin.readline
 
-city, street = map(int,input().split())
+n,m,start = map(int,input().split())
+graph = [[] for _ in range(n+1)]
+visited = [False]*(n+1)
 
-graph = [[] for _ in range(city+1)]
-visited = [False] * (city+1)
-answer = [-1]*(city+1)
+for _ in range(m):
+    node1, node2 = map(int,input().split())
+    graph[node1].append(node2)
+    graph[node2].append(node1)
+for node_info in graph:
+    node_info.sort()
 
-for _ in range(street):
-    city1, city2 = map(int,input().split())
-    graph[city1].append(city2)
+DFS(start)
+visited = [False]*(n+1)
+print()
+BFS(start)
 
-qstreet = int(input())
-for _ in range(qstreet):
-    city1, city2 = map(int,input().split())
-    graph[city1].append(city2)
-    visited = [False] * (city+1)
-    bfs_print()
+#from collections import deque
+#import sys
+
+#def bfs(row, col):
+#    global visited, safe_length
+#    pre_length = 0
+#    q = deque()
+
+#    q.append((row,col,0))
+#    visited[row][col] = True
+#    if shark_map[row][col] == 1:
+#        safe_length[row][col] = 0
+#        return
+
+#    while q:
+#        pre_row, pre_col, pre_length = q.popleft()
+
+#        for i in range(8):
+#            next_row = pre_row + dir_row[i]
+#            next_col = pre_col + dir_col[i]
+
+#            if next_row >= 0 and next_row <n and next_col>=0 and next_col < m:
+#                if shark_map[next_row][next_col] == 1:
+#                    safe_length[row][col] = pre_length + 1
+#                    return
+
+#                if not visited[next_row][next_col]:
+#                    visited[next_row][next_col] = True
+#                    q.append((next_row,next_col,pre_length+1))
+
+#sys.stdin = open("input.txt")
+#input = sys.stdin.readline
+
+#n,m = map(int,input().split())
+
+#answer = -99999999
+#shark_map = []
+#safe_length = [[0]*m for _ in range(n)]
+#visited = [[False]*m for _ in  range(n)]
+#dir_row = [0,1,1,1,0,-1,-1,1]
+#dir_col = [1,1,0,-1,-1,-1,0,1]
+
+#for _ in range(n):
+#    input_data = list(map(int, input().split()))
+#    shark_map.append(input_data)
+
+#for row in range(n):
+#    for col in range(m):
+#        bfs(row,col)
+#        visited = [[False]*m for _ in  range(n)]
+
+#        if answer < safe_length[row][col]:
+#            answer = safe_length[row][col]
+
+#print(safe_length)
+#print()
+#print(answer)
+
+
+#import sys
+#from collections import deque
+
+#def bfs_print():
+#    q= deque()
+#    visited[1] = True
+#    q.append((1,0))
+
+#    while q:
+#        node, length = q.popleft()
+
+#        if answer[node] == -1 or answer[node] > length:
+#            answer[node] = length
+
+#        for next_node in graph[node]:
+#            if not visited[next_node]:
+#                visited[next_node] = True
+#                q.append((next_node, length+1))
+#    for i in range(1,city+1):
+#        print(answer[i], end = " ")
+#    print()
+
+                
+#sys.stdin = open("input.txt")
+#input = sys.stdin.readline
+
+#city, street = map(int,input().split())
+
+#graph = [[] for _ in range(city+1)]
+#visited = [False] * (city+1)
+#answer = [-1]*(city+1)
+
+#for _ in range(street):
+#    city1, city2 = map(int,input().split())
+#    graph[city1].append(city2)
+
+#qstreet = int(input())
+#for _ in range(qstreet):
+#    city1, city2 = map(int,input().split())
+#    graph[city1].append(city2)
+#    visited = [False] * (city+1)
+#    bfs_print()
 
 
 
