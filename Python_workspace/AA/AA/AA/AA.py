@@ -1,61 +1,34 @@
-import sys
+import sys, heapq, collections
 
-def get_smallest_node():
-    min_weight = 999999999
-    node_number = None
-
-    for node in range(1,number_of_node+1):
-        if not visited[node]:
-            if distance[node] <= min_weight:
-                min_weight = distance[node]
-                node_number = node
-    
-    return node_number
+sys.stdin = open("input.txt")
 
 def dijkstra(start):
+    
+    q = []
+    heapq.heappush(q,(0,1))
 
-    distance[start] = 0
-    visited[start] = True
-
-    # 시작노드와 연결된 정보 갱신
-    for to_node_info in graph[start]:
-        distance[to_node_info[0]] = to_node_info[1]
-
-    #시작노드를 제외하고 n-1번 그리디한 방식으로 최소 경로 노드 찾고 그 노드로 부터 최단 경로 갱신
-    for i in range(number_of_node-1):
-        from_node = get_smallest_node()
-        visited[from_node] = True
-        for to_node_info in graph[from_node]:
-            if distance[to_node_info[0]] > distance[from_node] + to_node_info[1]:
-                distance[to_node_info[0]] = distance[from_node] + to_node_info[1]
+    while q:
+        path, p = heapq.heappop(q)
+        if path < distance[p]:
+            distance[p] = path
+            for nxt_p, dist in graph[p]:
+                if distance[nxt_p] == float('INF'):
+                    heapq.heappush(q,(path + dist, nxt_p))
+            
 
 
 input = sys.stdin.readline
-
 number_of_node, number_of_edge = map(int,input().split())
-
 graph = [[] for _ in range(number_of_node+1)]
-visited = [False]*(number_of_node+1)
-distance = [999999999]*(number_of_node+1)
-
-start = int(input())
-
 for _ in range(number_of_edge):
-    from_node, to_node, weight = map(int,input().split())
-    for node_info in graph[from_node]:
-        if node_info[0] == to_node:
-            if node_info[1] > weight:
-                node_info[1] = weight
-                break
-    else:
-        graph[from_node].append([to_node,weight])
+    a, b, c = map(int,input().split())
+    graph[a].append((b,c))
+    graph[b].append((a,c))
+    
+distance = [float('INF')] * (number_of_node+1)
 
-dijkstra(start)
-for d in distance[1:]:
-    if d == 999999999:
-        print("INF")
-    else:
-        print(d)
+dijkstra(1)
+print(distance[number_of_node])
 
 #from collections import deque
 #import sys
