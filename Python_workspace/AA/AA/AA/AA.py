@@ -1,48 +1,61 @@
 import sys
-from collections import deque
 
-def DFS(cur_node):
-    global visited
-    print(cur_node, end= " ")
-    visited[cur_node] = True
-    for next_node in graph[cur_node]:
-        if not visited[next_node]:
-            DFS(next_node)
-def BFS(start_node):
-    global visited
-    q= deque()
+def get_smallest_node():
+    min_weight = 999999999
+    node_number = None
 
-    q.append(start_node)
-    visited[start_node] = True
+    for node in range(1,number_of_node+1):
+        if not visited[node]:
+            if distance[node] <= min_weight:
+                min_weight = distance[node]
+                node_number = node
+    
+    return node_number
 
-    while q:
-        pre_node = q.popleft()
-        print(pre_node, end= " ")
+def dijkstra(start):
 
-        for next_node in graph[pre_node]:
-            if not visited[next_node]:
-                visited[next_node] = True
+    distance[start] = 0
+    visited[start] = True
 
-                q.append(next_node)
-   
+    # 시작노드와 연결된 정보 갱신
+    for to_node_info in graph[start]:
+        distance[to_node_info[0]] = to_node_info[1]
+
+    #시작노드를 제외하고 n-1번 그리디한 방식으로 최소 경로 노드 찾고 그 노드로 부터 최단 경로 갱신
+    for i in range(number_of_node-1):
+        from_node = get_smallest_node()
+        visited[from_node] = True
+        for to_node_info in graph[from_node]:
+            if distance[to_node_info[0]] > distance[from_node] + to_node_info[1]:
+                distance[to_node_info[0]] = distance[from_node] + to_node_info[1]
+
 
 input = sys.stdin.readline
 
-n,m,start = map(int,input().split())
-graph = [[] for _ in range(n+1)]
-visited = [False]*(n+1)
+number_of_node, number_of_edge = map(int,input().split())
 
-for _ in range(m):
-    node1, node2 = map(int,input().split())
-    graph[node1].append(node2)
-    graph[node2].append(node1)
-for node_info in graph:
-    node_info.sort()
+graph = [[] for _ in range(number_of_node+1)]
+visited = [False]*(number_of_node+1)
+distance = [999999999]*(number_of_node+1)
 
-DFS(start)
-visited = [False]*(n+1)
-print()
-BFS(start)
+start = int(input())
+
+for _ in range(number_of_edge):
+    from_node, to_node, weight = map(int,input().split())
+    for node_info in graph[from_node]:
+        if node_info[0] == to_node:
+            if node_info[1] > weight:
+                node_info[1] = weight
+                break
+    else:
+        graph[from_node].append([to_node,weight])
+
+dijkstra(start)
+for d in distance[1:]:
+    if d == 999999999:
+        print("INF")
+    else:
+        print(d)
 
 #from collections import deque
 #import sys
