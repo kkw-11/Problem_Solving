@@ -1,34 +1,18 @@
-import sys, heapq, collections
-
-sys.stdin = open("input.txt")
-
-def dijkstra(start):
-    
-    q = []
-    heapq.heappush(q,(0,1))
-
-    while q:
-        path, p = heapq.heappop(q)
-        if path < distance[p]:
-            distance[p] = path
-            for nxt_p, dist in graph[p]:
-                if distance[nxt_p] == float('INF'):
-                    heapq.heappush(q,(path + dist, nxt_p))
-            
-
+import sys
 
 input = sys.stdin.readline
-number_of_node, number_of_edge = map(int,input().split())
-graph = [[] for _ in range(number_of_node+1)]
-for _ in range(number_of_edge):
-    a, b, c = map(int,input().split())
-    graph[a].append((b,c))
-    graph[b].append((a,c))
-    
-distance = [float('INF')] * (number_of_node+1)
+number, count = map(int,input().split())
+numbers = list(map(int,input().split()))
+range_sum = [0]*(number+1)
+total = 0
 
-dijkstra(1)
-print(distance[number_of_node])
+for i in range(number):
+    total += numbers[i]
+    range_sum[i+1] = total
+
+for _ in range(count):
+    i, j = map(int,input().split())
+    print(range_sum[j]-range_sum[i-1])
 
 #from collections import deque
 #import sys
