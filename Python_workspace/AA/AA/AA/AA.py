@@ -1,35 +1,44 @@
 import sys
 from collections import deque
 
-def BFS(start):
+sys.stdin = open("input.txt")
+
+def BFS():
     global answer
     
     q = deque()
-    visited[start-1] = True
-    q.append(start)
-    answer += 1
-    
-    while q:
-        now = q.popleft()
 
-        for move in (stone[now-1],-stone[now-1]):
-            next = now + move
-            
-            if next>0 and next<=n and not visited[next-1]:
-                visited[next-1] = True
-                q.append(next)
-                answer += 1
+    visited[1] = True
+    q.append((1,0))
+
+    while q:
+        friend, count = q.popleft()
+
+        if 1<= count <=2 :
+            answer += 1
+        if count > 3:
+            break
+
+        for next_friend in graph[friend]:
+            if not visited[next_friend]:
+                visited[next_friend] = True
+                q.append((next_friend, count+1))
 
 input = sys.stdin.readline
-n = int(input())
-visited = [False]*(n)
-stone = list(map(int,input().split()))
-start = int(input())
 answer = 0
+n = int(input())
+m = int(input())
 
-BFS(start)
+graph = [[] for _ in range(n+1)]
+visited = [False] * (n+1)
+
+for _ in range(m):
+    a, b = map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+BFS()
+
 print(answer)
-
 #from collections import deque
 #import sys
 
