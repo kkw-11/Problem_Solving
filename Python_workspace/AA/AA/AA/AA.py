@@ -1,25 +1,34 @@
 import sys
+from collections import deque
+
+def BFS(start):
+    global answer
+    
+    q = deque()
+    visited[start-1] = True
+    q.append(start)
+    answer += 1
+    
+    while q:
+        now = q.popleft()
+
+        for move in (stone[now-1],-stone[now-1]):
+            next = now + move
+            
+            if next>0 and next<=n and not visited[next-1]:
+                visited[next-1] = True
+                q.append(next)
+                answer += 1
+
 input = sys.stdin.readline
-
 n = int(input())
+visited = [False]*(n)
+stone = list(map(int,input().split()))
+start = int(input())
+answer = 0
 
-if n <5:
-    if n%3 == 0:
-        print(n//3)
-    else:
-        print(-1)
-else:
-    max_five = n //5
-
-    for i in range(max_five, -1, -1):
-        mod_five = n - 5*i
-
-        if mod_five % 3 == 0:
-            print(i+mod_five//3)
-            break
-    else:
-        print(-1)
-
+BFS(start)
+print(answer)
 
 #from collections import deque
 #import sys
