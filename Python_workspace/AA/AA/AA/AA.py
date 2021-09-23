@@ -1,18 +1,25 @@
 import sys
-
 input = sys.stdin.readline
-number, count = map(int,input().split())
-numbers = list(map(int,input().split()))
-range_sum = [0]*(number+1)
-total = 0
 
-for i in range(number):
-    total += numbers[i]
-    range_sum[i+1] = total
+n = int(input())
 
-for _ in range(count):
-    i, j = map(int,input().split())
-    print(range_sum[j]-range_sum[i-1])
+if n <5:
+    if n%3 == 0:
+        print(n//3)
+    else:
+        print(-1)
+else:
+    max_five = n //5
+
+    for i in range(max_five, -1, -1):
+        mod_five = n - 5*i
+
+        if mod_five % 3 == 0:
+            print(i+mod_five//3)
+            break
+    else:
+        print(-1)
+
 
 #from collections import deque
 #import sys
