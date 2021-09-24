@@ -1,44 +1,35 @@
 import sys
-from collections import deque
-
-sys.stdin = open("input.txt")
-
-def BFS():
-    global answer
-    
-    q = deque()
-
-    visited[1] = True
-    q.append((1,0))
-
-    while q:
-        friend, count = q.popleft()
-
-        if 1<= count <=2 :
-            answer += 1
-        if count > 3:
-            break
-
-        for next_friend in graph[friend]:
-            if not visited[next_friend]:
-                visited[next_friend] = True
-                q.append((next_friend, count+1))
 
 input = sys.stdin.readline
-answer = 0
-n = int(input())
-m = int(input())
 
-graph = [[] for _ in range(n+1)]
-visited = [False] * (n+1)
+people = int(input())
+
+a,b = map(int,input().split())
+m = int(input())
+graph = [[] for _ in range(people+1)]
+visited = [False]*(people+1)
+answer = -1
+flag = False
 
 for _ in range(m):
-    a, b = map(int,input().split())
-    graph[a].append(b)
-    graph[b].append(a)
-BFS()
+    parent, child = map(int,input().split()) 
+    graph[parent].append(child)
+    graph[child].append(parent)
 
-print(answer)
+def find(person,relation):
+    global answer, flag
+    visited[person] = True
+    if person == b:
+        print(relation)
+        flag = True
+        return
+    for p in graph[person]:
+        if not visited[p]:
+            find(p, relation+1)
+find(a,0)
+if not flag:
+    print(-1)
+
 #from collections import deque
 #import sys
 
