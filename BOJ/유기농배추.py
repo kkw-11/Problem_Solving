@@ -1,43 +1,45 @@
 import sys
 from collections import deque
 
-def BFS(cur_row, cur_col):
-    visited[cur_row][cur_col] = True
-    q = deque()
-    q.append((cur_row,cur_col))
+sys.stdin = open("input.txt")
+
+def BFS(start_row, start_col):
+    visited[start_row][start_col] = True
+    q= deque()
+    q.append((start_row,start_col))
 
     while q:
         now_row, now_col = q.popleft()
 
-        for i in range(4):
-            next_row = now_row + dir_row[i]
-            next_col = now_col + dir_col[i]
+        for dir in range(4):
+            next_row = now_row + dir_row[dir]
+            next_col = now_col + dir_col[dir]
 
-            if next_row>=0 and next_row<row and next_col>=0 and next_col<col:
-                if not visited[next_row][next_col] and graph[next_row][next_col]:
+            if next_row>=0 and next_row<field_row and next_col>=0 and next_col<field_col:
+                if not visited[next_row][next_col] and field[next_row][next_col]:
                     visited[next_row][next_col] = True
                     q.append((next_row,next_col))
 
 input = sys.stdin.readline
 
-testcase = int(input())
 dir_row = [-1,1,0,0]
 dir_col = [0,0,-1,1]
+testcast = int(input())
 
-for _ in range(testcase):
-    col, row, edge = map(int,input().split())
-    graph = [[0]*(col) for _ in range(row)]
-    visited = [[False]*(col) for _ in range(row)]
+for _ in range(testcast):
+    field_col, field_row, number_of_position = map(int,input().split())
 
-    for _ in range(edge):
-        a, b = map(int,input().split())
-        graph[b][a] = 1
-    answer = 0 
-    for i in range(row):
-        for j in range(col):
-            if graph[i][j]:
-                if not visited[i][j]:
-                    answer += 1
-                    BFS(i,j)
+    visited = [[False]*(field_col) for _ in range(field_row)]
+    field = [[0]*(field_col) for _ in range(field_row)]
+    answer = 0
 
+    for _ in range(number_of_position):
+        col, row = map(int, input().split())
+        field[row][col] = 1
+    
+    for i in range(field_row):
+        for j in range(field_col):
+            if field[i][j] and not visited[i][j]:
+                answer += 1
+                BFS(i,j)
     print(answer)
