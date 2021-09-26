@@ -1,112 +1,45 @@
 import sys
 from collections import deque
 
-sys.stdin = open("input.txt")
-
-def BFS(start_row, start_col, number):
-    global cnt
-    answer[start_row][start_col] = number
-    q = deque()
-    q.append((start_row,start_col))
-
-    while q:
-       now_row, now_col = q.popleft()
-
-       for dir in range(4):
-           next_row = now_row + dir_row[dir]
-           next_col = now_col + dir_col[dir]
-
-           if next_row>=0 and next_row<n and next_col>=0 and next_col<n:
-               if graph[next_row][next_col] and not answer[next_row][next_col]:
-                   answer[next_row][next_col] = number
-                   q.append((next_row,next_col))
-                   cnt += 1
-
-dir_row = [-1,1,0,0]
-dir_col = [0,0,-1,1]
 input = sys.stdin.readline
 
-n = int(input())
+def BFS(start_r, start_c):
 
-graph = []
-answer = [[0]*n for _ in range(n)]
-home_number= 0
-result = []
-for _ in range(n):
-    a = list(map(int,input().rstrip()))
-    graph.append(a)
+    q = deque()
 
-for row in range(n):
-    for col in range(n):
-        if graph[row][col] and not answer[row][col]:
-            home_number += 1
-            cnt = 1
-            BFS(row,col,home_number)
-            result.append(cnt)
+    visited[start_r][start_c] = True
+    q.append((start_r,start_c))
 
-print(len(result))
-result.sort()
-for r in result:
-    print(r)
+    while q:
+        now_r, now_c = q.popleft()
 
+        for dir in range(8):
+            next_r = now_r + dir_r[dir]
+            next_c = now_c + dir_c[dir]
 
-#from collections import deque
-#import sys
+            if next_r>=0 and next_r<row and next_c>=0 and next_c<col:
+                if graph[next_r][next_c] and not visited[next_r][next_c]:
+                    visited[next_r][next_c] = True
+                    q.append((next_r,next_c))
 
-#def bfs(row, col):
-#    global visited, safe_length
-#    pre_length = 0
-#    q = deque()
-
-#    q.append((row,col,0))
-#    visited[row][col] = True
-#    if shark_map[row][col] == 1:
-#        safe_length[row][col] = 0
-#        return
-
-#    while q:
-#        pre_row, pre_col, pre_length = q.popleft()
-
-#        for i in range(8):
-#            next_row = pre_row + dir_row[i]
-#            next_col = pre_col + dir_col[i]
-
-#            if next_row >= 0 and next_row <n and next_col>=0 and next_col < m:
-#                if shark_map[next_row][next_col] == 1:
-#                    safe_length[row][col] = pre_length + 1
-#                    return
-
-#                if not visited[next_row][next_col]:
-#                    visited[next_row][next_col] = True
-#                    q.append((next_row,next_col,pre_length+1))
-
-#sys.stdin = open("input.txt")
-#input = sys.stdin.readline
-
-#n,m = map(int,input().split())
-
-#answer = -99999999
-#shark_map = []
-#safe_length = [[0]*m for _ in range(n)]
-#visited = [[False]*m for _ in  range(n)]
-#dir_row = [0,1,1,1,0,-1,-1,1]
-#dir_col = [1,1,0,-1,-1,-1,0,1]
-
-#for _ in range(n):
-#    input_data = list(map(int, input().split()))
-#    shark_map.append(input_data)
-
-#for row in range(n):
-#    for col in range(m):
-#        bfs(row,col)
-#        visited = [[False]*m for _ in  range(n)]
-
-#        if answer < safe_length[row][col]:
-#            answer = safe_length[row][col]
-
-#print(safe_length)
-#print()
-#print(answer)
+dir_r = [-1,1,0,0,1,-1,1,-1]
+dir_c = [0,0,-1,1,1,1,-1,-1]
+while True:
+    col, row = map(int,input().split())
+    if col == 0 and row == 0:
+        break
+    else:
+        visited = [[False]*col for _ in range(row)]
+        graph = []
+        cnt = 0
+        for _ in range(row):
+            graph.append(list(map(int,input().split())))
+        for r in range(row):
+            for c in range(col):
+                if graph[r][c] and not visited[r][c]:
+                    cnt += 1
+                    BFS(r,c)
+        print(cnt)
 
 
 #import sys
