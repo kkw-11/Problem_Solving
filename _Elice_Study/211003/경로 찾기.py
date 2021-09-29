@@ -25,4 +25,4 @@ for i in range(n):
     visited = [False]*n
     DFS(i,i)
 for a in answer:
-    print(a)
+    print(*a)

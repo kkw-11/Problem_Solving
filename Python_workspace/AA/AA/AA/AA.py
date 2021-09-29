@@ -1,33 +1,15 @@
 import sys
 
-def DFS(start,now):
-    global answer
-    visited[now] = True
-
-    for next in range(n):
-        if graph[now][next] :
-            answer[start][next] = 1
-            if not visited[next]:
-                DFS(start,next)
-
 sys.stdin = open("input.txt")
 
 input = sys.stdin.readline
 
 n = int(input())
-
-graph = []
-answer = [[0]*n for _ in range(n)]
-visited = [False]*n
+region = []
 for _ in range(n):
-    a = list(map(int,input().split()))
-    graph.append(a)
+    region.append(list(map(int,input().split())))
 
-for i in range(n):
-    visited = [False]*n
-    DFS(i,i)
-for a in answer:
-    print(*a)
+print(region)
 
 #import sys
 #from collections import deque
