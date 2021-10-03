@@ -20,7 +20,6 @@ def BFS(start_r,start_c):
                    visited[next_r][next_c] =True
                    q.append((next_r,next_c,cnt+1))
 
-
 input = sys.stdin.readline
 
 testcase = int(input())
