@@ -1,15 +1,30 @@
 import sys
+from collections import deque
 
-sys.stdin = open("input.txt")
+def BFS(start):
+    visited[start] = True
+    q = deque()
+    q.append((start,0))
+
+    while q:
+        now, time = q.popleft()
+        if now == brother:
+            print(time)
+            break
+
+
+        for next in [now-1,now+1,now+now]:
+            if next >=0 and next<=100000 and not visited[next]:
+                visited[next] = True
+                q.append((next,time+1))
 
 input = sys.stdin.readline
 
-n = int(input())
-region = []
-for _ in range(n):
-    region.append(list(map(int,input().split())))
+subin, brother = map(int, input().split())
+visited = [False]*(100001)
 
-print(region)
+BFS(subin)
+
 
 #import sys
 #from collections import deque
