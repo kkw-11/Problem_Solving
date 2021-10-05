@@ -1,29 +1,40 @@
 import sys
 from collections import deque
 
-def BFS(start):
-    visited[start] = True
+def BFS(s_r, s_c):
+    visited[s_r][s_c] = True
     q = deque()
-    q.append((start,0))
+    q.append((s_r,s_c, 1))
 
     while q:
-        now, time = q.popleft()
-        if now == brother:
-            print(time)
+        now_r, now_c, cnt = q.popleft()
+        if now_r == n-1 and now_c == m-1:
+            print(cnt)
             break
 
 
-        for next in [now-1,now+1,now+now]:
-            if next >=0 and next<=100000 and not visited[next]:
-                visited[next] = True
-                q.append((next,time+1))
+        for dir in range(4):
+            next_r = now_r + dir_r[dir]
+            next_c = now_c + dir_c[dir]
 
-input = sys.stdin.readline
+            if next_r>=0 and next_r<n and next_c>=0 and next_c<m:
+                if graph[next_r][next_c] == 1 and not visited[next_r][next_c]:
+                    visited[next_r][next_c] = True
+                    q.append((next_r,next_c,cnt+1))
 
-subin, brother = map(int, input().split())
-visited = [False]*(100001)
 
-BFS(subin)
+n, m = map(int, input().split())
+graph = []
+visited = [[False]*m for _ in range(n)]
+dir_r = [-1,1,0,0]
+dir_c = [0,0,-1,1]
+
+for _ in range(n):
+    graph.append(list(map(int,input().rstrip())))
+
+BFS(0,0)
+
+
 
 
 #import sys
