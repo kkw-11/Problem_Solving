@@ -1,38 +1,78 @@
 import sys
 from collections import deque
 
-def BFS(s_r, s_c):
-    visited[s_r][s_c] = True
+def BFS(start_r,start_c):
+    res = []
+    visited[start_r][start_c] = True
     q = deque()
-    q.append((s_r,s_c, 1))
+    q.append((start_r,start_c,0))
 
     while q:
-        now_r, now_c, cnt = q.popleft()
-        if now_r == n-1 and now_c == m-1:
-            print(cnt)
-            break
+       now_r,now_c,cnt = q.popleft()
+       if now_r == end_row and now_c == end_col:
+            return cnt
+
+       for dir in range(8):
+           next_r = now_r + dir_r[dir]
+           next_c = now_c + dir_c[dir]
+
+           if next_r>=0 and next_r<length and next_c>=0 and next_c<length:
+               if not visited[next_r][next_c]:
+                   visited[next_r][next_c] =True
+                   q.append((next_r,next_c,cnt+1))
+    return res
+input = sys.stdin.readline
+
+testcase = int(input())
+
+dir_r = [-1,1,2,2,1,-1,-2,-2]
+dir_c = [2,2,1,-1,-2,-2,-1,1]
+answer = 0 
+for _ in range(testcase):
+    length = int(input())
+    visited= [[False]*length for _ in range(length)]
+    start_row, start_col = map(int,input().split())
+    end_row, end_col = map(int, input().split())
+
+    answer = BFS(start_row,start_col)
+    print(answer)
 
 
-        for dir in range(4):
-            next_r = now_r + dir_r[dir]
-            next_c = now_c + dir_c[dir]
+#import sys
+#from collections import deque
 
-            if next_r>=0 and next_r<n and next_c>=0 and next_c<m:
-                if graph[next_r][next_c] == 1 and not visited[next_r][next_c]:
-                    visited[next_r][next_c] = True
-                    q.append((next_r,next_c,cnt+1))
+#def BFS(s_r, s_c):
+#    visited[s_r][s_c] = True
+#    q = deque()
+#    q.append((s_r,s_c, 1))
+
+#    while q:
+#        now_r, now_c, cnt = q.popleft()
+#        if now_r == n-1 and now_c == m-1:
+#            print(cnt)
+#            break
 
 
-n, m = map(int, input().split())
-graph = []
-visited = [[False]*m for _ in range(n)]
-dir_r = [-1,1,0,0]
-dir_c = [0,0,-1,1]
+#        for dir in range(4):
+#            next_r = now_r + dir_r[dir]
+#            next_c = now_c + dir_c[dir]
 
-for _ in range(n):
-    graph.append(list(map(int,input().rstrip())))
+#            if next_r>=0 and next_r<n and next_c>=0 and next_c<m:
+#                if graph[next_r][next_c] == 1 and not visited[next_r][next_c]:
+#                    visited[next_r][next_c] = True
+#                    q.append((next_r,next_c,cnt+1))
 
-BFS(0,0)
+
+#n, m = map(int, input().split())
+#graph = []
+#visited = [[False]*m for _ in range(n)]
+#dir_r = [-1,1,0,0]
+#dir_c = [0,0,-1,1]
+
+#for _ in range(n):
+#    graph.append(list(map(int,input().rstrip())))
+
+#BFS(0,0)
 
 
 

@@ -2,6 +2,7 @@ import sys
 from collections import deque
 
 def BFS(start_r,start_c):
+    res = []
     visited[start_r][start_c] = True
     q = deque()
     q.append((start_r,start_c,0))
@@ -9,7 +10,7 @@ def BFS(start_r,start_c):
     while q:
        now_r,now_c,cnt = q.popleft()
        if now_r == end_row and now_c == end_col:
-           return cnt
+            return cnt
 
        for dir in range(8):
            next_r = now_r + dir_r[dir]
@@ -19,13 +20,13 @@ def BFS(start_r,start_c):
                if not visited[next_r][next_c]:
                    visited[next_r][next_c] =True
                    q.append((next_r,next_c,cnt+1))
-
+    return res
 input = sys.stdin.readline
 
 testcase = int(input())
 
-dir_r = [-1,1,2,2,1,-1,-2,1]
-dir_c = [2,2,1,-1,-2,-2,-1,-2]
+dir_r = [-1,1,2,2,1,-1,-2,-2]
+dir_c = [2,2,1,-1,-2,-2,-1,1]
 answer = 0 
 for _ in range(testcase):
     length = int(input())
@@ -35,5 +36,3 @@ for _ in range(testcase):
 
     answer = BFS(start_row,start_col)
     print(answer)
-
-
