@@ -1,40 +1,62 @@
 import sys
 from collections import deque
 
-def BFS(start_r,start_c):
-    res = []
-    visited[start_r][start_c] = True
+def BFS():
+    global answer, check
+
     q = deque()
-    q.append((start_r,start_c,0))
 
+    for tomato in tomatoes:
+        q.append(tomato)
+        checked[tomato[0]][tomato[1]] = True
+    
+        
     while q:
-       now_r,now_c,cnt = q.popleft()
-       if now_r == end_row and now_c == end_col:
-            return cnt
+        now_r, now_c, now_day = q.popleft()
 
-       for dir in range(8):
-           next_r = now_r + dir_r[dir]
-           next_c = now_c + dir_c[dir]
+        if answer < now_day:
+            answer = now_day
 
-           if next_r>=0 and next_r<length and next_c>=0 and next_c<length:
-               if not visited[next_r][next_c]:
-                   visited[next_r][next_c] =True
-                   q.append((next_r,next_c,cnt+1))
-    return res
+        for dir in range(4):
+            next_r = now_r + dir_r[dir]
+            next_c = now_c + dir_c[dir]
+            if next_r>=0 and next_r<row and next_c>=0 and next_c<col:
+                if not checked[next_r][next_c] and graph[next_r][next_c] == 0:
+                    check +=1
+                    q.append((next_r,next_c,now_day+1))
+                    checked[next_r][next_c] = True
+
+
 input = sys.stdin.readline
 
-testcase = int(input())
+answer = 0
+check = 0
+cnt = 0
+graph = []
+tomatoes = []
+dir_r = [-1,1,0,0]
+dir_c = [0,0,-1,1]
 
-dir_r = [-1,1,2,2,1,-1,-2,-2]
-dir_c = [2,2,1,-1,-2,-2,-1,1]
-answer = 0 
-for _ in range(testcase):
-    length = int(input())
-    visited= [[False]*length for _ in range(length)]
-    start_row, start_col = map(int,input().split())
-    end_row, end_col = map(int, input().split())
+col, row = map(int,input().split())
+checked = [[False]*col for _ in range(row)]
 
-    answer = BFS(start_row,start_col)
+for i in range(row):
+    a = list(map(int,input().split()))
+    graph.append(a)
+
+print(graph)
+
+for i in range(row):
+    for j in range(col):
+        if graph[i][j] == 1:
+            tomatoes.append((i,j,0))
+        elif graph[i][j] == 0:
+            cnt += 1
+BFS()
+
+if check < cnt:
+    print(-1)
+elif check == cnt:
     print(answer)
 
 
