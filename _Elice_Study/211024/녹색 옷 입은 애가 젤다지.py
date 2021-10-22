@@ -24,8 +24,6 @@ def dijkstra():
                     heapq.heappush(q,(now_rupy + graph[next_r][next_c],next_r,next_c))
 
 
-sys.stdin = open("input.txt")
-
 input = sys.stdin.readline
 dir_r = [-1,1,0,0]
 dir_c = [0,0,-1,1]
