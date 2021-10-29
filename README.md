@@ -19,7 +19,7 @@ SW 역량테스트 대비
 ## C/C++  
 - [STL 사용법](https://baactree.tistory.com/29)
 - [C++ 레퍼런스](https://en.cppreference.com/w/)
-
+<!-- 
 <h3 id="-">수학</h3>
 
 - [x] 나머지 
@@ -57,3 +57,4 @@ SW 역량테스트 대비
 - [ ] <a href="https://www.acmicpc.net/problem/1463">1로 만들기</a> 
 
 
+ -->
