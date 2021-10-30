@@ -3,7 +3,7 @@
 * [DataStructure](https://github.com/kkw-11/DataStructure)
 * [Algorithm](https://github.com/kkw-11/C_Algorithm)
 
-## Reference
+## Problem Solving Site
 - [SW Expert Academy](https://www.swexpertacademy.com)
 - [Baekjoon Online Judge](https://www.acmicpc.net)
 - [Programmers](https://programmers.co.kr) 
