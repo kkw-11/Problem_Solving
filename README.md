@@ -1,14 +1,13 @@
 
 # DataStructure & Algorithm 학습 자료 정리
-* [자료구조](https://github.com/kkw-11/DataStructure)
-* [알고리즘](https://github.com/kkw-11/C_Algorithm)
+* [DataStructure](https://github.com/kkw-11/DataStructure)
+* [Algorithm](https://github.com/kkw-11/C_Algorithm)
 
-## Coding_Test
-SW 역량테스트 대비 
-- SW Expert Academy: https://www.swexpertacademy.com
-- 백준 알고리즘: https://www.acmicpc.net 
-- 프로그래머스: https://programmers.co.kr 
-- 인프런 강의 : https://www.inflearn.com/course/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/dashboard
+## Problem Solving Site
+- [SW Expert Academy](https://www.swexpertacademy.com)
+- [Baekjoon Online Judge](https://www.acmicpc.net)
+- [Programmers](https://programmers.co.kr) 
+- [inflearn](https://www.inflearn.com/course/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/dashboard)
 
 ## Folder
 - C++를 이용한 창의적 문제 해결(인프런 강의)
