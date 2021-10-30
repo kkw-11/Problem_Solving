@@ -1,6 +1,7 @@
 #include <stdio.h>
 int main() {
 	
+	
 	//freopen("input.txt", "rt", stdin);
 	int k, i =0,cnt = 0;
 	char curMax = '9', curMin = '0';
