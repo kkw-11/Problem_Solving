@@ -3,7 +3,7 @@
 * [자료구조](https://github.com/kkw-11/DataStructure)
 * [알고리즘](https://github.com/kkw-11/C_Algorithm)
 
-## Coding_Test
+## Coding_Test 참고 사이트
 SW 역량테스트 대비 
 - SW Expert Academy: https://www.swexpertacademy.com
 - 백준 알고리즘: https://www.acmicpc.net 
