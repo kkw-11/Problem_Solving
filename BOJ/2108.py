@@ -23,15 +23,14 @@ start = 0
 cur = 0
 while cur < n:
     cnt = 1
-    for next in range(cur+1,n):
+    for next in range(cur+1, n):
         if numbers[cur] == numbers[next]:
             cnt += 1
             cur = next
         else:
-            temp_numbers.append((cnt, numbers[cur] ))
+            temp_numbers.append((cnt, numbers[cur]))
             break
     cur += 1
-    
 else:
     temp_numbers.append((cnt, numbers[n-1]))
 
