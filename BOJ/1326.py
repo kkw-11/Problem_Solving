@@ -3,7 +3,7 @@ from collections import deque
 
 def BFS(start, end):
     q = deque()
-    visited[start] = True
+    checked[start] = True
     q.append((start,0))
 
     while q:
@@ -12,36 +12,37 @@ def BFS(start, end):
             print(cnt)
             break
 
-        i = 1
+        i = 0
         while True:
-            next1 = now + stone_bridge[now]*i
             i += 1
+            next1 = now + stone_bridge[now]*i
             
             if next1>0 and next1<=n:
-                if not visited[next1]:
-                    visited[next1] = True
+                if not checked[next1]:
+                    checked[next1] = True
                     q.append((next1,cnt+1))
             else:
                 break
         
-        j = 1
+        j = 0
         while True:
-            next2 = now - stone_bridge[now]*j
             j += 1
+            next2 = now - stone_bridge[now]*j
 
             if next2>0 and next2<=n:
-                if not visited[next2]:
-                    visited[next2] = True
+                if not checked[next2]:
+                    checked[next2] = True
                     q.append((next2,cnt+1))
             else:
                 break
+
     else:
         print(-1)
 
 input = sys.stdin.readline
 n = int(input())
 
-visited = [False]*(n+1)
+checked = [False]*(n+1)
 stone_bridge = [0]
 
 temp = list(map(int,input().split()))
