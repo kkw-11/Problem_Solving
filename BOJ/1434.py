@@ -3,12 +3,8 @@ import sys
 input = sys.stdin.readline
 
 number_of_boxes, number_of_books = map(int, input().split())
-
 boxes = list(map(int,input().split()))
-
 books = list(map(int,input().split()))
-
-cur = 0 
 
 box_number = 0
 book_number = 0
