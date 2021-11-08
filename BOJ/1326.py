@@ -35,7 +35,6 @@ def BFS(start, end):
                     q.append((next2,cnt+1))
             else:
                 break
-
     else:
         print(-1)
 
