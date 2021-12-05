@@ -1,35 +1,31 @@
 def solution(n, lost, reserve):
     answer = 0
-    students = [1]*(n+1)
+    students = [1]*(n)
     
     for l in lost:
-        students[l] -= 1
+        students[l-1] -= 1
     for r in reserve:
-        students[r] += 1
+        students[r-1] += 1
 
+    for cur in range(n):
+        if students[cur] == 0:
+            if cur > 0 and cur < n-1:
+                if students[cur-1] == 2:
+                    students[cur-1] -= 1
+                    students[cur] += 1
+                elif students[cur+1] == 2:
+                    students[cur + 1] += 1
+                    students[cur] += 1
+            elif cur == 0:
+                if students[cur+1] == 2:
+                    students[cur+1] -= 1
+                    students[cur] += 1
+            elif cur == n-1:
+                if students[cur-1] == 2:
+                    students[cur-1] -= 1
+                    students[cur] += 1
+    lost_cnt = students.count(0)
+    
+    
         
-    for student_number, number_of_clothes in enumerate(students):
-        if number_of_clothes == 2 :
-            if student_number != 1 and student_number != n:
-                if students[student_number+1] == 0:
-                    students[student_number] -= 1
-                    students[student_number+1] += 1
-                    continue
-                    
-                if students[student_number-1] == 0:
-                    students[student_number] -= 1
-                    students[student_number-1] += 1
-            
-            if student_number == 1:
-                if students[student_number+1] == 0:
-                    students[student_number] -= 1
-                    students[student_number+1] += 1
-            
-            if student_number == n:
-                if students[student_number-1] == 0:
-                    students[student_number] -= 1
-                    students[student_number-1] += 1
-        print(students[1:])
-    answer = n - students.count(0)
-        
-    return answer
+    return n-lost_cnt
