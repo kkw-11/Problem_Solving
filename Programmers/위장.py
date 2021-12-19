@@ -7,8 +7,8 @@ def solution(clothes):
         else:
             clothes_dict[clothe[1]].append(clothe[0])
     
-    for clothe_clasifi in clothes_dict:
-        answer *= (len(clothes_dict[clothe_clasifi])+1)
+    for clothe_classifi in clothes_dict:
+        answer *= (len(clothes_dict[clothe_classifi])+1)
         
     
     return answer-1
