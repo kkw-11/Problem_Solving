@@ -4,8 +4,6 @@ def solution(nums):
     def isPrime(num):
         if num == 1:
             return False
-        elif num == 2:
-            return False
         else:
             for n in range(2,num//2 + 1):
                 if num % n == 0:
