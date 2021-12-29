@@ -24,4 +24,4 @@ def solution(nums):
     for start_index in range(len(nums)):
         combination(start_index,0,nums[start_index])
 
-    return answer
+    return answerㅎ
