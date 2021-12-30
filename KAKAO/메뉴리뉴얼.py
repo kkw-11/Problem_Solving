@@ -3,11 +3,11 @@ from itertools import combinations
 def solution(orders, course):
     result = []
     
-    for size_of_course in  course:
+    for size_of_course in course:
         course_menu_dict = {}
         
         for order in orders:
-            all_course = list(map("".join,list(combinations(sorted(order),size_of_course))))
+            all_course = list(map("".join, combinations(sorted(order),size_of_course)))
         
             for each_course in all_course:
                 if not each_course in course_menu_dict:
@@ -23,7 +23,6 @@ def solution(orders, course):
                 for key, value in course_menu_dict.items():
                     if value == max_val:
                         result.append(key)
-
     result.sort()
 
     return result
