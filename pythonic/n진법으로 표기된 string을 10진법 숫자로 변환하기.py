@@ -6,3 +6,4 @@ while num:
     i += 1
     num //= 10
 print(answer)
+
