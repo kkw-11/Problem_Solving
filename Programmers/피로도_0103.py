@@ -5,10 +5,10 @@ def solution(k, dungeons):
 
     for dungeon_seq in permutation: #[80, 20], [50, 40], [30, 10]
         cnt = 0
-        temp = k
+        cur_k = k
         for dungeon_each in dungeon_seq:
-            if dungeon_each[0] <= temp:
-                temp -= dungeon_each[1]
+            if dungeon_each[0] <= cur_k:
+                cur_k -= dungeon_each[1]
                 cnt += 1
             else:
                 break
