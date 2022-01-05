@@ -1,3 +1,4 @@
+# 우선순위 큐 정렬로 해결
 def solution(numbers):
     answer = ""
     data = [0]
