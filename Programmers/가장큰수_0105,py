@@ -5,7 +5,7 @@ def solution(numbers):
         if len(arr) <= 1:
             return arr
         pivot = arr[len(arr) // 2]
-        greater_arr,  equal_arr, lesser_arr  = [], [], []
+        greater_arr, equal_arr, lesser_arr  = [], [], []
         for num in arr:
             if  num + pivot > pivot + num:
                 greater_arr.append(num)
