@@ -9,9 +9,7 @@ def solution(phone_book):
         for number in phone_number:
             start_number += number
 
-            if len(start_number) != len(phone_number):
-                if start_number in check_dict:
-                    return False
+            if start_number != phone_number and start_number in check_dict:
+                return False
     else:
         return True
-        
