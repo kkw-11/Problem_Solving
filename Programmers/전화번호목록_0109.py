@@ -7,14 +7,14 @@ def solution(phone_book):
             check_dict[phone_number] = True
 
     for phone_number in phone_book:
-        temp = ""
+        start_number = ""
         for number in phone_number:
-            temp += number
+            start_number += number
 
-            if len(temp) != len(phone_number):
-                if not temp in check_dict:
+            if len(start_number) != len(phone_number):
+                if not start_number in check_dict:
                     pass
-                elif check_dict[temp]:
+                elif check_dict[start_number]:
                     return False
     else:
-        return Truet
+        return True
