@@ -10,6 +10,6 @@ def solution(genres, plays):
             best[genre][1].append((song_number,plays[song_number]))
             
     for plays_infos in sorted(best.values(),key=lambda x:-x[0]):
-        answer.extend([a[0] for a in sorted(plays_infos[1], key=lambda x:(-x[1],x[0]))[:2]])
+        answer.extend([song[0] for song in sorted(plays_infos[1], key=lambda x:(-x[1],x[0]))[:2]])
     
     return answer
