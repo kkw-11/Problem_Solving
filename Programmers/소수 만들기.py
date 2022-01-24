@@ -1,7 +1,24 @@
 def solution(nums):
+
+    '''
+    
+    7 -> 2 
+
+    16
+
+    1 * 16
+    2 * 8
+
+    4 * 4
+
+    8 * 2
+    16 * 1
+
+    '''
+
     def isPrime(num):
         if num > 1:
-            for n in range(2,int(num**0.5)+1): 
+            for n in range(2, int(num**0.5)+1): 
                 if num % n == 0:
                     return False
             else:
