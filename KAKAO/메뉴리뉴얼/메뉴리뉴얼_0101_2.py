@@ -15,7 +15,7 @@ def solution(orders, course):
             else:
                 menu_cnt_dict[combi] += 1
 
-        # max 함수 예외 처리
+        # max 함수 예외 처리, iterable이 빈값이면 안됨
         if len(menu_cnt_dict) != 0:
             max_value = max(menu_cnt_dict.values())
 
@@ -23,7 +23,6 @@ def solution(orders, course):
                 for key, value in menu_cnt_dict.items():
                     if value == max_value:
                         result.append(key)
-
 
     return sorted(result)
 
