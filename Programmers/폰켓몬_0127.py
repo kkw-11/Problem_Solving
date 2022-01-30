@@ -5,10 +5,10 @@ def solution(nums):
     cnt = 0
     poncketmon_category = 0
     
-    
+
     for num in nums:
         if not num in poncketmon_dict:
-            poncketmon_dict[num] = 1
+            poncketmon_dict[num] = True
         else:
             poncketmon_dict[num] += 1
             
