@@ -9,7 +9,7 @@ def solution(dartResult):
         if score in "0123456789":
             if scores[dart_round] == None:
                 scores[dart_round] = int(score)
-            else:
+            else:# 점수 10점 계산하기 위한 코드
                 scores[dart_round] = scores[dart_round]*10 + int(score)
         if score in BONUS:
             if score == BONUS[1]:
