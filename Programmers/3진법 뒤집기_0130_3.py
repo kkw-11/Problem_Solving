@@ -1,7 +1,6 @@
 def solution(n):
-    answer = 0
     exponent = 1 
-    result = 0
+    
     def reverse_three_digit(x):
         reverse_number = 0
         while x:
@@ -11,5 +10,5 @@ def solution(n):
             return reverse_number
      
     temp = reverse_three_digit(n)
-   
+    
     return int(str(temp),3)
