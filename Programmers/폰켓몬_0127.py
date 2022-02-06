@@ -3,7 +3,7 @@ def solution(nums):
     half = len(nums)//2
     poncketmon_dict = {}
     cnt = 0
-    poncketmon_category = 0
+    number_of_poncketmon_category = 0
     
 
     for num in nums:
@@ -13,11 +13,11 @@ def solution(nums):
             poncketmon_dict[num] += 1
             
     poncketmon_list = list(poncketmon_dict.keys())
-    poncketmon_category = len(poncketmon_list)
+    number_of_poncketmon_category = len(poncketmon_list)
     
     
-    if poncketmon_category < half:
-        return poncketmon_category
+    if number_of_poncketmon_category < half:
+        return number_of_poncketmon_category
     else:
         return half
     
