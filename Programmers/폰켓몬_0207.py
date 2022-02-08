@@ -1,9 +1,11 @@
 def solution(nums):
     answer = 0
-    
-    if len(set(nums)) <= len(nums)//2:
-        answer = len(set(nums))
+    half =  len(nums)//2
+    number_of_poncketmons = len(set(nums))
+
+    if number_of_poncketmons <= half:
+        answer = number_of_poncketmons
     else:
-        answer = len(nums)//2
+        answer = half
         
     return answer
