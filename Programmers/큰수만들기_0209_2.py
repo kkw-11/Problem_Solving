@@ -1,12 +1,12 @@
 def solution(number, k):
-    answer = ""
-    for index, cur_num in enumerate(number):
-        while len(answer) != 0 and answer[-1] < cur_num and k > 0:
-            answer = answer[:-1]
+    stack = []
+    for cur_num in number:
+        while len(stack) != 0 and stack[-1] < cur_num and k > 0:
+            stack.pop()
             k -= 1
-        answer += cur_num
+        stack.append(cur_num)
             
     if k > 0:
-        answer = answer[:-k]
+        stack = stack[:-k]
         
-    return answer
+    return "".join(stack)
