@@ -1,16 +1,20 @@
-import math
+from math import ceil
+
 def solution(progresses, speeds):
     answer = []
     progressesCnt = len(progresses)
-    days = [100]*progressesCnt
-    for i in range(progressesCnt):    
-        days[i] = math.ceil((100 - progresses[i])/speeds[i])
-        
-        
-    newStart = days[0]
+    days = []
+    newStart = -1
     cnt = 1
-    for i in range(1,progressesCnt):
-        if newStart >= days[i]:
+
+    for index, progress in enumerate(progresses):
+        days.append(ceil((100 - progress)/speeds[index]))
+        
+        
+    for i in range(progressesCnt):
+        if newStart == -1:
+            newStart = days[0]
+        elif newStart >= days[i]:
             cnt += 1
         else:
             answer.append(cnt)
