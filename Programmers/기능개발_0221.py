@@ -18,7 +18,8 @@ def solution(progresses, speeds):
             distribution = []
             distribution.append(day)
             
-    answer.append((len(distribution)))
+    if len(distribution):
+        answer.append((len(distribution)))
         
     
     return answer
