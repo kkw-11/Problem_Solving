@@ -1,5 +1,3 @@
-
-
 def solution(n):
     answer = 0
     exponent = 1 
