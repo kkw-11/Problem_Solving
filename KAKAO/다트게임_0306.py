@@ -2,7 +2,6 @@ def solution(dartResult):
     answer = 0
     scores = [None]*3
     game_round = 0
-    BONUS = ["S","D","T"]
     BONUS_DICT = {"S":1,"D":2,"T":3}
     OPTION = ["*","#"]
     
