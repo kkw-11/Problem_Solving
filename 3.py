@@ -18,6 +18,8 @@ def solution(money, costs):
 
    return answer
 
+
+
 def factorial(n):
    result = 1
    for item in range(1, n+1, 1): 
