@@ -14,7 +14,7 @@ def solution(n, vertex):
         graph[edge[0]].append(edge[1])
         graph[edge[1]].append(edge[0])
 
-    #BFS
+    #graph search - BFS
     q = deque()
     q.append(1)
     checked[1] = True
