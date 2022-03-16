@@ -1,3 +1,32 @@
-def solution(n, edge):
+from collections import deque
+
+def solution(n, vertex):
     answer = 0
-    return answer
+    edges_cnt = [0]*(n+1)
+
+    #make graph
+    checked = [False]*(n+1)
+    graph = [None]*(n+1)
+    for i in range(n+1):
+        graph[i] = []
+
+    for edge in vertex:
+        graph[edge[0]].append(edge[1])
+        graph[edge[1]].append(edge[0])
+
+    #BFS
+    q = deque()
+    q.append(1)
+    checked[1] = True
+
+    while q:
+        cur = q.popleft()
+        
+        for next in graph[cur]:
+            if not checked[next]:
+                q.append(next)
+                checked[next] = True
+                edges_cnt[next] = edges_cnt[cur] + 1
+
+    max_cnt = max(edges_cnt)
+    return edges_cnt.count(max_cnt)
