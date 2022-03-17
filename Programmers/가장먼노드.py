@@ -3,7 +3,7 @@ from collections import deque
 def solution(n, vertex):
     answer = 0
     edges_cnt = [0]*(n+1)
-
+    start = 1
     #make graph
     checked = [False]*(n+1)
     graph = [None]*(n+1)
@@ -16,8 +16,8 @@ def solution(n, vertex):
 
     #graph search - BFS
     q = deque()
-    q.append(1)
-    checked[1] = True
+    q.append(start)
+    checked[start] = True
 
     while q:
         cur = q.popleft()
