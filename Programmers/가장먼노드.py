@@ -7,8 +7,8 @@ def solution(n, vertex):
     #make graph
     checked = [False]*(n+1)
     graph = [None]*(n+1)
-    for i in range(n+1):
-        graph[i] = []
+    for node in range(n+1):
+        graph[node] = []
 
     for edge in vertex:
         graph[edge[0]].append(edge[1])
