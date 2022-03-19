@@ -12,10 +12,6 @@ def solution(money, costs):
    for index in range(6):
        answer += (money//unit_cost[index][2])*unit_cost[index][1]
        money -= (money//unit_cost[index][2])*unit_cost[index][2]
-
-       if money == 0:
-           break
-
    return answer
 
 
