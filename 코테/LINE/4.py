@@ -1,5 +1,4 @@
 
-
 def solution(abilities, k):
     answer = 0
     difs = []

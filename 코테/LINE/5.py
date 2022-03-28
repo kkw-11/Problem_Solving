@@ -1,32 +1,87 @@
-from collections import deque
-def solution(num_teams, remote_tasks, office_tasks, employees):
-    answer = []
-    remote_dic = {}
-    office_dic = {}
-    team_member = [[] for _ in range(num_teams+1)]
-    team_remote = [deque() for _ in range(num_teams+1)]
-    for office_task in office_tasks:
-        office_dic[office_task] = True
 
-    for employee_num,employee in enumerate(employees):
-        employee_lists = employee.split()
-        team_member[int(employee_lists[0])].append(employee_num+1)
 
-        for task in employee_lists[1:]:
-            if task in office_dic:
-                break
-        else:
-            team_remote[int(employee_lists[0])].append(employee_num+1)
-    for num_team in range(1,num_teams+1):
-        if len(team_member[num_team]) != len(team_remote[num_team]):
-            answer.extend(team_remote[num_team])
-        else:
-            team_remote[num_team].popleft()
-            answer.extend(team_remote[num_team])
-    return answer
+def solution(arr, brr):
+   answer = 0
+   for i in range(len(arr)-1):
+       temp =  (brr[i] - arr[i])
+       if temp != 0:
+           arr[i] = brr[i]
+           arr[i+1] = arr[i+1] - temp
+           answer += 1
 
-num_teams = 3
-remote_tasks =["development","marketing","hometask"]
-office_tasks = 		["recruitment","education","officetask"]
-employees = ["1 development hometask","1 recruitment marketing","2 hometask","2 development marketing hometask","3 marketing","3 officetask","3 development"]
+   return answer
+
+print(solution([3, 7, 2, 4], [4, 5, 5, 2]))
+# 4 5 5 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def solution(abilities, k):
+#     answer = 0
+#     difs = []
+#     if len(abilities) % 2 == 1:
+#         abilities.append(0)
+#     abilities.sort(reverse=True)
+
+#     for i in range(0,len(abilities)-1,2):
+#         difs.append((abilities[i]-abilities[i+1],abilities[i],abilities[i+1]))
+#     difs.sort(reverse=True)
+
+#     for dif in difs:
+#         if k>0:
+#             k -= 1
+#             answer += dif[1]
+#         else:
+#             answer += dif[2]
+
+#     return answer
+
+# abilities = [2, 8, 3, 6, 1, 9, 1, 9]
+# k = 2
+
+
+
+
+
+
+
+
+
+# def solution(abilities, k):
+#     answer = 0
+#     difs = []
+#     if len(abilities) % 2 == 1:
+#         abilities.append(0)
+#     abilities.sort(reverse=True)
+
+#     for i in range(0,len(abilities)-1,2):
+#         difs.append((abilities[i]-abilities[i+1],abilities[i],abilities[i+1]))
+#     difs.sort(reverse=True)
+
+#     for dif in difs:
+#         if k>0:
+#             k -= 1
+#             answer += dif[1]
+#         else:
+#             answer += dif[2]
+
+#     return answer
+
+# abilities = [2, 8, 3, 6, 1, 9, 1, 9]
+# k = 2
 

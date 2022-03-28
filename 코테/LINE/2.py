@@ -16,7 +16,6 @@ def solution(sentences, n):
                 char_dict["shift"] = True
                 all_char["shift"] = True
                 score += 1
-        print("hello")
         print(char_dict.keys())
         print(score)
     print(all_char.keys())
@@ -27,3 +26,4 @@ def solution(sentences, n):
 sentences = ["line in line", "LINE", "in lion"]
 n = 5
 solution(sentences, n)
+
