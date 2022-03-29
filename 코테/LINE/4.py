@@ -1,21 +1,21 @@
 
 def solution(abilities, k):
     answer = 0
-    difs = []
+    gaps = []
     if len(abilities) % 2 == 1:
         abilities.append(0)
     abilities.sort(reverse=True)
 
     for i in range(0,len(abilities)-1,2):
-        difs.append((abilities[i]-abilities[i+1],abilities[i],abilities[i+1]))
-    difs.sort(reverse=True)
+        gaps.append((abilities[i]-abilities[i+1], abilities[i], abilities[i+1]))
+    gaps.sort(reverse=True)
 
-    for dif in difs:
+    for gap in gaps:
         if k>0:
             k -= 1
-            answer += dif[1]
+            answer += gap[1]
         else:
-            answer += dif[2]
+            answer += gap[2]
 
     return answer
 

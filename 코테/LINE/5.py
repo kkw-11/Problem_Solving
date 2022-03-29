@@ -1,5 +1,3 @@
-
-
 def solution(arr, brr):
    answer = 0
    for i in range(len(arr)-1):
@@ -13,9 +11,6 @@ def solution(arr, brr):
 
 print(solution([3, 7, 2, 4], [4, 5, 5, 2]))
 # 4 5 5 2
-
-
-
 
 
 
