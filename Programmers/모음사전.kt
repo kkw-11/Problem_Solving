@@ -11,9 +11,8 @@ class Solution {
         return cnt
     }
     
-    
     fun dfs(w:String, vowels:Array<Char>, word:String){
-        if (w.length > 5 || flag == true){
+        if (w.length > 5){
             return
         }
         else{
@@ -30,5 +29,6 @@ class Solution {
             }
         }
     }
+
 
 }
