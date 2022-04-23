@@ -17,4 +17,4 @@ fun main() {
     }while(cur_num != num)
     print(cnt)
 
-}
+}g

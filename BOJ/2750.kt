@@ -12,4 +12,4 @@ fun main() {
     for(num in nums){
         println(num)
     }
-}
+}g
