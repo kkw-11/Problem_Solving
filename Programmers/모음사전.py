@@ -1,6 +1,5 @@
 from itertools import product
 def solution(word):
-    answer = 0
     vowels = ['A','E','I','O','U']
     all_words = []
     words_sequence = {}
