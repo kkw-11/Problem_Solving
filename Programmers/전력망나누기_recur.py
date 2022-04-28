@@ -1,16 +1,15 @@
 def solution(n, wires):
     answer = float('inf')
     
-    def DFS(cur_node, n, tree):
-        nonlocal answer
+    def DFS(cur_node, n):
+        nonlocal answer, tree, visited
+        visited[cur_node] = True
         
         visited_cnt = 1
         for next_node in range(1,n+1):
-            if tree[cur_node][next_node]:
-                tree[cur_node][next_node] = False
-                tree[next_node][cur_node] = False
-                visited_cnt += DFS(next_node,n,tree)
-
+            if tree[cur_node][next_node] and not visited[next_node]:
+                visited[next_node] = True
+                visited_cnt += DFS(next_node,n)
                 
         answer = min(answer,abs(n-visited_cnt-visited_cnt))        
         return visited_cnt
@@ -20,7 +19,7 @@ def solution(n, wires):
     for wire in wires:
         tree[wire[0]][wire[1]] = True
         tree[wire[1]][wire[0]] = True
-        
-    DFS(1,n,tree)    
+    visited = [False for _ in range(n+1)]
+    DFS(1,n)    
     
     return answer

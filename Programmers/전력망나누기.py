@@ -8,6 +8,7 @@ def solution(n, wires):
         graph[wire[0]].append(wire[1])
         graph[wire[1]].append(wire[0])
     
+    #O(n^2)
     for wire in wires:
         checked = [False]*(n+1) 
         cnt = 1
@@ -28,7 +29,7 @@ def solution(n, wires):
                     cnt += 1
                     
         dif = abs((n - cnt) - cnt)
-        
+        print(dif)
         if dif < answer:
             answer = dif
     
