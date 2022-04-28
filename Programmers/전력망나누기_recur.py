@@ -5,14 +5,14 @@ def solution(n, wires):
         nonlocal answer, tree, visited
         visited[cur_node] = True
         
-        visited_cnt = 1
+        child_cnt = 1
         for next_node in range(1,n+1):
             if tree[cur_node][next_node] and not visited[next_node]:
                 visited[next_node] = True
-                visited_cnt += DFS(next_node,n)
+                child_cnt += DFS(next_node,n)
                 
-        answer = min(answer,abs(n-visited_cnt-visited_cnt))        
-        return visited_cnt
+        answer = min(answer,abs(n-child_cnt-child_cnt))        
+        return child_cnt
     
     
     tree = [[False]*(n+1) for _ in range(n+1)]

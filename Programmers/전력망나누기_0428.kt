@@ -5,6 +5,7 @@ class Solution {
     var tree = Array(0) {BooleanArray(0)}
     var visited = BooleanArray(0)
     
+    # 트리 후위 순회 방식으로 answer 값 갱신 및 자식 노드 수 구하기
     fun childCount(cur: Int, n: Int): Int {
         var ret = 1
         visited[cur] = true
