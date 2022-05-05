@@ -1,7 +1,7 @@
 import sys
 from collections import deque
 def BFS(cur_node):
-    global tree
+    global visited, tree
     visited[cur_node] = True
     q = deque()
     q.append(cur_node)

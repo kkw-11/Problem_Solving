@@ -3,20 +3,20 @@ import kotlin.math.abs
 class Solution {
     var answer: Int = Int.MAX_VALUE
     var tree = Array(0) {BooleanArray(0)}
-    
+
     fun dfs(cur: Int, n: Int): Int {
-        var ret = 1
-        
+        var child_me = 1
+
         for (next in 1..n) {
             if(tree[cur][next]){
                 tree[cur][next] = false
                 tree[next][cur] = false
-                ret += dfs(next, n)
+                child_me += dfs(next, n)
             }
         }
-        
-        answer = min(answer, abs(n - ret - ret))
-        return ret
+
+        answer = min(answer, abs(n - child_me - child_me))
+        return child_me
     }
 
     fun solution(n: Int, wires: Array<IntArray>): Int {
