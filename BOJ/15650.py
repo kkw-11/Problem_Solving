@@ -21,3 +21,4 @@ for answer in answers:
     for num in answer:
         print(num,end=" ")
     print()
+    
