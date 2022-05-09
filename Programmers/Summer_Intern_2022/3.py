@@ -17,6 +17,7 @@ def solution(line):
 
         left_men = (lef_col_dis + lef_col_dis)
         right_men = (ri_row_dis + ri_col_dis)
+        
         if left_men < right_men:
             answer.append(0)
             left = [row,col]
