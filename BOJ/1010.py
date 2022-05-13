@@ -15,7 +15,6 @@ def recur(west, east):
         checked[west][east] = True
         return DP[west][east]
 
-sys.stdin = open("input.txt")
 input = sys.stdin.readline
 
 T = int(input())
