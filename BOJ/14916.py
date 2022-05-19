@@ -1,12 +1,13 @@
 n = int(input())
 coins = [5,2]
 max_five = n // coins[0]
-cnt = 0
-while n>0:
-    if (n % 5) % 2 == 0:
-        print(n//5 + (n%5//2)+cnt)
+
+while True:
+    if (n -(coins[0]*max_five)) % 2 == 0:
+        print(max_five + (n -(coins[0]*max_five)) // 2)
         break
     else:
-        n -= 2
-        cnt += 1
-print(-1)
+        max_five -= 1
+        if max_five == -1:
+            print(-1)
+            break
