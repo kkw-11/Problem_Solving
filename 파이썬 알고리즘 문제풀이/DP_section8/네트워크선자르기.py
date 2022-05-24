@@ -3,7 +3,6 @@ import sys
 n = int(input())
 dy = [0]*(n+1)
 
-dy[0]=0
 dy[1]=1
 dy[2]=2
 
