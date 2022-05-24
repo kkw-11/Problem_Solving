@@ -1,4 +1,4 @@
-# queue1,queue2 길이 같음, 합이 같게 하는 최소 연산햣 
+# queue1,queue2 길이 같음, 합이 같게 하는 최소 연산
 
 from collections import deque
 

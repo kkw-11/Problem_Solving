@@ -1,6 +1,6 @@
 from collections import deque
 answer = []
-def DFS(graph,checked,cur, cost, start, end,  intensity,max_intensity):
+def DFS(graph,checked, cur, cost, start, end,  intensity, max_intensity):
     global answer
     if max_intensity < cost:
         max_intensity = cost

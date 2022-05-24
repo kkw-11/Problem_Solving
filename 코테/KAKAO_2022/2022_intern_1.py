@@ -18,6 +18,4 @@ def solution(survey, choices):
             answer += indicator2
 
 
-
-
     return answer
