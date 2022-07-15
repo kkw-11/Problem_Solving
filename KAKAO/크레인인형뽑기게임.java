@@ -1,10 +1,10 @@
 //https://school.programmers.co.kr/learn/courses/30/lessons/64061?language=java
-import java.util.ArrayList;
+import java.util.Stack;
 
 class Solution {
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
-        ArrayList<Integer> basket = new ArrayList<Integer>();
+        Stack<Integer> basket = new Stack<Integer>();
         
         for(int i = 0; i < moves.length; ++i){
             for(int j = 0; j < board.length; ++j){
