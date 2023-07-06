@@ -3,7 +3,7 @@ import java.util.Set;
 
 class Solution {
     public int solution(int[] nums) {
-  int answer = 0;
+        int answer = 0;
 
         int halfNumsLen = nums.length/2;
 
