@@ -1,6 +1,8 @@
+package String;
+
 import java.util.Scanner;
 
-public class No2734 {
+public class No2743 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
