@@ -14,13 +14,7 @@ public class No10808 {
         }
 
         for(int i = 0; i < nums.length; i++) {
-            if(nums[i]==0){
-                System.out.print(0);
-
-            }else {
-                System.out.print(nums[i]);
-            }
-            System.out.print(" ");
+            System.out.print(nums[i] + " ");
         }
 
         sc.close();
